@@ -13,6 +13,6 @@ I'm a 24 year old graduate from UDLA living in Quito. I love to code, solving pr
 
 ### Contact info
 
-__Full Name:__ Juan Francisco Rosero Pozo
-__Phone:__ 0997225657 (Ecuador)
-__Email:__ jfrosero@rosero.in
+__Full Name:__ Juan Francisco Rosero Pozo </br>
+__Phone:__ 0997225657 (Ecuador)  </br>
+__Email:__ jfrosero@rosero.in </br>
