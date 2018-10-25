@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bookshelf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="dist/styles.css">
+  </head>
+  <body>
+    <div class="main">
+      <header>
+        <h1><i class="fas fa-bars" id="burgerMenu"></i>Bookshelf</h1>
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" name="" value="" placeholder="Search...">
+        </div>
+        <div class="avatar">
+          <div class="spacer"></div>
+          <span class="name">Jackob Treml</span>
+          <i class="fas fa-caret-down"></i>
+          <img src="src/images/avatar.png" alt="Jackob Treml Photo">
+        </div>
+      </header>
+      <nav id="drawer">
+        <div class="logo">
+          <img src="src/images/logo.png" alt="Jobsity Logo">
+        </div>
+        <section class="links">
+          <h1>Main</h1>
+          <a href="#">
+            <i class="fas fa-globe"></i>
+            <span>Quito</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-globe"></i>
+            <span>Cartagenta</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-globe"></i>
+            <span>Medellin</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-tablet-alt"></i>
+            <span>Digital</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-user-tag"></i>
+            <span>Personal loans</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-tags"></i>
+            <span>New Releases</span>
+          </a>
+          <h1>Your Books</h1>
+          <a href="#">
+            <i class="fas fa-book-open"></i>
+            <span>Readings</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-bookmark"></i>
+            <span>Read Later</span>
+          </a>
+          <a href="#">
+            <i class="fas fa-heart"></i>
+            <span>Favorites</span>
+          </a>
+        </section>
+      </nav>
+      <section class="books">
+        <div class="filters">
+          <h1>New Releases</h1>
+          <div class="sort">
+            <span class="selected">Release Date</span>
+            <span> | </span>
+            <span>Popularity</span>
+          </div>
+          <div class="view">
+            <i class="fas fa-th-list"></i>
+            <i class="fas fa-th-large"></i>
+          </div>
+        </div>
+        <article class="book">
+          <img src="src/images/Book1.png" alt="Everything I never told you cover">
+          <h1>Everything I never told you</h1>
+          <h2>Celeste Ng</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Everything I never told you</h1>
+              <span class="year">2014</span>
+              <p>Novel by <span class="author">Celeste Ng</span></p>
+              <p>544 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book2.png" alt="Redeployment cover">
+          <h1>Redeployment</h1>
+          <h2>Phil Klay</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Redeployment</h1>
+              <span class="year">2010</span>
+              <p>Novel by <span class="author">Phil Klay</span></p>
+              <p>224 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book3.png" alt="Euphoria cover">
+          <h1>Euphoria</h1>
+          <h2>Lily King</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Euphoria</h1>
+              <span class="year">2012</span>
+              <p>Novel by <span class="author">Lily King</span></p>
+              <p>124 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book4.png" alt="Big Little Lies cover">
+          <h1>Big Little Lies</h1>
+          <h2>Liane Moriarty</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Big Little Lies</h1>
+              <span class="year">2014</span>
+              <p>Novel by <span class="author">Liane Moriarty</span></p>
+              <p>344 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book5.png" alt="Station Eleven cover">
+          <h1>Station Eleven</h1>
+          <h2>Emily St, John Mandel</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Station Eleven</h1>
+              <span class="year">2011</span>
+              <p>Novel by <span class="author">Emily St, John Mandel</span></p>
+              <p>244 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book6.png" alt="Revival cover">
+          <h1>Revival</h1>
+          <h2>Stephen King</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>Revival</h1>
+              <span class="year">2001</span>
+              <p>Novel by <span class="author">Stephen King</span></p>
+              <p>344 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+        <article class="book">
+          <img src="src/images/Book7.png" alt="The bone clocks cover">
+          <h1>The bone clocks</h1>
+          <h2>David Mitchell</h2>
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <section class="details">
+            <div class="actions">
+              <div class="top">
+                <i class="far fa-heart"></i>
+                <i class="far fa-bookmark"></i>
+              </div>
+              <i class="fas fa-book-open open-book"></i>
+              <div class="rate">
+                <p>Rate this book</p>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <!-- This div.arrow is used to display that little arrow on the right side -->
+              <div class="arrow"></div>
+              <h1>The bone clocks</h1>
+              <span class="year">2011</span>
+              <p>Novel by <span class="author">David Mitchell</span></p>
+              <p>633 pages</p>
+              <h2>Summary</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor.</p>
+              <h2>Rating</h2>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <h2>Recommended by</h2>
+              <div class="recommenders">
+                <img src="src/images/avatar2.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar3.png" alt="John Doe Avatar Picture">
+                <img src="src/images/avatar4.png" alt="John Doe Avatar Picture">
+              </div>
+            </div>
+          </section>
+        </article>
+      </section>
+      <footer>
+        <h1>Most read books</h1>
+        <ol>
+          <li>1. Hooked: How to Build Habit-Forming Products</li>
+          <li>2. How Google works</li>
+          <li>3. Lean In: Women, Work, and the Will to Lead </li>
+          <li>4. The Inevitable: Understanding the 12 Technological Forces That Will Shape Our Future</li>
+          <li>5. How Google works</li>
+        </ol>
+      </footer>
+      <div class="drawer-background"></div>
+    </div>
+  </body>
+  <script>
+    var books = document.querySelectorAll('article.book'),
+        burgerMenu = document.querySelector('#burgerMenu'),
+        booksSection = document.querySelector('section.books'),
+        drawer = document.querySelector('#drawer'),
+        drawerBackground = document.querySelector('.drawer-background');
+    var openedBook;
+
+    function isDesktop(){
+      return window.innerWidth>=1025;
+    }
+
+    function findBookElement(el){
+      var res,found=false;
+      do {
+        if(el.localName==='article'){
+          return el;
+        }
+        el=el.parentElement;
+      } while (el);
+      return null;
+    }
+
+    function toggleDetails(ele){
+      if(ele.hasAttribute('opened')){
+        ele.removeAttribute('opened');
+        openedBook=null;
+      }else{
+        if(openedBook){
+          openedBook.removeAttribute('opened');
+        }
+        ele.setAttribute('opened','');
+        openedBook=ele;
+      }
+    }
+
+    function toggleDrawer(){
+      if(drawer.hasAttribute('opened')){
+        drawer.removeAttribute('opened');
+      }else{
+        drawer.setAttribute('opened','');
+      }
+    }
+
+    for (var i = 0; i < books.length; i++) {
+      books[i].addEventListener('click',(e)=>{
+        //Check window size.
+        if(isDesktop())return;
+        let ele = findBookElement(e.target);
+        if(!ele){return;}
+        toggleDetails(ele);
+      });
+    }
+
+    //This will close the details dialog when a blank part of the books section is tapped/clicked
+    booksSection.addEventListener('click',(e)=>{
+      if(e.target.localName==='section'&&openedBook){
+        openedBook.removeAttribute('opened');
+        openedBook=null;
+      }
+    });
+
+    burgerMenu.addEventListener('click',(e)=>{
+      toggleDrawer();
+    });
+
+    drawerBackground.addEventListener('click',(e)=>{
+      toggleDrawer();
+    })
+
+  </script>
+</html>

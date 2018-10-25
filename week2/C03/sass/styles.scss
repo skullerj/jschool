@@ -1,0 +1,109 @@
+$bg-color: #F5F6F8;
+$topbar-bg-color: #FCF8F3;
+$sidebar-color: #231F20;
+$accent-color: #6EC1E4;
+// he: High Emphasis, me: Medium Emphasis, le: Low Emphasis
+$he-text-color:#231F20;
+$me-text-color: #484848;
+$le-text-color: #AEAEAE;
+$on-sidebar-he-text-color:#FFFFFF;
+$on-sidebar-me-text-color:rgba(252,248,243,0.7);
+$hover-background-color: rgba(35,31,32,0.8);
+$star-color:#EEC75A;
+@import 'reset';
+@import 'components';
+
+body{
+  background-color: $bg-color;
+}
+
+div.main{
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 240px 1fr 240px;
+  grid-template-rows: 80px 1fr;
+  @include mobile{
+    grid-template-rows: 160px 1fr auto;
+  }
+  @include big-mobile{
+    grid-template-rows: 160px 1fr auto;
+  }
+  @include tablet{
+    grid-template-rows: 160px 1fr auto;
+  }
+}
+
+header{
+  @extend %header;
+  grid-column: 2/4;
+  @include mobile{
+    grid-column: 1/4;
+  }
+  @include big-mobile{
+    grid-column: 1/4;
+  }
+  @include tablet{
+    grid-column: 2/4;
+  }
+}
+
+section.books{
+  @extend %books-section;
+  grid-column: 2/3;
+  @include mobile{
+    grid-column:1/4;
+  }
+  @include big-mobile{
+    grid-column:1/4;
+  }
+  @include tablet{
+    grid-column:2/4;
+  }
+}
+
+footer{
+  @extend %footer;
+  grid-column: 3/4;
+  @include mobile{
+    grid-column: 1/4;
+  }
+  @include big-mobile{
+    grid-column: 1/4;
+  }
+  @include tablet{
+    grid-column: 1/4;
+  }
+}
+
+nav{
+  @extend %drawer;
+  @include mobile{
+    display: none;
+  }
+  @include big-mobile{
+    display: none;
+  }
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+
+nav[opened]{
+  display: block;
+  position: fixed;
+  height: 100%;
+  z-index: 100;
+  width: 240px;
+}
+
+div.drawer-background{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: $hover-background-color;
+  display: none;
+  z-index: -1;
+}
+ nav[opened] ~ div.drawer-background {
+  display: block;
+  z-index: 99;
+}

@@ -1,0 +1,665 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "Pluto Sans Regular";
+  src: url("../fonts/PlutoSansRegular.otf");
+}
+@font-face {
+  font-family: "Pluto Sans Medium";
+  src: url("../fonts/PlutoSansMedium.otf");
+}
+@font-face {
+  font-family: "Pluto Sans Cond Bold";
+  src: url("../fonts/PlutoSansCondBold.otf");
+}
+@font-face {
+  font-family: "Pluto Sans Cond Regular";
+  src: url("../fonts/PlutoSansCondRegular.otf");
+}
+@font-face {
+  font-family: "Pluto Sans Cond Medium";
+  src: url("../fonts/PlutoSansCondMedium.otf");
+}
+@font-face {
+  font-family: "Pluto Sans Cond Light";
+  src: url("../fonts/PlutoSansCondLight.otf");
+}
+header .search-container {
+  border-radius: 36px;
+  height: 36px;
+  padding: 8px;
+  border: 1px solid #6EC1E4;
+  background: #F5F6F8;
+  font-family: "Pluto Sans Regular", sans-serif;
+  color: #231F20;
+  display: flex;
+}
+header .search-container input {
+  border: 0;
+  background: #F5F6F8;
+  color: #231F20;
+  flex-grow: 1;
+  font-size: 14px;
+  border-radius: 36px;
+  margin-left: 8px;
+}
+header .search-container i {
+  font-size: 18px;
+}
+
+header .avatar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 220px;
+  min-width: 50px;
+  border-left: 1px solid #231F20;
+}
+header .avatar img {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  border: solid 1px #6EC1E4;
+}
+header .avatar .spacer {
+  flex-grow: 1;
+}
+header .avatar span.name {
+  font-family: "Pluto Sans Cond Regular", sans-serif;
+  font-size: 14px;
+  margin-right: 8px;
+}
+@media (max-width: 520px) {
+  header .avatar span.name {
+    display: none;
+  }
+}
+header .avatar i {
+  margin-right: 8px;
+}
+
+header {
+  display: grid;
+  background: #FCF8F3;
+  color: #231F20;
+  border-bottom: 1px solid #6EC1E4;
+  box-shadow: -1px 0px 4px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  font-size: 24px;
+  display: grid;
+  padding: 20px;
+  grid-gap: 20px;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "title title avatar" "search search search";
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  header {
+    grid-template-areas: "title search avatar" "search search search";
+  }
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  header {
+    grid-template-columns: auto 300px 240px;
+    grid-template-areas: "title search avatar";
+  }
+}
+@media (min-width: 1541px) {
+  header {
+    grid-template-columns: auto 300px 240px;
+    grid-template-areas: "title search avatar";
+  }
+}
+header h1 {
+  font-family: "Pluto Sans Medium", sans-serif;
+  grid-area: title;
+  display: flex;
+  align-self: center;
+}
+header h1 i.fas.fa-bars {
+  margin-right: 16px;
+  display: none;
+}
+@media (max-width: 520px) {
+  header h1 i.fas.fa-bars {
+    display: block;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  header h1 i.fas.fa-bars {
+    display: block;
+  }
+}
+header .search-container {
+  grid-area: search;
+}
+header .avatar {
+  grid-area: avatar;
+  justify-self: end;
+}
+
+section.books div.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+section.books div.filters h1 {
+  font-family: "Pluto Sans Cond Light", sans-serif;
+  font-size: 20px;
+  color: #231F20;
+}
+@media (max-width: 520px) {
+  section.books div.filters h1 {
+    display: none;
+  }
+}
+section.books div.filters div.sort {
+  font-family: "Pluto Sans Cond Regular", sans-serif;
+  font-size: 14px;
+  color: #484848;
+  cursor: pointer;
+}
+section.books div.filters div.sort .selected {
+  font-weight: 800;
+}
+section.books div.filters div.view {
+  color: #6EC1E4;
+  font-size: 18.5px;
+}
+
+section.books article.book section.details div.actions {
+  padding: 16px;
+  background: rgba(35, 31, 32, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+section.books article.book section.details div.actions .top i, section.books article.book section.details div.actions i.open-book {
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+}
+section.books article.book section.details div.actions i.open-book {
+  height: 48px;
+  width: 48px;
+  padding-top: 14px;
+  font-size: 22px;
+  color: #6EC1E4;
+}
+section.books article.book section.details div.actions .top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+section.books article.book section.details div.actions .top i {
+  padding-top: 7px;
+  height: 30px;
+  width: 30px;
+  color: #AEAEAE;
+}
+section.books article.book section.details div.actions .rate p {
+  color: #fff;
+  font-family: "Pluto Sans Cond Medium", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+}
+section.books article.book section.details div.actions .rate i {
+  color: #EEC75A;
+}
+
+section.books article.book section.details div.info {
+  z-index: 100;
+  padding: 30px;
+  background-color: rgba(35, 31, 32, 0.8);
+  font-family: "Pluto Sans Cond Light", sans-serif;
+  color: #fff;
+  font-size: 12px;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100vw;
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  section.books article.book section.details div.info {
+    position: absolute;
+    left: 205px;
+    width: 372px;
+    top: 0px;
+    bottom: inherit;
+  }
+}
+@media (min-width: 1541px) {
+  section.books article.book section.details div.info {
+    position: absolute;
+    left: 205px;
+    width: 372px;
+    top: 0px;
+    bottom: inherit;
+  }
+}
+section.books article.book section.details div.info h1, section.books article.book section.details div.info span.year, section.books article.book section.details div.info h2, section.books article.book section.details div.info .recommenders {
+  margin-top: 8px;
+}
+section.books article.book section.details div.info h1 {
+  font-family: "Pluto Sans Cond Bold", sans-serif;
+  text-transform: uppercase;
+  color: #6EC1E4;
+  font-size: 14px;
+}
+section.books article.book section.details div.info span.year {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  color: #AEAEAE;
+}
+section.books article.book section.details div.info span.author {
+  color: #AEAEAE;
+}
+section.books article.book section.details div.info h2 {
+  font-family: "Pluto Sans Cond Bold", sans-serif;
+  font-size: 12px;
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+section.books article.book section.details div.info .recommenders {
+  display: flex;
+}
+section.books article.book section.details div.info .recommenders img {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+section.books article.book section.details div.info .arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-right: 16px solid rgba(35, 31, 32, 0.8);
+  left: -16px;
+  top: 98px;
+  display: none;
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  section.books article.book section.details div.info .arrow {
+    display: block;
+  }
+}
+@media (min-width: 1541px) {
+  section.books article.book section.details div.info .arrow {
+    display: block;
+  }
+}
+
+section.books article.book section.details {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 250px;
+}
+section.books article.book {
+  height: 335px;
+  display: flex;
+  width: 175px;
+  flex-direction: column;
+  min-width: 150px;
+  position: relative;
+}
+section.books article.book img {
+  width: 100%;
+}
+section.books article.book h1 {
+  font-family: "Pluto Sans Cond Regular", sans-serif;
+  font-weight: 800;
+  color: #231F20;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 16px;
+}
+section.books article.book h2 {
+  font-family: "Pluto Sans Cond Light", sans-serif;
+  color: #AEAEAE;
+  font-size: 14px;
+  margin-top: 8px;
+}
+section.books article.book div.stars {
+  margin-top: 8px;
+  color: #6EC1E4;
+}
+section.books {
+  padding: 30px;
+  display: grid;
+  grid-gap: 30px;
+  max-width: 1000px;
+  margin: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 80px 1fr;
+}
+@media (max-width: 520px) {
+  section.books {
+    padding: 16px;
+    grid-gap: 16px;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  section.books {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  section.books {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  section.books {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1541px) {
+  section.books {
+    padding: 30px 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+section.books div.filters {
+  grid-column: 1/3;
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  section.books div.filters {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  section.books div.filters {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  section.books div.filters {
+    grid-column: 1/5;
+  }
+}
+@media (min-width: 1541px) {
+  section.books div.filters {
+    grid-column: 1/6;
+  }
+}
+section.books article.book section.details {
+  display: none;
+}
+section.books article.book[opened] section.details {
+  display: block;
+}
+@media (min-width: 1025px) and (max-width: 1540px) {
+  section.books article.book:hover section.details {
+    display: block;
+  }
+  section.books article:nth-child(4n+1):hover section.details div.info {
+    left: -400px;
+  }
+  section.books article:nth-child(4n+1):hover section.details div.info .arrow {
+    left: 370px;
+    border-right: inherit;
+    border-left: 16px solid rgba(35, 31, 32, 0.8);
+  }
+}
+@media (min-width: 1541px) {
+  section.books article.book:hover section.details {
+    display: block;
+  }
+  section.books article:nth-child(5n+1):hover section.details div.info {
+    left: -402px;
+  }
+  section.books article:nth-child(5n+1):hover section.details div.info .arrow {
+    left: 370px;
+    border-right: inherit;
+    border-left: 16px solid rgba(35, 31, 32, 0.8);
+  }
+}
+
+footer {
+  padding: 30px;
+  background: #231F20;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+footer h1 {
+  font-family: "Pluto Sans Cond Regular", sans-serif;
+  font-size: 14px;
+  color: rgba(252, 248, 243, 0.7);
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+footer li {
+  font-family: "Pluto Sans Cond Light", sans-serif;
+  color: rgba(252, 248, 243, 0.7);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 30px;
+}
+
+nav {
+  background: #231F20;
+  display: flex;
+  flex-direction: column;
+}
+nav .logo {
+  background: #fff;
+  display: flex;
+  height: 80px;
+  border-bottom: 1px solid #6EC1E4;
+}
+nav .logo img {
+  margin: auto;
+}
+nav section.links {
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+}
+nav section.links h1, nav section.links a {
+  margin-top: 20px;
+}
+nav section.links h1 {
+  font-family: "Pluto Sans Cond Regular", sans-serif;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+nav section.links h1:not(:first-child) {
+  margin-top: 50px;
+}
+nav section.links a {
+  font-family: "Pluto Sans Cond Light", sans-serif;
+  color: #6EC1E4;
+  text-decoration: none;
+  font-size: 14px;
+}
+nav section.links a i {
+  margin-right: 16px;
+}
+
+body {
+  background-color: #F5F6F8;
+}
+
+div.main {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 240px 1fr 240px;
+  grid-template-rows: 80px 1fr;
+}
+@media (max-width: 520px) {
+  div.main {
+    grid-template-rows: 160px 1fr auto;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  div.main {
+    grid-template-rows: 160px 1fr auto;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  div.main {
+    grid-template-rows: 160px 1fr auto;
+  }
+}
+
+header {
+  grid-column: 2/4;
+}
+@media (max-width: 520px) {
+  header {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  header {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  header {
+    grid-column: 2/4;
+  }
+}
+
+section.books {
+  grid-column: 2/3;
+}
+@media (max-width: 520px) {
+  section.books {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  section.books {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  section.books {
+    grid-column: 2/4;
+  }
+}
+
+footer {
+  grid-column: 3/4;
+}
+@media (max-width: 520px) {
+  footer {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  footer {
+    grid-column: 1/4;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  footer {
+    grid-column: 1/4;
+  }
+}
+
+nav {
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+@media (max-width: 520px) {
+  nav {
+    display: none;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
+
+nav[opened] {
+  display: block;
+  position: fixed;
+  height: 100%;
+  z-index: 100;
+  width: 240px;
+}
+
+div.drawer-background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(35, 31, 32, 0.8);
+  display: none;
+  z-index: -1;
+}
+
+nav[opened] ~ div.drawer-background {
+  display: block;
+  z-index: 99;
+}
+
+/*# sourceMappingURL=styles.css.map */
