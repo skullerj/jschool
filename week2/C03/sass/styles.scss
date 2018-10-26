@@ -12,7 +12,7 @@ $hover-background-color: rgba(35,31,32,0.8);
 $star-color:#EEC75A;
 @import 'reset';
 @import 'components';
-
+@import 'animations';
 body{
   background-color: $bg-color;
 }
@@ -45,6 +45,9 @@ header{
   @include tablet{
     grid-column: 2/4;
   }
+  @include desktop{
+    grid-column: 2/4;
+  }
 }
 
 section.books{
@@ -59,19 +62,16 @@ section.books{
   @include tablet{
     grid-column:2/4;
   }
+  @include desktop{
+    grid-column:2/4;
+  }
 }
 
 footer{
   @extend %footer;
-  grid-column: 3/4;
-  @include mobile{
-    grid-column: 1/4;
-  }
-  @include big-mobile{
-    grid-column: 1/4;
-  }
-  @include tablet{
-    grid-column: 1/4;
+  grid-column: 1/4;
+  @include big-desktop{
+    grid-column:3/4;
   }
 }
 

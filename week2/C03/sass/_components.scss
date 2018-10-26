@@ -4,13 +4,13 @@
 %search-container{
   border-radius: 36px;
   height: 36px;
-  padding: 8px;
+  padding: 8px 14px;
   border: 1px solid $accent-color;
   background: $bg-color;
   @include font('Pluto Sans Regular');
   color: $he-text-color;
   display: flex;
-
+  align-self: center;
   input{
     border: 0;
     background: $bg-color;
@@ -43,15 +43,21 @@
   span.name{
     @include font('Pluto Sans Cond Regular');
     font-size: 14px;
-    margin-right: 8px;
+    margin-right: 10px;
     @include mobile{
       display:none;
     }
   }
   i{
-    margin-right: 8px;
+    margin-right: 16px;
   }
-  border-left: 1px solid $he-text-color;
+  .divider{
+    height: 50px;
+    width: 1px;
+    margin-left: 3px;
+    position: absolute;
+    background-color: $me-text-color;
+  }
 }
 
 %header{
@@ -61,10 +67,8 @@
   border-bottom: 1px solid $accent-color;
   box-shadow: -1px 0px 4px rgba(0, 0, 0, 0.4);
   z-index: 10;
-  font-size: 24px;
   display: grid;
-  padding: 20px;
-  grid-gap: 20px;
+  padding: 23px;
   grid-template-columns: auto auto auto;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "title title avatar"
@@ -74,11 +78,12 @@
                          "search search search";
   }
   @include desktop{
-
+    grid-template-rows: 1fr;
     grid-template-columns: auto 300px 240px;
     grid-template-areas: "title search avatar";
   }
   @include big-desktop{
+    grid-template-rows: 1fr;
     grid-template-columns: auto 300px 240px;
     grid-template-areas: "title search avatar";
   }
@@ -87,6 +92,7 @@
     grid-area:title;
     display: flex;
     align-self: center;
+    font-size: 24px;
     i.fas.fa-bars{
       margin-right: 16px;
       display: none;
@@ -115,7 +121,7 @@
 %filters{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   h1{
     @include font('Pluto Sans Cond Light');
     font-size: 20px;
@@ -140,7 +146,7 @@
 }
 
 %book-details-actions{
-  padding: 16px;
+  padding: 14px;
   background: $hover-background-color;
   display: flex;
   flex-direction: column;
@@ -172,11 +178,13 @@
     }
   }
   .rate{
+    font-size: 11px;
+    text-align: center;
     p{
       color: #fff;
-      @include font('Pluto Sans Cond Medium');
+      @include font('Pluto Sans Cond Light');
       text-transform: uppercase;
-      font-size: 12px;
+
       text-align: center;
     }
     i{
@@ -187,7 +195,7 @@
 
 %book-details-info{
  z-index: 100;
- padding: 30px;
+ padding: 21px 31px;
  background-color: $hover-background-color;
  @include font('Pluto Sans Cond Light');
  color: #fff;
@@ -211,7 +219,7 @@
    bottom: inherit;
  }
 
- h1,span.year,h2,.recommenders{
+ h1,span.year,h2,.recommenders,p{
    margin-top:8px;
  }
 
@@ -219,12 +227,12 @@
    @include font('Pluto Sans Cond Bold');
    text-transform: uppercase;
    color: $accent-color;
-   font-size: 14px;
+   font-size: 13px;
  }
  span.year{
    position: absolute;
-   right: 30px;
-   top: 30px;
+   right: 20px;
+   top: 22px;
    color: $le-text-color;
  }
  span.author{
@@ -248,11 +256,11 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 16px solid transparent;
-    border-bottom: 16px solid transparent;
-    border-right: 16px solid $hover-background-color;
-    left: -16px;
-    top: 98px;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-right: 13px solid $hover-background-color;
+    left: -13px;
+    top: 111px;
     display: none;
     @include desktop{
       display: block;
@@ -280,7 +288,7 @@
 }
 
 %book{
-  height: 335px;
+  height: 330px;
   display: flex;
   width: 175px;
   flex-direction: column;
@@ -291,9 +299,8 @@
   }
   h1{
     @include font('Pluto Sans Cond Regular');
-    font-weight: 800;
     color: $he-text-color;
-    font-size: 16px;
+    font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -302,12 +309,14 @@
   h2{
     @include font('Pluto Sans Cond Light');
     color: $le-text-color;
-    font-size: 14px;
-    margin-top:8px;
+    font-size: 13px;
+    margin-top:5px;
   }
   div.stars{
+    font-size: 13px;
     margin-top:8px;
     color: $accent-color;
+    letter-spacing: -2px;
   }
   section.details{
     @extend %book-details;
@@ -317,11 +326,11 @@
 %books-section{
   padding: 30px;
   display: grid;
-  grid-gap: 30px;
+  grid-gap: 31px;
   max-width: 1000px;
   margin: auto;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: 25px 1fr;
   @include mobile{
     padding: 16px;
     grid-gap: 16px;
@@ -333,10 +342,11 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
   @include desktop{
+    padding: 26px 0;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   @include big-desktop{
-    padding: 30px 0;
+    padding: 26px 0;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
   div.filters{
@@ -381,9 +391,9 @@
         div.info{
           left: -400px;
           .arrow{
-            left: 370px;
+            left: 367px;
             border-right: inherit;
-            border-left: 16px solid $hover-background-color;
+            border-left: 13px solid $hover-background-color;
           }
         }
       }
@@ -399,9 +409,9 @@
         div.info{
           left: -402px;
           .arrow{
-            left: 370px;
+            left: 367px;
             border-right: inherit;
-            border-left: 16px solid $hover-background-color;
+            border-left: 13px solid $hover-background-color;
           }
         }
       }
@@ -412,14 +422,14 @@
 }
 
 %footer{
-  padding: 30px;
+  padding: 30px 34px;
   background: $sidebar-color;
   display:flex;
   flex-direction: column;
   min-width: 150px;
   h1{
     @include font('Pluto Sans Cond Regular');
-    font-size: 14px;
+    font-size: 13px;
     color: $on-sidebar-me-text-color;
     text-transform: uppercase;
     margin-top:10px;
@@ -427,11 +437,11 @@
   li{
     @include font('Pluto Sans Cond Light');
     color: $on-sidebar-me-text-color;
-    font-size: 12px;
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: 30px;
+    margin-top: 29px;
   }
 }
 
@@ -453,21 +463,29 @@
   section.links{
     display: flex;
     flex-direction: column;
-    padding:36px;
+    padding:40px;
 
-    h1,a{
+    h1+a{
       margin-top:20px;
+    }
+
+    a{
+      margin-top:26px;
+    }
+
+    h1:first-child{
+      margin-top:0px;
     }
 
     h1{
       @include font('Pluto Sans Cond Regular');
       color:$on-sidebar-he-text-color;
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     h1:not(:first-child){
-      margin-top: 50px;
+      margin-top: 55px;
     }
 
     a,a:hover,a:visited{
