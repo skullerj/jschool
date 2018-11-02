@@ -1,0 +1,37 @@
+{
+  "name": "piano",
+  "version": "1.0.0",
+  "description": "Web piano player",
+  "private": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "webpack": "webpack -d --watch",
+    "start": "npm run webpack",
+    "lint": "eslint *.js --fix"
+  },
+  "keywords": [
+    "piano",
+    "javascript"
+  ],
+  "author": "Juan Rosero (@skullerj)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-airbnb": "^3.0.1",
+    "css-loader": "^1.0.1",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "file-loader": "^2.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "mobile-detect": "^1.4.3",
+    "tone": "^0.12.80"
+  }
+}
