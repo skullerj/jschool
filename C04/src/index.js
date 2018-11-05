@@ -1,6 +1,11 @@
 import Sampler from 'tone/Tone/instrument/Sampler';
 import './styles.css';
 
+function filenameToNotename(name) {
+  // ej. Convert ./Ds4.mp3 into D#4
+  return name.split('.')[1].replace('/', '').replace('s', '#');
+}
+
 const sounds = require.context('./salamander', true, /\.(mp3)/);
 const noteToKeyboardMap = new Map([
   [70, 'C'], // f
@@ -17,28 +22,24 @@ const noteToKeyboardMap = new Map([
   [186, 'B'], // ;
   [222, 'Ce'], // '
 ]);
-
-let octave = 4;
-
-function filenameToNotename(name) {
-  // ej. Convert ./Ds4.mp3 into D#4
-  return name.split('.')[1].replace('/', '').replace('s', '#');
-}
-
 const soundsSources = sounds.keys().reduce((res, key) => {
   res[filenameToNotename(key)] = `./dist/${sounds(key)}`;
   return res;
 }, {});
-
 const piano = new Sampler(soundsSources, () => {}).toMaster();
 const keysDown = {};
+const octaveDisplayer = document.querySelector('#octaveDisplayer');
+const keys = document.querySelectorAll('[playable]');
+const keyPressers = {};
+const keyReleasers = {};
+let octave = 4;
 
-// We need compute octave in order to allow 2 C keys to coexist
-function computeNote(n, t) {
+// We need compute octave in order to allow 2 C keys to coexist.
+function computeNote(n, o) {
   if (n === 'Ce') {
-    return `C${t >= 7 ? 0 : t + 1}`;
+    return `C${o >= 7 ? 0 : o + 1}`;
   }
-  return `${n}${t}`;
+  return `${n}${o}`;
 }
 
 function pressKey(item, note) {
@@ -63,17 +64,10 @@ function releaseKey(item, note) {
   };
 }
 
-const octaveDisplayer = document.querySelector('#octaveDisplayer');
-
 function updateOctave(t) {
   octave = t >= 1 && t <= 7 ? t : octave;
   octaveDisplayer.innerHTML = `Octave: ${octave}`;
 }
-
-const keys = document.querySelectorAll('[playable]');
-const keyPressers = {};
-const keyReleasers = {};
-
 
 for (let i = 0; i < keys.length; i += 1) {
   const note = keys[i].getAttribute('note');
