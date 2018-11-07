@@ -1,0 +1,549 @@
+@import 'typography';
+@import 'breakpoints';
+
+%search-container {
+  align-self: center;
+  background: $bg-color;
+  border: 1px solid $accent-color;
+  border-radius: 36px;
+  color: $he-text-color;
+  display: flex;
+  height: 36px;
+  padding: 8px 14px;
+
+  input {
+    background: $bg-color;
+    border: 0;
+    border-radius: 36px;
+    color: $he-text-color;
+    flex-grow: 1;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  i {
+    font-size: 18px;
+  }
+  @include font('Pluto Sans Regular');
+}
+
+%avatar {
+  align-items: center;
+  display: flex;
+  max-width: 220px;
+  min-width: 50px;
+  width: 100%;
+
+  img {
+    border: solid 1px $accent-color;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .name {
+    @include font('Pluto Sans Cond Regular');
+    @include mobile {
+      display: none;
+    }
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  i {
+    margin-right: 16px;
+  }
+
+  .divider {
+    background-color: $me-text-color;
+    height: 50px;
+    margin-left: 3px;
+    position: absolute;
+    width: 1px;
+  }
+}
+
+%header {
+  @include tablet {
+    grid-template-areas: 'title search avatar' 'search search search';
+  }
+  @include desktop {
+    grid-template-areas: 'title search avatar';
+    grid-template-columns: auto 300px 240px;
+    grid-template-rows: 1fr;
+  }
+  @include big-desktop {
+    grid-template-areas: 'title search avatar';
+    grid-template-columns: auto 300px 240px;
+    grid-template-rows: 1fr;
+  }
+  background: $topbar-bg-color;
+  border-bottom: 1px solid $accent-color;
+  box-shadow: -1px 0 4px $topbar-shadow-color;
+  color: $he-text-color;
+  display: grid;
+  grid-template-areas: 'title title avatar' 'search search search';
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr 1fr;
+  padding: 23px;
+  z-index: 10;
+
+
+
+  h1 {
+    @include font('Pluto Sans Medium');
+    align-self: center;
+    display: flex;
+    font-size: 24px;
+    grid-area: title;
+
+    .fa-bars {
+      @include mobile {
+        display: block;
+      }
+      @include big-mobile {
+        display: block;
+      }
+      display: none;
+      margin-right: 16px;
+    }
+  }
+
+  .search-container {
+    @extend %search-container;
+    grid-area: search;
+  }
+
+  .avatar {
+    @extend %avatar;
+    grid-area: avatar;
+    justify-self: end;
+  }
+
+}
+
+%filters {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    @include font('Pluto Sans Cond Light');
+    @include mobile {
+      display: none;
+    }
+    color: $he-text-color;
+    font-size: 20px;
+  }
+
+  .sort {
+    @include font('Pluto Sans Cond Regular');
+    color: $me-text-color;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .selected {
+    font-weight: 800;
+  }
+
+  .view {
+    color: $accent-color;
+    font-size: 18.5px;
+  }
+}
+
+%book-details-actions {
+  $icon-color: #fff;
+
+  align-items: center;
+  background: $hover-background-color;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 14px;
+  width: 100%;
+
+  .open-book {
+    background: $icon-color;
+    border-radius: 50%;
+    color: $accent-color;
+    font-size: 22px;
+    height: 48px;
+    padding-top: 14px;
+    text-align: center;
+    width: 48px;
+  }
+
+  .top {
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    i {
+      background: $icon-color;
+      border-radius: 50%;
+      color: $le-text-color;
+      height: 30px;
+      padding-top: 7px;
+      text-align: center;
+      width: 30px;
+    }
+  }
+
+  .rate {
+    font-size: 11px;
+    text-align: center;
+
+    p {
+      @include font('Pluto Sans Cond Light');
+      color: $icon-color;
+      text-align: center;
+
+      text-transform: uppercase;
+    }
+
+    i {
+      color: $star-color;
+    }
+  }
+}
+
+%book-details-info {
+  $details-text-color: #fff;
+  @include font('Pluto Sans Cond Light');
+  @include desktop {
+    bottom: inherit;
+    left: 205px;
+    position: absolute;
+    top: 0;
+    width: 372px;
+  }
+  @include big-desktop {
+    bottom: inherit;
+    left: 205px;
+    position: absolute;
+    top: 0;
+    width: 372px;
+  }
+  background-color: $hover-background-color;
+  bottom: 0;
+  color: $details-text-color;
+  font-size: 12px;
+  left: 0;
+  padding: 21px 31px;
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+
+
+  h1,
+  .year,
+  h2,
+  .recommenders,
+  p {
+    margin-top: 8px;
+  }
+
+  h1 {
+    @include font('Pluto Sans Cond Bold');
+    color: $accent-color;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  .year {
+    color: $le-text-color;
+    position: absolute;
+    right: 20px;
+    top: 22px;
+  }
+
+  .author {
+    color: $le-text-color;
+  }
+
+  h2 {
+    @include font('Pluto Sans Cond Bold');
+    font-size: 12px;
+    margin-top: 18px;
+    text-transform: uppercase;
+  }
+
+  .recommenders {
+    display: flex;
+
+    img {
+      height: 24px;
+      margin-right: 8px;
+      width: 24px;
+    }
+  }
+
+  .arrow {
+    border-bottom: 13px solid transparent;
+    border-right: 13px solid $hover-background-color;
+    border-top: 13px solid transparent;
+    display: none;
+    height: 0;
+    left: -13px;
+    position: absolute;
+    top: 111px;
+    width: 0;
+  }
+}
+
+%book-details {
+
+  display: none;
+  height: 250px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  .actions {
+    @extend %book-details-actions;
+  }
+
+  .info {
+    @extend %book-details-info;
+  }
+}
+
+%book {
+  display: flex;
+  flex-direction: column;
+  height: 330px;
+  min-width: 150px;
+  position: relative;
+  width: 175px;
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    @include font('Pluto Sans Cond Regular');
+    color: $he-text-color;
+    font-size: 15px;
+    margin-top: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  h2 {
+    @include font('Pluto Sans Cond Light');
+    color: $le-text-color;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+  .stars {
+    color: $accent-color;
+    font-size: 13px;
+    letter-spacing: -2px;
+    margin-top: 8px;
+  }
+
+  &:hover {
+    @include desktop {
+      .details {
+        display: block;
+      }
+
+      &:nth-child(4n+1) {
+        .info {
+          left: -400px;
+
+          .arrow {
+            border-left: 13px solid $hover-background-color;
+            border-right: inherit;
+            display: block;
+            left: 367px;
+          }
+        }
+      }
+    }
+    @include big-desktop {
+      .details {
+        display: block;
+      }
+
+      &:nth-child(5n+1) {
+        .info {
+          left: -400px;
+
+          .arrow {
+            border-left: 13px solid $hover-background-color;
+            border-right: inherit;
+            display: block;
+            left: 367px;
+          }
+        }
+      }
+    }
+  }
+
+  &[opened] {
+    .details {
+      display: block;
+    }
+  }
+
+  .details {
+    @extend %book-details;
+  }
+}
+
+%books-section {
+  @include mobile {
+    grid-gap: 16px;
+    padding: 16px;
+  }
+
+  @include big-mobile {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 26px 0;
+  }
+
+  @include big-desktop {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 26px 0;
+  }
+  display: grid;
+  grid-gap: 31px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 25px 1fr;
+  margin: auto;
+  max-width: 1000px;
+  padding: 30px;
+
+  .filters {
+    @extend %filters;
+    @include big-mobile {
+      grid-column: 1 / 4;
+    }
+
+    @include tablet {
+      grid-column: 1 / 4;
+    }
+
+    @include desktop {
+      grid-column: 1 / 5;
+    }
+
+    @include big-desktop {
+      grid-column: 1 / 6;
+    }
+    grid-column: 1 / 3;
+  }
+
+}
+
+%footer {
+  background: $sidebar-color;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 30px 34px;
+
+  h1 {
+    @include font('Pluto Sans Cond Regular');
+    color: $on-sidebar-me-text-color;
+    font-size: 13px;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  li {
+    @include font('Pluto Sans Cond Light');
+    color: $on-sidebar-me-text-color;
+    font-size: 13px;
+    margin-top: 29px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+%drawer {
+  $logo-background: #fff;
+  background: $sidebar-color;
+  display: flex;
+  flex-direction: column;
+
+  .logo {
+    background: $logo-background;
+    border-bottom: 1px solid $accent-color;
+    display: flex;
+    height: 80px;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+
+    h1+a {
+      margin-top: 20px;
+    }
+
+    h1 {
+      @include font('Pluto Sans Cond Regular');
+      color: $on-sidebar-he-text-color;
+      font-size: 13px;
+      text-transform: uppercase;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:not(:first-child) {
+        margin-top: 55px;
+      }
+    }
+
+
+    a {
+      @include font('Pluto Sans Cond Light');
+      color: $accent-color;
+      font-size: 14px;
+      margin-top: 26px;
+      text-decoration: none;
+
+      &:visited {
+        color: $accent-color;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: $accent-color;
+        text-decoration: none;
+      }
+
+      i {
+        margin-right: 16px;
+      }
+    }
+
+  }
+}

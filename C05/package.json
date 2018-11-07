@@ -1,0 +1,20 @@
+{
+  "name": "bookshelf",
+  "version": "1.0.0",
+  "description": "Displays a list of books with useful info and allows users to borrow them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "books"
+  ],
+  "author": "Juan Rosero (@skullerj)",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "sass-lint": "^1.12.1"
+  }
+}

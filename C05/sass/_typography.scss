@@ -1,0 +1,29 @@
+
+@font-face {
+  font-family: 'Pluto Sans Regular';
+  src: url('../fonts/PlutoSansRegular.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Medium';
+  src: url('../fonts/PlutoSansMedium.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Bold';
+  src: url('../fonts/PlutoSansCondBold.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Regular';
+  src: url('../fonts/PlutoSansCondRegular.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Medium';
+  src: url('../fonts/PlutoSansCondMedium.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Light';
+  src: url('../fonts/PlutoSansCondLight.otf');
+}
+
+@mixin font($type) {
+  font-family: $type , sans-serif;
+}

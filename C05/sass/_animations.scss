@@ -1,0 +1,16 @@
+
+.opening-drawer {
+  animation-duration: 400ms;
+  animation-name: opendrawer;
+  animation-timing-function: cubic-bezier(0, 0, .2, 1);
+}
+
+@keyframes opendrawer {
+  from {
+    transform: translateX(-240px);
+  }
+
+  to {
+    transform: none;
+  }
+}

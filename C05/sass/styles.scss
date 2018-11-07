@@ -1,0 +1,129 @@
+$bg-color: #f5f6f8;
+$topbar-bg-color: #fcf8f3;
+$sidebar-color: #231f20;
+$accent-color: #6ec1e4;
+$topbar-shadow-color: rgba(0, 0, 0, .4);
+// he: High Emphasis, me: Medium Emphasis, le: Low Emphasis
+$he-text-color: #231f20;
+$me-text-color: #484848;
+$le-text-color: #aeaeae;
+$on-sidebar-he-text-color: #fff;
+$on-sidebar-me-text-color: rgba(252,248,243,0.7);
+$hover-background-color: rgba(35,31,32,0.8);
+$star-color: #eec75a;
+@import 'reset';
+@import 'components';
+@import 'animations';
+
+body {
+  background-color: $bg-color;
+}
+
+.main {
+  @include mobile {
+    grid-template-rows: 160px 1fr auto;
+  }
+
+  @include big-mobile {
+    grid-template-rows: 160px 1fr auto;
+  }
+
+  @include tablet {
+    grid-template-rows: 160px 1fr auto;
+  }
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  grid-template-rows: 80px 1fr;
+  min-height: 100vh;
+}
+
+header {
+  @extend %header;
+  @include mobile {
+    grid-column: 1 / 4;
+  }
+
+  @include big-mobile{
+    grid-column: 1 / 4;
+  }
+
+  @include tablet {
+    grid-column: 2 / 4;
+  }
+
+  @include desktop {
+    grid-column: 2 / 4;
+  }
+  grid-column: 2 / 4;
+}
+
+.books {
+  @extend %books-section;
+  @include mobile {
+    grid-column: 1 / 4;
+  }
+
+  @include big-mobile {
+    grid-column: 1 / 4;
+  }
+
+  @include tablet {
+    grid-column: 2 / 4;
+  }
+
+  @include desktop {
+    grid-column: 2 / 4;
+  }
+  grid-column: 2 / 3;
+  
+}
+
+.book {
+  @extend %book;
+}
+
+
+footer {
+  @extend %footer;
+  @include big-desktop {
+    grid-column: 3 / 4;
+  }
+  grid-column: 1 / 4;
+}
+
+nav {
+  @extend %drawer;
+  @include mobile {
+    display: none;
+  }
+
+  @include big-mobile {
+    display: none;
+  }
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+
+  &[opened] {
+    display: block;
+    height: 100%;
+    position: fixed;
+    width: 240px;
+    z-index: 100;
+
+    & ~ .drawer-background {
+      display: block;
+      z-index: 99;
+    }
+  }
+
+}
+
+.drawer-background {
+  background: $hover-background-color;
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+}
+
