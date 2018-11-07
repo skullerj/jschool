@@ -8,8 +8,8 @@ $he-text-color: #231f20;
 $me-text-color: #484848;
 $le-text-color: #aeaeae;
 $on-sidebar-he-text-color: #fff;
-$on-sidebar-me-text-color: rgba(252,248,243,0.7);
-$hover-background-color: rgba(35,31,32,0.8);
+$on-sidebar-me-text-color: rgba(252, 248, 243, .7);
+$hover-background-color: rgba(35, 31 , 32, .8);
 $star-color: #eec75a;
 @import 'reset';
 @import 'components';
@@ -43,7 +43,7 @@ header {
     grid-column: 1 / 4;
   }
 
-  @include big-mobile{
+  @include big-mobile {
     grid-column: 1 / 4;
   }
 
@@ -74,8 +74,9 @@ header {
   @include desktop {
     grid-column: 2 / 4;
   }
+
   grid-column: 2 / 3;
-  
+
 }
 
 .book {
