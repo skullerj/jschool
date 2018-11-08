@@ -16,7 +16,6 @@ To lint the .js and scss files run:
 `npm run lint`
 
 
-
 ## Some comments
 
 On mobile and tablet, you can tap each book to reveal it's details. On Desktop, details are revealed on hover.
@@ -24,3 +23,5 @@ On mobile and tablet, you can tap each book to reveal it's details. On Desktop, 
 You can also tap the hamburger menu (top left) on mobile and tablet to bring up the drawer.
 
 I know the way I implemented Media Queries is not the best, since it generates a lot of actual media queries after compilation. I used this approach because this is not a big project and it makes sass code clearer around grid rules.
+
+I used the aribnb shims to get fetch 

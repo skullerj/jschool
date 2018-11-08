@@ -32,5 +32,9 @@
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "airbnb-browser-shims": "^3.0.0",
+    "node-fetch": "^2.2.1"
   }
 }
