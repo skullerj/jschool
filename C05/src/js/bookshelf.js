@@ -13,7 +13,7 @@ export default class Bookshelf {
     this.loadingElement = loadingElement;
     this.loading = false;
     this.bookElements = [];
-    this.books = [];   
+    this.books = [];
     this.openedBook = null;
     this.lastError = null;
   }
@@ -66,14 +66,11 @@ export default class Bookshelf {
     // Re insert all the books
     books.forEach((book) => {
       const bookElement = createBookElement(book);
-      if (window.innerWidth >= 992) {
-        bookElement.addEventListener('pointerdown', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.toggleBookDetails(bookElement);
-        });
-      }
-
+      bookElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleBookDetails(bookElement);
+      });
       this.bookElements.push(bookElement);
       this.booksContainer.appendChild(bookElement);
     });

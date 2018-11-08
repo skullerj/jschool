@@ -81,6 +81,11 @@
     grid-template-columns: auto 300px 240px;
     grid-template-rows: 1fr;
   }
+  @include ultra-big-desktop {
+    grid-template-areas: 'title search avatar';
+    grid-template-columns: auto 300px 240px;
+    grid-template-rows: 1fr;
+  }
   background: $topbar-bg-color;
   border-bottom: 1px solid $accent-color;
   box-shadow: -1px 0 4px $topbar-shadow-color;
@@ -159,7 +164,10 @@
 
 %book-details-actions {
   $icon-color: #fff;
-
+  @include mobile {
+    margin: auto;
+    width: 200px;
+  }
   align-items: center;
   background: $hover-background-color;
   display: flex;
@@ -178,23 +186,6 @@
     padding-top: 14px;
     text-align: center;
     width: 48px;
-  }
-
-  .top {
-
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    i {
-      background: $icon-color;
-      border-radius: 50%;
-      color: $le-text-color;
-      height: 30px;
-      padding-top: 7px;
-      text-align: center;
-      width: 30px;
-    }
   }
 
   .rate {
@@ -218,14 +209,7 @@
 %book-details-info {
   $details-text-color: #fff;
   @include font('Pluto Sans Cond Light');
-  @include desktop {
-    bottom: inherit;
-    left: 205px;
-    position: absolute;
-    top: 0;
-    width: 372px;
-  }
-  @include big-desktop {
+  @include desktop-up {
     bottom: inherit;
     left: 205px;
     position: absolute;
@@ -241,7 +225,6 @@
   position: fixed;
   width: 100vw;
   z-index: 100;
-
 
   h1,
   .year,
@@ -276,21 +259,15 @@
     text-transform: uppercase;
   }
 
-  .recommenders {
-    display: flex;
-
-    img {
-      height: 24px;
-      margin-right: 8px;
-      width: 24px;
-    }
+  .description {
+    height: 150px;
+    overflow: auto;
   }
 
   .arrow {
     border-bottom: 13px solid transparent;
     border-right: 13px solid $hover-background-color;
     border-top: 13px solid transparent;
-    display: none;
     height: 0;
     left: -13px;
     position: absolute;
@@ -317,14 +294,21 @@
 }
 
 %book {
+  @include mobile {
+    align-items: center;
+  }
   display: flex;
   flex-direction: column;
-  height: 330px;
+  height: 320px;
   min-width: 150px;
   position: relative;
-  width: 175px;
+  width: 100%;
 
   img {
+    align-self: center;
+    border-radius: 5px;
+    display: flex;
+    max-width: 200px;
     width: 100%;
   }
 
@@ -333,6 +317,7 @@
     color: $he-text-color;
     font-size: 15px;
     margin-top: 16px;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -358,7 +343,8 @@
         display: block;
       }
 
-      &:nth-child(4n+1) {
+      &:nth-child(4n+1),
+      &:nth-child(4n) {
         .info {
           left: -400px;
 
@@ -366,17 +352,18 @@
             border-left: 13px solid $hover-background-color;
             border-right: inherit;
             display: block;
-            left: 367px;
+            left: 372px;
           }
         }
       }
     }
-    @include big-desktop {
+    @include big-desktop-up {
       .details {
         display: block;
       }
 
-      &:nth-child(5n+1) {
+      &:nth-child(5n+1),
+      &:nth-child(5n) {
         .info {
           left: -400px;
 
@@ -391,7 +378,7 @@
     }
   }
 
-  &[opened] {
+  &.opened {
     .details {
       display: block;
     }
@@ -409,36 +396,45 @@
   }
 
   @include big-mobile {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 175px 175px;
   }
 
   @include tablet {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 175px 175px 175px;
   }
 
-  @include desktop {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 26px 0;
+  @include tablet-up {
+    height: calc(100vh - 80px);
+    justify-content: space-between;
+    overflow: auto;
+    padding: 26px 23px;
   }
 
-  @include big-desktop {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding: 26px 0;
+  @include desktop-up {
+    grid-template-columns: 175px 175px 175px 175px;
   }
+
+  @include big-desktop-up {
+    grid-template-columns: 175px 175px 175px 175px;
+    margin: auto;
+    max-width: 1080px;
+  }
+
+  @include ultra-big-desktop {
+    grid-template-columns: 175px 175px 175px 175px 175px;
+  }
+
   display: grid;
   grid-gap: 31px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 25px 1fr;
-  margin: auto;
-  max-width: 1000px;
-  min-height: 100%;
-  min-width: 90%;
+  justify-content: space-evenly;
   padding: 30px;
 
   .filters {
     @extend %filters;
     @include big-mobile {
-      grid-column: 1 / 4;
+      grid-column: 1 / 3;
     }
 
     @include tablet {
@@ -450,9 +446,14 @@
     }
 
     @include big-desktop {
+      grid-column: 1 / 5;
+    }
+
+    @include ultra-big-desktop {
       grid-column: 1 / 6;
     }
-    grid-column: 1 / 3;
+
+    grid-column: 1 / 2;
   }
 
 }

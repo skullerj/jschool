@@ -21,14 +21,17 @@ body {
 
 .main {
   @include mobile {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 160px 1fr auto;
   }
 
   @include big-mobile {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 160px 1fr auto;
   }
 
   @include tablet {
+    grid-template-columns: 240px 1fr 1fr;
     grid-template-rows: 160px 1fr auto;
   }
   display: grid;
@@ -54,6 +57,7 @@ header {
   @include desktop {
     grid-column: 2 / 4;
   }
+
   grid-column: 2 / 4;
 }
 
@@ -87,6 +91,9 @@ header {
 footer {
   @extend %footer;
   @include big-desktop {
+    grid-column: 3 / 4;
+  }
+  @include ultra-big-desktop {
     grid-column: 3 / 4;
   }
   grid-column: 1 / 4;
