@@ -71,21 +71,12 @@
   @include tablet {
     grid-template-areas: 'title search avatar' 'search search search';
   }
-  @include desktop {
+  @include desktop-up {
     grid-template-areas: 'title search avatar';
     grid-template-columns: auto 300px 240px;
     grid-template-rows: 1fr;
   }
-  @include big-desktop {
-    grid-template-areas: 'title search avatar';
-    grid-template-columns: auto 300px 240px;
-    grid-template-rows: 1fr;
-  }
-  @include ultra-big-desktop {
-    grid-template-areas: 'title search avatar';
-    grid-template-columns: auto 300px 240px;
-    grid-template-rows: 1fr;
-  }
+
   background: $topbar-bg-color;
   border-bottom: 1px solid $accent-color;
   box-shadow: -1px 0 4px $topbar-shadow-color;
@@ -96,8 +87,6 @@
   grid-template-rows: 1fr 1fr;
   padding: 23px;
   z-index: 10;
-
-
 
   h1 {
     @include font('Pluto Sans Medium');
@@ -356,6 +345,16 @@
     width: 55px;
   }
 
+  &.opened {
+    .details {
+      display: block;
+    }
+  }
+
+  .details {
+    @extend %book-details;
+  }
+
   &:hover {
     @include desktop {
       .details {
@@ -397,15 +396,6 @@
     }
   }
 
-  &.opened {
-    .details {
-      display: block;
-    }
-  }
-
-  .details {
-    @extend %book-details;
-  }
 }
 
 %books-section {
