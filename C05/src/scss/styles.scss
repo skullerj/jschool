@@ -135,17 +135,5 @@ nav {
   z-index: -1;
 }
 
-.loading {
-  background: $hover-background-color;
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
 
-  &.showing {
-    display: block;
-  }
-}
 

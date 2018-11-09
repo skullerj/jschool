@@ -354,7 +354,6 @@
     right: -9px;
     top: 20px;
     width: 55px;
-    z-index: 100;
   }
 
   &:hover {
@@ -363,8 +362,8 @@
         display: block;
       }
 
-      &:nth-child(4n+1),
-      &:nth-child(4n) {
+      &:nth-child(4n+2),
+      &:nth-child(4n+1) {
         .info {
           left: -400px;
 
@@ -382,8 +381,8 @@
         display: block;
       }
 
-      &:nth-child(5n+1),
-      &:nth-child(5n) {
+      &:nth-child(5n+2),
+      &:nth-child(5n+1) {
         .info {
           left: -400px;
 
@@ -453,6 +452,24 @@
 
   .filters {
     @extend %filters;
+  }
+
+  .loading {
+    @include font('Pluto Sans Cond Regular');
+    display: none;
+    font-size: 24px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    &.showing {
+      display: block;
+    }
+  }
+
+  .filters,
+  .loading {
     @include big-mobile {
       grid-column: 1 / 3;
     }

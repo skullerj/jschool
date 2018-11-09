@@ -44,9 +44,9 @@ function bookTemplate(book) {
         <div class="stars">
           ${stars(book.score)}
         </div>
-        <p class="borrow-button">
-          Borrow this
-        </p>
+        ${book.borrowed ? '' : `<p class="borrow-button">
+                Borrow this
+            </p>`}
       </div>
     </section>
   </article>`;
