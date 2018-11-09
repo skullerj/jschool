@@ -264,6 +264,16 @@
     overflow: auto;
   }
 
+  .borrow-button {
+    align-self: center;
+    background-color: $accent-color;
+    border: 0;
+    display: inline-block;
+    height: 30px;
+    padding: 10px;
+    text-align: center;
+  }
+
   .arrow {
     border-bottom: 13px solid transparent;
     border-right: 13px solid $hover-background-color;
@@ -335,6 +345,16 @@
     font-size: 13px;
     letter-spacing: -2px;
     margin-top: 8px;
+  }
+
+  .borrow-badge {
+    background: url('../images/borrowed.png');
+    height: 42px;
+    position: absolute;
+    right: -9px;
+    top: 20px;
+    width: 55px;
+    z-index: 100;
   }
 
   &:hover {

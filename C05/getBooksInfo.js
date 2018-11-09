@@ -43,6 +43,7 @@ async function getBooksInfo() {
         photoURL: b.imageLinks.thumbnail,
         score: Math.ceil(Math.random() * 5),
         pageCount: b.pageCount,
+        borrowed: (Math.random() - 0.5) > 0,
       });
     }
     return arr;

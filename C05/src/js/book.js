@@ -21,6 +21,7 @@ function bookTemplate(book) {
     <div class="stars">
       ${stars(book.score)}
     </div>
+    ${book.borrowed ? '<div class="borrow-badge"></div>' : ''}
     <section class="details">
       <div class="actions">
         <i class="fas fa-book-open open-book"></i>
