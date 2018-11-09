@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "webpack": "webpack -d --watch",
-    "dev": "webpack-dev-server",
-    "start": "npm run webpack",
+    "start": "webpack-dev-server --content-base dist/",
     "lint": "eslint *.js --fix && sass-lint src/scss/*.scss"
   },
   "keywords": [
