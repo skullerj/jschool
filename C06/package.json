@@ -1,0 +1,25 @@
+{
+  "name": "bookshelf-backend",
+  "version": "1.0.0",
+  "description": "Bookshelf app backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint *.js"
+  },
+  "keywords": [
+    "books",
+    "backend"
+  ],
+  "author": "Juan Rosero (@skullerj)",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.1.9"
+  }
+}
