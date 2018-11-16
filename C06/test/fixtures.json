@@ -1,7 +1,7 @@
 {
   "user":[
-    {"username": "sam", "password": "ihavetherign"},
-    {"username": "frodo", "password": "gimmethatring"}
+    {"username": "sam", "password": "$2b$10$oKU/fzU0QZH3hn75HcgmsudjzXAKgaM9HmqIdsJZFZhqbhkrSEULy", "unhashedpassword":"ihavethering"},
+    {"username": "frodo", "password": "$2b$10$KmC/WO0veIWdOXODOqTTXejrgtyWa802EWYW6cTJ5hyXIe3KRlCpu", "unhashedpassword": "gimmethatring"}
   ],
   "book":[
     {
@@ -12,7 +12,12 @@
       "photoURL":"http://books.google.com/books/content?id=JEYCDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":1,
       "pageCount":306,
-      "borrowed":false
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"All the Light We Cannot See",
       "author":"Anthony Doerr",
@@ -21,7 +26,12 @@
       ,"photoURL":"http://books.google.com/books/content?id=giaLDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "score":2,
       "pageCount":544,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"Redeployment",
       "author":"Phil Klay",
@@ -29,15 +39,28 @@
       "description":"\"Taking readers to the front lines of the war in Iraq and back, Redeployment asks us to understand what happened there, and what happened to the soldiers who returned\"--Back cover.",
       "photoURL":"http://books.google.com/books/content?id=lKeMDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":5,
-      "pageCount":304
-      ,"borrowed":true},{"title":"Euphoria",
+      "pageCount":304,
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
+    },{
+      "title":"Euphoria",
       "author":"Lily King",
       "year":2015,
       "description":"English anthropologist Andrew Banson has been alone in the field for several years, studying the Kiona river tribe in 1930s New Guinea. Haunted by the memory of his brothers' deaths and increasingly frustrated and isolated by his research, Bankson is on the verge of suicide. Then he encounters the famous and controversial American anthropologist Nell Stone and her wry and mercurial Australian husband, Fen, who have just fled the bloodthirsty Mumbanyo. Nell and Fen and, in spite of Nell's poor health, are hungry for a new discovery. When Bankson finds them a new tribe nearby, the artistic, female-dominated Tam, he ignites an intellectual and romantic firestorm between the three of them that burns out of anyone's control."
       ,"photoURL":"http://books.google.com/books/content?id=5ry-oQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":2,
       "pageCount":288,
-      "borrowed":false
+      "borrowed":false,
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"Big Little Lies",
       "author":"Liane Moriarty",
@@ -46,7 +69,12 @@
       "photoURL":"http://books.google.com/books/content?id=QNQBDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":2,
       "pageCount":512,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ] 
     },{
       "title":"Revival",
       "author":"Stephen King",
@@ -55,7 +83,12 @@
       "photoURL":"http://books.google.com/books/content?id=VLW2CAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "score":3,
       "pageCount":416,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "medellin",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"Station Eleven",
       "author":"Emily St. John Mandel",
@@ -64,7 +97,13 @@
       "photoURL":"http://books.google.com/books/content?id=AQzRrQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":2,
       "pageCount":352,
-      "borrowed":false
+      "borrowed":false,
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"Creativity, Inc.",
       "author":"Ed Catmull,Amy Wallace",
@@ -73,7 +112,13 @@
       "photoURL":"http://books.google.com/books/content?id=Il2inQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":3,
       "pageCount":340,
-      "borrowed":false
+      "borrowed":false,
+      "locations": [
+        {
+          "name": "cartagena",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"World of Warcraft: The Shattering",
       "author":"Christie Golden",
@@ -82,7 +127,12 @@
       ,"photoURL":"http://books.google.com/books/content?id=4_6qjog5n3sC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "score":2,
       "pageCount":432,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]   
     },{
       "title":"Eloquent JavaScript, 3rd Edition",
       "author":"Marijn Haverbeke",
@@ -91,7 +141,12 @@
       ,"photoURL":"http://books.google.com/books/content?id=ZwL9swEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":4,
       "pageCount":472,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "digital",
+          "onInventory": 100
+        }
+      ]
     },{
       "title":"Learning JavaScript Design Patterns",
       "author":"Addy Osmani",
@@ -100,14 +155,27 @@
       "photoURL":"http://books.google.com/books/content?id=JYPEgK-1bZoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "score":2,
       "pageCount":235,
-      "borrowed":true},{"title":"12 Rules for Life",
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
+    },{
+      "title":"12 Rules for Life",
       "author":"Jordan B. Peterson",
       "year":2018,
       "description":"\"What does everyone in the modern world need to know? [The author's] answer to this most difficult of questions uniquely combines the hard-won truths of ancient tradition with the stunning revelations of cutting-edge scientific research. [The author discusses] discussing discipline, freedom, adventure and responsibility, distilling the world's wisdom into 12 practical and profound rules for life\"--Amazon.com.",
       "photoURL":"http://books.google.com/books/content?id=sxVHDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":1,
       "pageCount":448,
-      "borrowed":false
+      "borrowed":false,
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"Cien años de soledad",
       "author":"Gabriel García Márquez",
@@ -116,7 +184,12 @@
       ,"photoURL":"http://books.google.com/books/content?id=_2UCwD6jnWUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":4,
       "pageCount":494,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     },{
       "title":"El Extranjero",
       "author":"Albert Camus",
@@ -125,7 +198,12 @@
       "photoURL":"http://books.google.com/books/content?id=9R1dvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":1,
       "pageCount":66,
-      "borrowed":true
+      "locations": [
+        {
+          "name": "quito",
+          "onInventory": 10
+        }
+      ]
     }
   ]
 }

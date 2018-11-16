@@ -14,6 +14,7 @@
   "author": "Juan Rosero (@skullerj)",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -22,10 +23,12 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "config": "^2.0.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.3.12"
+    "mongoose": "^5.3.12",
+    "node-fetch": "^2.3.0"
   }
 }
