@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha test/main.js",
-    "lint": "eslint *.js"
+    "lint": "eslint **.js app/**/*.js",
+    "start": "node index.js",
+    "populate": "node populateDatabase.js"
   },
   "keywords": [
     "books",
