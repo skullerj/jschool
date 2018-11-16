@@ -15,7 +15,7 @@ There is a test suite included that will test all the available endpoints. To us
 
   #### `npm run test`
 
-By default this will run on `NODE_ENV=test` and will connect to `localhost:27017/bookshelf` database.
+By default this will run on `NODE_ENV=test` and will connect to `localhost:27017/bookshelftest` database.
 
 Last but not least, to lint the project run:
 
