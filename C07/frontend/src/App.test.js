@@ -1,9 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import {shallow} from 'enzyme';
+import App from './App.jsx';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+const Element = shallow(<App/>);
+
+describe('App tests',()=>{
+
+  it('should render normally',()=>{
+
+    expect(Element.find('h1').length).toEqual(1);
+
+  });
+
 });
