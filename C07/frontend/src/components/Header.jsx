@@ -7,7 +7,7 @@ import mq from '../styles/mediaQueries'
 import theme from '../styles/theme'
 
 const style = css`
-  height: 80px;
+  min-height: 80px;
   background: ${theme.topBarBgColor};
   box-shadow: -1px 0 4px ${theme.topbarShadowColor};
   color: ${theme.heTextColor};
