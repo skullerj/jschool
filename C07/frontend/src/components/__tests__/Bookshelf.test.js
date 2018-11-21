@@ -1,15 +1,13 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import Bookshelf from '../Bookshelf.jsx';
+/* global describe, it, expect */
 
-const Element = shallow(<Bookshelf/>);
+import React from 'react'
+import { shallow } from 'enzyme'
+import Bookshelf from '../Bookshelf.jsx'
 
-describe('Bookshelf tests',()=>{
+const Element = shallow(<Bookshelf />)
 
-  it('should render normally',()=>{
-
-    expect(Element.find('section').length).toEqual(1);
-
-  });
-
-});
+describe('Bookshelf tests', () => {
+  it('should render normally', () => {
+    expect(Element.find('section').length).toEqual(1)
+  })
+})

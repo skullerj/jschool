@@ -1,12 +1,10 @@
-import React,{ Component } from 'react';
-
-
+import React, { Component } from 'react'
 class Bookshelf extends Component {
-  render(){
+  render () {
     return (
       <section>Aquí van los libros</section>
-    );
+    )
   }
 }
 
-export default Bookshelf;
+export default Bookshelf

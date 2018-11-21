@@ -1,15 +1,13 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import App from './App.jsx';
+/* global describe, it, expect */
 
-const Element = shallow(<App/>);
+import React from 'react'
+import { shallow } from 'enzyme'
+import App from './App.jsx'
 
-describe('App tests',()=>{
+const Element = shallow(<App />)
 
-  it('should render normally',()=>{
-
-    expect(Element.find('h1').length).toEqual(1);
-
-  });
-
-});
+describe('App tests', () => {
+  it('should render normally', () => {
+    expect(Element.find('div.app').length).toEqual(1)
+  })
+})
