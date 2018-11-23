@@ -6,6 +6,18 @@ import plutoFont from '../styles/plutoFont'
 import logo from '../images/logo.png'
 
 const navStyle = css`
+  @keyframes opendrawer {
+    from {
+      transform: translateX(-240px);
+    }
+
+    to {
+      transform: none;
+    }
+  }
+  animation-duration: 400ms;
+  animation-name: opendrawer;
+  animation-timing-function: cubic-bezier(0, 0, .2, 1);
   background: ${theme.sidebarColor};
   display: flex;
   flex-direction: column;
@@ -56,8 +68,9 @@ class Nav extends Component {
   }
   render () {
     const { location } = this.state
+    const parentStyles = this.props.style
     return (
-      <nav className={navStyle}>
+      <nav className={css`${navStyle} ${parentStyles}`}>
         <div className='logo'>
           <img src={logo} alt='Jobsity Logo' />
         </div>

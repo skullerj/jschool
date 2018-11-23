@@ -25,14 +25,14 @@ class Bookshelf extends Component {
   render () {
     const { books, selectedBook } = this.state
     return (
-      <section className={style}>
+      <div className={style}>
         {books.map((book, i) => {
           return (
             <Book book={book} key={book.id} >
               {selectedBook === book.id ? <BookDetails book={book} alignment={i % 2 === 0 ? 'left' : 'right'} /> : ''}
             </Book>)
         })}
-      </section>
+      </div>
     )
   }
 
