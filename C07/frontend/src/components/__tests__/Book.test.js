@@ -13,7 +13,7 @@ const book = shallow(<Book book={books[0]}
   onBookPointerEnter={onPointerEnterStub}
   onBookPointerLeave={onPointerLeaveStub} />)
 
-describe('Nav tests', () => {
+describe('Book tests', () => {
   it('should render normally', () => {
     expect(book.instance()).toBeDefined()
   })
