@@ -39,9 +39,24 @@ const style = css`
     margin-top: 5px;
   }
 
+  span {
+    ${plutoFont('cond_light', 10)};
+    margin-top: 5px;
+    color: ${theme.leTextColor};
+  }
+
 `
+export const locations = new Map([
+  ['everywhere', 'Everywhere'],
+  ['medellin', 'Medellin'],
+  ['quito', 'Quito'],
+  ['cartagena', 'Cartagena'],
+  ['digital', 'Digital']
+])
+
 const Book = (props) => {
   const { book, children, onBookClick, onBookPointerEnter, onBookPointerLeave } = props
+  const availableLocations = book.availableLocations.map(l => locations.get(l)).join(', ')
   return (
     <article
       className={style}
@@ -50,8 +65,9 @@ const Book = (props) => {
       onPointerLeave={onBookPointerLeave}>
       <img src={book.photoURL} alt={`${book.title} cover`} />
       <h1>{book.title}</h1>
-      <h2>{book.author}</h2>
+      <h2>{book.author}</h2>    
       <BookStars score={book.score} color={theme.accentColor} />
+      <span><i className='fas fa-globe' /> {availableLocations} </span>
       {children}
     </article>
   )
@@ -66,7 +82,7 @@ Book.propTypes = {
     photoURL: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     pageCount: PropTypes.number.isRequired,
-    locations: PropTypes.arrayOf(PropTypes.string)
+    availableLocations: PropTypes.arrayOf(PropTypes.string).isRequired
   }),
   onBookClick: PropTypes.func,
   onBookPointerEnter: PropTypes.func,

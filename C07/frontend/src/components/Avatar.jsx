@@ -12,7 +12,8 @@ const avatarStyles = css`
     max-width: 220px;
     min-width: 50px;
     width: 100%;
-
+    height: 100%;
+    
     img {
       border: solid 1px ${theme.accentColor};
       border-radius: 50%;

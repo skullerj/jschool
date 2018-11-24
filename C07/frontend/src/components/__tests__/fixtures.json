@@ -9,7 +9,7 @@
          "photoURL":"http://books.google.com/books/content?id=ZwL9swEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
          "score":4,
          "pageCount":472,
-         "locations":["cartagena","medellin"]
+         "availableLocations":["cartagena","medellin"]
       },
       {
          "id": 2,
@@ -20,7 +20,7 @@
          "photoURL":"http://books.google.com/books/content?id=JYPEgK-1bZoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
          "score":2,
          "pageCount":235,
-         "locations":["quito","medellin"]
+         "availableLocations":["quito","medellin"]
       },
       {
          "id": 3,
@@ -31,7 +31,7 @@
          "photoURL":"http://books.google.com/books/content?id=sxVHDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
          "score":1,
          "pageCount":448,
-         "locations":["medellin","digital"]
+         "availableLocations":["medellin","digital"]
       },
       {
          "id": 4,
@@ -42,7 +42,7 @@
          "photoURL":"http://books.google.com/books/content?id=_2UCwD6jnWUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
          "score":4,
          "pageCount":494,
-         "locations":["digital"]
+         "availableLocations":["digital"]
       },
       {
          "id": 5,
@@ -53,7 +53,7 @@
          "photoURL":"http://books.google.com/books/content?id=9R1dvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
          "score":1,
          "pageCount":66,
-         "locations":["cartagena","medellin"]
+         "availableLocations":["cartagena","medellin"]
       }
    ]
 }

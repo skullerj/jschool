@@ -5,11 +5,9 @@ import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
 
 const styles = css`
-  max-height: calc(100vh - 80px);
-  overflow: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   .loading,
   .error,
   .message {

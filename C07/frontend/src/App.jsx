@@ -6,16 +6,9 @@ import Nav from './components/Nav'
 import Bookshelf from './components/Bookshelf'
 import BooksSection from './components/BooksSection'
 import SearchField from './components/SearchField'
+import { locations } from './components/Book'
 import Avatar from './components/Avatar'
 import axios from 'axios'
-
-const locations = new Map([
-  ['everywhere', 'Everywhere'],
-  ['medellin', 'Medellin'],
-  ['quito', 'Quito'],
-  ['cartagena', 'Cartagena'],
-  ['digital', 'Digital']
-])
 
 class App extends Component {
   constructor (props) {

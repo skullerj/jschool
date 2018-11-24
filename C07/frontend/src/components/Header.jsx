@@ -18,9 +18,11 @@ const headerStyles = css`
     'grid-template-areas': [
       `'title title avatar' 'search search search'`,
       `'title title avatar' 'search search search'`,
+      `'title title avatar' 'search search search'`,
       `'title search avatar'`
     ],
     'grid-template-columns': [
+      'auto auto auto',
       'auto auto auto',
       'auto auto auto',
       'auto 300px 240px'

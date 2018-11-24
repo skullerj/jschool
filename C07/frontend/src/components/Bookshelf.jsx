@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
+import mq from '../styles/mediaQueries'
 
 import Book from './Book'
 import BookDetails from './BookDetails'
@@ -11,7 +12,11 @@ const style = css`
   grid-template-columns: repeat(auto-fill, 175px);
   justify-content: space-around;
   padding: 31px;
-  min-height: calc(100vh - 130px);
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+  & article:last-child {
+    ${mq({ 'margin-bottom': ['300px', '200px', '0', '0'] })}
+  }
 `
 
 class Bookshelf extends Component {
