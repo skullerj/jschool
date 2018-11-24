@@ -15,7 +15,7 @@ const BookStars = (props) => {
     if (i <= score) {
       stars.push(<i className='fas fa-star' key={i} />)
     } else {
-      stars.push(<i className='fas fa-star' key={i} />)
+      stars.push(<i className='far fa-star' key={i} />)
     }
   }
   return (
