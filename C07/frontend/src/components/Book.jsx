@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { css } from 'emotion'
-import theme from '../../styles/theme'
-import plutoFont from '../../styles/plutoFont'
+import theme from '../styles/theme'
+import plutoFont from '../styles/plutoFont'
 
 import BookStars from './BookStars'
 
@@ -41,9 +41,13 @@ const style = css`
 
 `
 const Book = (props) => {
-  const { book, children } = props
+  const { book, children, onBookClick, onBookPointerEnter, onBookPointerLeave } = props
   return (
-    <article className={style}>
+    <article
+      className={style}
+      onClick={onBookClick}
+      onPointerEnter={onBookPointerEnter}
+      onPointerLeave={onBookPointerLeave}>
       <img src={book.photoURL} alt={`${book.title} cover`} />
       <h1>{book.title}</h1>
       <h2>{book.author}</h2>
@@ -64,7 +68,9 @@ Book.propTypes = {
     pageCount: PropTypes.number.isRequired,
     locations: PropTypes.arrayOf(PropTypes.string)
   }),
-  showDetails: PropTypes.bool
+  onBookClick: PropTypes.func,
+  onBookPointerEnter: PropTypes.func,
+  onBookPointerLeave: PropTypes.func
 }
 
 export default Book

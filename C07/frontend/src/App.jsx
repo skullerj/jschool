@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Nav from './components/Nav'
 import Bookshelf from './components/Bookshelf'
 import SearchField from './components/SearchField'
+import axios from 'axios'
 
 const appStyle = css`
   display: grid;
@@ -34,6 +35,8 @@ const appStyle = css`
   }
   .bookshelf {
     grid-area: bookshelf;
+    max-height: calc(100vh - 80px);
+    overflow: auto;
   }
   .drawer-background {
     background: ${theme.hoverBackgroundColor};
@@ -62,13 +65,14 @@ class App extends Component {
     super(props)
     this.state = {
       searchTerms: '',
-      showNav: false
+      showNav: false,
+      books: []
     }
     this.updateSearchTerms = this.updateSearchTerms.bind(this)
     this.toggleNav = this.toggleNav.bind(this)
   }
   render () {
-    const { showNav } = this.state
+    const { showNav, books } = this.state
     return (
       <div className={appStyle}>
         <div className='header'>
@@ -81,7 +85,7 @@ class App extends Component {
         {showNav && <div className='drawer-background' onClick={this.toggleNav} />}     
         <section className='bookshelf'>      
           {this.state.searchTerms && <div className='search-terms'>{`Buscando: ${this.state.searchTerms}`}</div>}
-          <Bookshelf />
+          <Bookshelf books={books} />
         </section>
       </div>
     )
@@ -95,6 +99,21 @@ class App extends Component {
     this.setState((state) => {
       return { showNav: !state.showNav }
     })
+  }
+  componentDidMount () {
+    const jwt = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmVmMzkxOWViNmE3YTc0NzZlZjY3NjciLCJ1c2VybmFtZSI6ImJpbGwiLCJpYXQiOjE1NDI5MjIzODJ9.alpB13JGFwDpyq49jiSdZ8WuvIj8tkX42ilr35Mohv0'
+    let requester = axios.create({
+      baseURL: '/',
+      headers: { 'Authorization': jwt }
+    })
+    requester.get('/books')
+      .then((res) => {
+        console.log(res)
+        this.setState({ books: res.data.data })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 

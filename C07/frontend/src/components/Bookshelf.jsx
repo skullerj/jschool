@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { css } from 'emotion'
-import axios from 'axios'
 
-import Book from './Book/Book'
-import BookDetails from './Book/BookDetails'
+import Book from './Book'
+import BookDetails from './BookDetails'
 
 const style = css`
   display: grid;
@@ -23,35 +23,58 @@ class Bookshelf extends Component {
   }
 
   render () {
-    const { books, selectedBook } = this.state
+    const { selectedBook } = this.state
+    const { books } = this.props
     return (
-      <div className={style}>
+      <div className={style} onClick={(e) => this.clearSelectedBook(e)}>
         {books.map((book, i) => {
           return (
-            <Book book={book} key={book.id} >
-              {selectedBook === book.id ? <BookDetails book={book} alignment={i % 2 === 0 ? 'left' : 'right'} /> : ''}
+            <Book book={book}
+              key={book.id}
+              onBookClick={(e) => this.selectBook(e, book.id)}
+              onBookPointerEnter={(e) => this.selectBook(e, book.id)}
+              onBookPointerLeave={(e) => this.clearSelectedBook(e)}>
+              {selectedBook === book.id && <BookDetails book={book} alignment={this.computeAlignment(i)} /> }
             </Book>)
         })}
       </div>
     )
   }
 
-  componentDidMount () {
-    const jwt = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmVmMzkxOWViNmE3YTc0NzZlZjY3NjciLCJ1c2VybmFtZSI6ImJpbGwiLCJpYXQiOjE1NDI5MjIzODJ9.alpB13JGFwDpyq49jiSdZ8WuvIj8tkX42ilr35Mohv0'
-    let requester = axios.create({
-      baseURL: '/',
-      headers: { 'Authorization': jwt }
-    })
-
-    requester.get('/books')
-      .then((res) => {
-        console.log(res)
-        this.setState({ books: res.data.data })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  computeAlignment (index) {
+    const width = window.innerWidth
+    if (width > 1180) {
+      // Compute books per row taking the drawer nav and padding into account
+      const booksPerRow = Math.floor((width - 300) / 220)
+      const mod = (index + 1) % booksPerRow
+      console.log(mod,booksPerRow)
+      if (mod === 0 || mod === booksPerRow - 1) {
+        return 'left'
+      } else {
+        return 'right'
+      }
+    } else {
+      return 'left'
+    }
   }
+
+  selectBook (e, id) {
+    e.preventDefault()
+    e.stopPropagation()
+    this.setState(state => {
+      if (id === state.selectBook) return {}
+      return { selectedBook: id }
+    })
+  }
+  clearSelectedBook (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    this.setState({ selectedBook: null })
+  }
+}
+
+Bookshelf.propTypes = {
+  books: PropTypes.array
 }
 
 export default Bookshelf

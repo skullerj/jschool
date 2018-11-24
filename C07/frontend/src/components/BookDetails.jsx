@@ -1,8 +1,8 @@
 import React from 'react'
 import { css } from 'emotion'
-import theme from '../../styles/theme'
-import plutoFont from '../../styles/plutoFont'
-import mq from '../../styles/mediaQueries'
+import theme from '../styles/theme'
+import plutoFont from '../styles/plutoFont'
+import mq from '../styles/mediaQueries'
 import BookStars from './BookStars'
 
 const mainStyle = css`
@@ -46,7 +46,7 @@ const actionsStyle = css`
 const infoStyle = alignment => css`
   ${mq({
     'bottom': ['0', '0', '0', 'inherit'],
-    'left': ['0', '0', '0', alignment === 'left' ? '205px' : '-400px'],
+    'left': ['0', '0', '0', alignment === 'left' ? '-400px' : '205px'],
     'position': ['fixed', 'fixed', 'fixed', 'absolute'],
     'top': ['inherit', 'inherit', 'inherit', '0'],
     'width': ['100vw', '100vw', '100vw', '372px']
@@ -102,7 +102,7 @@ const infoStyle = alignment => css`
     height: 0;
     position: absolute;
     width: 0;
-    ${alignment === 'left' ? `left: 367px;` : `left: -13px;`}
+    ${alignment === 'left' ? `left: 371px;` : `left: -12px;`}
   }
 `
 
