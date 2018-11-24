@@ -47,7 +47,6 @@ class Bookshelf extends Component {
       // Compute books per row taking the drawer nav and padding into account
       const booksPerRow = Math.floor((width - 300) / 220)
       const mod = (index + 1) % booksPerRow
-      console.log(mod,booksPerRow)
       if (mod === 0 || mod === booksPerRow - 1) {
         return 'left'
       } else {
