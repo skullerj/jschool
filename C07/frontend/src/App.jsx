@@ -6,6 +6,7 @@ import Nav from './components/Nav'
 import Bookshelf from './components/Bookshelf'
 import BooksSection from './components/BooksSection'
 import SearchField from './components/SearchField'
+import Avatar from './components/Avatar'
 import axios from 'axios'
 
 const locations = new Map([
@@ -26,7 +27,10 @@ class App extends Component {
       loading: false,
       location: 'everywhere',
       authenticated: false,
-      lastError: null
+      lastError: null,
+      user: {
+        username: null
+      }
     }
     this.updateSearchTerms = this.updateSearchTerms.bind(this)
     this.updateLocation = this.updateLocation.bind(this)
@@ -34,12 +38,13 @@ class App extends Component {
     this.loginAndFetchBooks = this.loginAndFetchBooks.bind(this)
   }
   render () {
-    const { showNav, loading, searchTerms, location, lastError, authenticated } = this.state
+    const { showNav, loading, searchTerms, location, lastError, authenticated, user } = this.state
     const books = this.filterBooks(this.state.books, searchTerms)
     return (
       <main className={appStyle}>
         <Header
           search={<SearchField onValueChange={this.updateSearchTerms} />}
+          avatar={<Avatar authenticated={authenticated} user={user} onLoginClick={this.loginAndFetchBooks} />}
           onMenuTap={this.toggleNav}
           styles={headerStyle}
         />
@@ -99,7 +104,7 @@ class App extends Component {
               baseURL: '/',
               headers: { 'Authorization': `Bearer ${response.data.jwt}` }
             })
-            this.setState({ authenticated: true })
+            this.setState({ authenticated: true, user: { username: 'frodo' } })
             resolve()
           })
           .catch((err) => {
@@ -111,7 +116,7 @@ class App extends Component {
           baseURL: '/',
           headers: { 'Authorization': `Bearer ${jwt}` }
         })
-        this.setState({ authenticated: true })
+        this.setState({ authenticated: true, user: { username: 'frodo' } })
         resolve()
       }
     })
@@ -123,10 +128,7 @@ class App extends Component {
         this.fetchBooks(this.state.location)
       })
   }
-
-  componentDidMount () {
-    // this.loginAndFetchBooks()
-  }
+  
 }
 
 export default App

@@ -53,7 +53,7 @@ const headerStyles = css`
   }
 `
 const Header = (props) => {
-  const { search, profile, onMenuTap, styles: parentStyles } = props
+  const { search, avatar, onMenuTap, styles: parentStyles } = props
   return (
     <header className={css`${parentStyles} ${headerStyles};`}>
       <div className='title'>
@@ -64,7 +64,7 @@ const Header = (props) => {
         {search}
       </div>
       <div className='avatar'>
-        {profile}
+        {avatar}
       </div>
     </header>
   )
@@ -72,7 +72,7 @@ const Header = (props) => {
 
 Header.propTypes = {
   search: PropTypes.element,
-  profile: PropTypes.element,
+  avatar: PropTypes.element,
   onMenuTap: PropTypes.func
 }
 
