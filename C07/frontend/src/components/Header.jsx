@@ -6,7 +6,7 @@ import plutoFont from '../styles/plutoFont'
 import mq from '../styles/mediaQueries'
 import theme from '../styles/theme'
 
-const style = css`
+const headerStyles = css`
   min-height: 80px;
   background: ${theme.topBarBgColor};
   box-shadow: -1px 0 4px ${theme.topbarShadowColor};
@@ -53,9 +53,9 @@ const style = css`
   }
 `
 const Header = (props) => {
-  const { search, profile, onMenuTap } = props
+  const { search, profile, onMenuTap, styles: parentStyles } = props
   return (
-    <header className={style}>
+    <header className={css`${parentStyles} ${headerStyles};`}>
       <div className='title'>
         <i className='fas fa-bars' onClick={onMenuTap} />
         <h1>Bookshelf</h1>

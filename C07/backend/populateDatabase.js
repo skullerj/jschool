@@ -3,6 +3,7 @@ const config = require('config');
 const fetch = require('node-fetch');
 
 const Book = require('./app/models/book');
+const User = require('./app/models/user');
 
 const booksISBNs = [
   '9780143127550',
@@ -71,6 +72,14 @@ async function populateDatabase() {
   });
   try {
     await Promise.all(promises);
+  } catch (e) {
+    return e;
+  }
+  // Create a sample user
+  const user = new User({ username: 'frodo', password:'givemethatring' });
+  user.hashPassword();
+  try {
+    await user.save();
   } catch (e) {
     return e;
   }
