@@ -93,32 +93,35 @@ class App extends Component {
       })
   }
 
-  login () {
+  checkLogin () {
     const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      this.requester = axios.create({
+        baseURL: '/',
+        headers: { 'Authorization': `Bearer ${jwt}` }
+      })
+      this.setState({ authenticated: true, user: { username: 'frodo' } })
+      return true
+    }
+    return false
+  }
+
+  login () {
     return new Promise((resolve, reject) => {
-      if (!jwt) {
-        axios.post('/auth/login', { username: 'frodo', password: 'givemethatring' })
-          .then((response) => {
-            localStorage.jwt = response.data.jwt
-            this.requester = axios.create({
-              baseURL: '/',
-              headers: { 'Authorization': `Bearer ${response.data.jwt}` }
-            })
-            this.setState({ authenticated: true, user: { username: 'frodo' } })
-            resolve()
+      axios.post('/auth/login', { username: 'frodo', password: 'givemethatring' })
+        .then((response) => {
+          localStorage.jwt = response.data.jwt
+          this.requester = axios.create({
+            baseURL: '/',
+            headers: { 'Authorization': `Bearer ${response.data.jwt}` }
           })
-          .catch((err) => {
-            this.setState({ lastError: err, authenticated: false })
-            reject(err)
-          })
-      } else {
-        this.requester = axios.create({
-          baseURL: '/',
-          headers: { 'Authorization': `Bearer ${jwt}` }
+          this.setState({ authenticated: true, user: { username: 'frodo' } })
+          resolve()
         })
-        this.setState({ authenticated: true, user: { username: 'frodo' } })
-        resolve()
-      }
+        .catch((err) => {
+          this.setState({ lastError: err, authenticated: false })
+          reject(err)
+        })
     })
   }
 
@@ -128,7 +131,12 @@ class App extends Component {
         this.fetchBooks(this.state.location)
       })
   }
-  
+
+  componentDidMount () {
+    if (this.checkLogin()) {
+      this.fetchBooks(this.state.location)
+    }
+  }
 }
 
 export default App
