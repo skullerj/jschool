@@ -11,6 +11,7 @@ const style = css`
   grid-template-columns: repeat(auto-fill, 175px);
   justify-content: space-around;
   padding: 31px;
+  min-height: calc(100vh - 130px);
 `
 
 class Bookshelf extends Component {
