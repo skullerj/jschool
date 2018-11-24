@@ -12,9 +12,15 @@ const styles = css`
   .error,
   .message {
     padding: 20px 0px 10px 44px;
-    ${plutoFont('cond_light', 30)}
+    ${plutoFont('cond_light', 20)}
     color: ${theme.heTextColor};
     min-height: calc(100vh - 130px);
+  }
+  .error {
+    color: ${theme.errorColor}
+  }
+  .message {
+    color: ${theme.accentColor}
   }
 `
 

@@ -3,6 +3,7 @@ const theme = {
   topBarBgColor: '#fcf8f3',
   sidebarColor: '#231f20',
   accentColor: '#6ec1e4',
+  errorColor: '#dc3545',
   topbarShadowColor: 'rgba(0, 0, 0, .4)',
   // he: High Emphasis, me: Medium Emphasis, le: Low Emphasis
   heTextColor: '#231f20',
