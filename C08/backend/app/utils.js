@@ -1,6 +1,6 @@
 
-function formatError(errorMessage, errorCode) {
-  return { error: { message: errorMessage, status: errorCode } };
+function formatError (errorMessage, errorCode) {
+  return { error: { message: errorMessage, status: errorCode } }
 }
 
-module.exports = { formatError };
+module.exports = { formatError }
