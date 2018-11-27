@@ -47,7 +47,6 @@ app.use('/books', booksRouter)
 app.use('/auth', authRouter)
 
 // 404 at the end
-
 app.use((req, res) => {
   res.status(404).send('Not found.')
 })

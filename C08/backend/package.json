@@ -4,7 +4,7 @@
   "description": "Bookshelf app backend",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha test/main.js",
+    "test": "NODE_ENV=test mocha --recursive",
     "lint": "eslint **.js app/**/*.js",
     "start": "node index.js",
     "populate": "node populateDatabase.js"
