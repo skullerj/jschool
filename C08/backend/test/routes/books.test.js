@@ -80,7 +80,7 @@ describe('Books routes', () => {
         })
     })
     it('responds with a 200 and the remaining books in the last page', (done) => {
-      const page = Math.floor(books.length / 10)
+      const page = Math.ceil(books.length / 10)
       const remaining = books.length % 10
       request(app)
         .get(`/books?page=${page}&limit=10`)
@@ -130,7 +130,6 @@ describe('Books routes', () => {
           return done()
         })
     })
-
   })
   describe('GET /books/:id', () => {
     let validBook
@@ -200,10 +199,8 @@ describe('Books routes', () => {
   })
   describe('POST /books/:id/lend', () => {
     let testBook
-    const validTime = new Date()
-    const futureTime = new Date()
-    validTime.setTime(validTime.getTime + 1000 * 60 * 60 * 24 * 10)
-    futureTime.setTime(futureTime.getTime + 1000 * 60 * 60 * 24 * 30)
+    const validTime = new Date(Date.now() + 1000 * 60 * 60 * 24 * 10)
+    const futureTime = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
     before((done) => {
       testBook = books.find(b => b.availableLocations.indexOf('quito') >= 0 &&
                               b.availableLocations.indexOf('cartagena') < 0)
@@ -249,22 +246,22 @@ describe('Books routes', () => {
           expect(error).to.be.an('object')
           expect(error.message).to.equal('Missing parameters.')
           expect(error.missingParameters).to.include('location')
-          expect(error.missingParameters).to.include('lendUntil')
+          expect(error.missingParameters).to.include('returnDate')
           return done()
         })
     })
-    it('responds with a 400 when lendUntil is more than 15 days from now', (done) => { 
+    it('responds with a 400 when returnDate is more than 15 days from now', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito', lendUntil: futureTime })
+        .send({ location: 'quito', returnDate: futureTime })
         .expect('Content-Type', /json/)
         .expect(400)
         .end((err, res) => {
           if (err) return done(err)
           const { error } = res.body
           expect(error).to.be.an('object')
-          expect(error.message).to.equal('Invalid lendUntil date.')
+          expect(error.message).to.equal('Invalid returnDate.')
           return done()
         })
     })
@@ -272,7 +269,7 @@ describe('Books routes', () => {
       request(app)
         .post('/books/somefakeid/lend')
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito', lendUntil: validTime })
+        .send({ location: 'quito', returnDate: validTime })
         .expect('Content-Type', /json/)
         .expect(404)
         .end((err, res) => {
@@ -287,7 +284,7 @@ describe('Books routes', () => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito', lendUntil: validTime })
+        .send({ location: 'quito', returnDate: validTime })
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -302,7 +299,7 @@ describe('Books routes', () => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito', lendUntil: validTime })
+        .send({ location: 'quito', returnDate: validTime })
         .expect('Content-Type', /json/)
         .expect(409)
         .end((err, res) => {

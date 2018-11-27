@@ -1,29 +1,33 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
-const Book = require('../models/book.js');
-const isAuthenticated = require('../policies/isAuthenticated');
-const { formatError } = require('../utils');
-
+const router = express.Router()
+const Book = require('../models/book.js')
+const isAuthenticated = require('../policies/isAuthenticated')
+const { formatError, validateReturnDate } = require('../utils')
 // Used to parse params and convert them into mongoose filters
-function queryToFilters(query) {
-  const filters = {};
+function queryToFilters (query) {
+  const filters = {}
   if (query.location) {
-    filters['locations.name'] = query.location;
+    filters['locations.name'] = query.location
   }
-  return filters;
+  if (query.title) {
+    filters['title'] = { '$regex': new RegExp(`${query.title}`, 'i') }
+  }
+  return filters
 }
 
 // Require authentication for all this routes
-router.use(isAuthenticated);
+router.use(isAuthenticated)
 
 // *GET* Get all Books
 router.get('/', (req, res, next) => {
-  Book.find(queryToFilters(req.query), (err, books) => {
-    if (err) return next(err);
-    return res.json({ data: books.map(b => b.toPublic()) });
-  });
-});
+  const limit = parseInt(req.query.limit || 15)
+  const page = parseInt(req.query.page || 1)
+  Book.find(queryToFilters(req.query)).skip(limit * (page - 1)).limit(limit).exec((err, books) => {
+    if (err) return next(err)
+    return res.json({ data: books.map(b => b.toPublic()) })
+  })
+})
 
 // *GET* Get a specific book
 router.get('/:id', (req, res, next) => {
@@ -31,54 +35,69 @@ router.get('/:id', (req, res, next) => {
     if (err) {
       // When the sent id is not a valid id this error will pop
       if (err.name === 'CastError' && err.path === '_id') {
-        return res.status(404).json(formatError('Book not found.', 404));
+        return res.status(404).json(formatError('Book not found.', 404))
       }
-      return next(err);
+      return next(err)
     }
-    if (!book) return res.status(404).json(formatError('Book not found.', 404));
-    return res.json({ data: book.toPublic() });
-  });
-});
+    if (!book) return res.status(404).json(formatError('Book not found.', 404))
+    return res.json({ data: book.toPublic() })
+  })
+})
+
+function validateLendParams (params) {
+  const missingParams = []
+  if (!params.location) {
+    missingParams.push('location')
+  }
+  if (!params.returnDate) {
+    missingParams.push('returnDate')
+  }
+  return missingParams.length > 0 ? missingParams : false
+}
 
 // *POST* Lend a book
 router.post('/:id/lend', (req, res, next) => {
-  if (!req.body.location) {
-    return res.status(400).json(formatError('Location is required.', 400));
+  const paramsErrors = validateLendParams(req.body)
+  if (paramsErrors) {
+    return res.status(400).json(formatError('Missing parameters.', 400, { missingParameters: paramsErrors }))
+  }
+  if (!validateReturnDate(req.body.returnDate)) {
+    return res.status(400).json(formatError('Invalid returnDate.', 400))
   }
   return Book.findById(req.params.id, (findError, book) => {
     if (findError) {
       // When the sent id is not a valid id this error will pop
       if (findError.name === 'CastError' && findError.path === '_id') {
-        return res.status(404).json(formatError('Book not found.', 404));
+        return res.status(404).json(formatError('Book not found.', 404))
       }
-      return next(findError);
+      return next(findError)
     }
-    if (!book) return res.status(404).json(formatError('Book not found.', 404));
+    if (!book) return res.status(404).json(formatError('Book not found.', 404))
     if (book.availableLocations.indexOf(req.body.location) < 0) {
-      return res.status(409).json(formatError('Book is not available at that location.', 409));
+      return res.status(409).json(formatError('Book is not available at that location.', 409))
     }
-    if (book.lentTo.indexOf(req.user.sub) >= 0) {
-      return res.status(409).json(formatError('Book already lent.', 409));
+    if (book.lendingUsers.indexOf(req.user.sub) >= 0) {
+      return res.status(409).json(formatError('Book already lent.', 409))
     }
+
     const updatedLocations = book.locations.map((loc) => {
       if (loc.name === req.body.location) {
         return {
           name: loc.name,
-          onInventory: loc.name === req.body.location ? loc.availableAfterLend : loc.available,
-        };
+          onInventory: loc.name === req.body.location ? loc.availableAfterLend : loc.available
+        }
       }
-      return loc;
-    });
+      return loc
+    })
     book.set({
-      lentTo: [...book.lentTo, req.user.sub],
-      locations: updatedLocations,
-    });
+      lentTo: [...book.lentTo, { userId: req.user.sub, returnDate: req.body.returnDate }],
+      locations: updatedLocations
+    })
     return book.save((updateError) => {
-      if (updateError) return next(updateError);
-      return res.json({ data: { lended: true } });
-    });
-  });
-});
+      if (updateError) return next(updateError)
+      return res.json({ data: { lended: true } })
+    })
+  })
+})
 
-
-module.exports = router;
+module.exports = router
