@@ -51,7 +51,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and all books', (done) => {
+    it('responds with a 200 and 15 books which is the default limit', (done) => {
       request(app)
         .get('/books')
         .set('Authorization', `Bearer ${token}`)
@@ -61,7 +61,37 @@ describe('Books routes', () => {
           if (err) return done(err)
           const resultBooks = res.body.data
           expect(resultBooks).to.be.an('array')
-          expect(resultBooks.length).to.equal(books.length)
+          expect(resultBooks.length).to.equal(15)
+          return done()
+        })
+    })
+    it('responds with a 200 and the limit quantity of books', (done) => {
+      request(app)
+        .get('/books?limit=5')
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err)
+          const resultBooks = res.body.data
+          expect(resultBooks).to.be.an('array')
+          expect(resultBooks.length).to.equal(5)
+          return done()
+        })
+    })
+    it('responds with a 200 and the remaining books in the last page', (done) => {
+      const page = Math.floor(books.length / 10)
+      const remaining = books.length % 10
+      request(app)
+        .get(`/books?page=${page}&limit=10`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err)
+          const resultBooks = res.body.data
+          expect(resultBooks).to.be.an('array')
+          expect(resultBooks.length).to.equal(remaining)
           return done()
         })
     })
@@ -81,6 +111,26 @@ describe('Books routes', () => {
           return done()
         })
     })
+    it('responds with a 200 and the books containing sent title', (done) => {
+      const searchingTitle = 'redep'
+      const desiredBooks = books.filter((b) => {
+        return b.title.toLowerCase().indexOf(searchingTitle) >= 0
+      })
+      request(app)
+        .get(`/books?title=${searchingTitle}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err)
+          const resultBooks = res.body.data
+          expect(resultBooks).to.be.an('array')
+          expect(resultBooks.length).to.equal(desiredBooks.length)
+          expect(resultBooks[0].title).to.equal(desiredBooks[0].title)
+          return done()
+        })
+    })
+
   })
   describe('GET /books/:id', () => {
     let validBook
@@ -150,6 +200,10 @@ describe('Books routes', () => {
   })
   describe('POST /books/:id/lend', () => {
     let testBook
+    const validTime = new Date()
+    const futureTime = new Date()
+    validTime.setTime(validTime.getTime + 1000 * 60 * 60 * 24 * 10)
+    futureTime.setTime(futureTime.getTime + 1000 * 60 * 60 * 24 * 30)
     before((done) => {
       testBook = books.find(b => b.availableLocations.indexOf('quito') >= 0 &&
                               b.availableLocations.indexOf('cartagena') < 0)
@@ -183,9 +237,9 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 400 when no location is sent', (done) => {
+    it('responds with a 400 when any required parameters are missing', (done) => {
       request(app)
-        .post('/books/somefakeid/lend')
+        .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
         .expect('Content-Type', /json/)
         .expect(400)
@@ -193,7 +247,24 @@ describe('Books routes', () => {
           if (err) return done(err)
           const { error } = res.body
           expect(error).to.be.an('object')
-          expect(error.message).to.equal('Location is required.')
+          expect(error.message).to.equal('Missing parameters.')
+          expect(error.missingParameters).to.include('location')
+          expect(error.missingParameters).to.include('lendUntil')
+          return done()
+        })
+    })
+    it('responds with a 400 when lendUntil is more than 15 days from now', (done) => { 
+      request(app)
+        .post(`/books/${testBook.id}/lend`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ location: 'quito', lendUntil: futureTime })
+        .expect('Content-Type', /json/)
+        .expect(400)
+        .end((err, res) => {
+          if (err) return done(err)
+          const { error } = res.body
+          expect(error).to.be.an('object')
+          expect(error.message).to.equal('Invalid lendUntil date.')
           return done()
         })
     })
@@ -201,7 +272,7 @@ describe('Books routes', () => {
       request(app)
         .post('/books/somefakeid/lend')
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito' })
+        .send({ location: 'quito', lendUntil: validTime })
         .expect('Content-Type', /json/)
         .expect(404)
         .end((err, res) => {
@@ -212,26 +283,11 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 409 when book exists but is not available', (done) => {
-      request(app)
-        .post(`/books/${testBook.id}/lend`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'cartagena' })
-        .expect('Content-Type', /json/)
-        .expect(409)
-        .end((err, res) => {
-          if (err) return done(err)
-          const { error } = res.body
-          expect(error).to.be.an('object')
-          expect(error.message).to.equal('Book is not available at that location.')
-          return done()
-        })
-    })
     it('responds with a 200 and some confirmation data', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito' })
+        .send({ location: 'quito', lendUntil: validTime })
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -246,7 +302,7 @@ describe('Books routes', () => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ location: 'quito' })
+        .send({ location: 'quito', lendUntil: validTime })
         .expect('Content-Type', /json/)
         .expect(409)
         .end((err, res) => {
