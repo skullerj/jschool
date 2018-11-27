@@ -1,0 +1,59 @@
+{
+   "books":[
+      {  
+         "id": 1,
+         "title":"Eloquent JavaScript, 3rd Edition",
+         "author":"Marijn Haverbeke",
+         "year":2018,
+         "description":"Completely revised and updated, this best-selling introduction to programming in JavaScript focuses on writing real applications. Eloquent JavaScript dives into the JavaScript language to show programmers how to write elegant, effective JavaScript code. Like any good programming book, Eloquent JavaScript begins with fundamentals--variables, control structures, functions, and data structures--then moves on to complex topics like object-oriented programming and regular expressions. This third edition introduces new features covering the 2017 version of JavaScript, such as class notation, arrow functions, iterators, async functions, template strings, and black scope. Author Marijn Haverbeke keeps the friendly tone and easy-to-follow explanations that made the original a hit, and he adds new exercises for readers to test their skills. Eloquent JavaScript will have readers fluent in the language of the web in no time, eloquently.",
+         "photoURL":"http://books.google.com/books/content?id=ZwL9swEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+         "score":4,
+         "pageCount":472,
+         "availableLocations":["cartagena","medellin"]
+      },
+      {
+         "id": 2,
+         "title":"Learning JavaScript Design Patterns",
+         "author":"Addy Osmani",
+         "year":2012,
+         "description":"An introduction to writing code with JavaScript using classical and modern design patterns, including modules, observers, facades, and mediators.",
+         "photoURL":"http://books.google.com/books/content?id=JYPEgK-1bZoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+         "score":2,
+         "pageCount":235,
+         "availableLocations":["quito","medellin"]
+      },
+      {
+         "id": 3,
+         "title":"12 Rules for Life",
+         "author":"Jordan B. Peterson",
+         "year":2018,
+         "description":"\"What does everyone in the modern world need to know? [The author's] answer to this most difficult of questions uniquely combines the hard-won truths of ancient tradition with the stunning revelations of cutting-edge scientific research. [The author discusses] discussing discipline, freedom, adventure and responsibility, distilling the world's wisdom into 12 practical and profound rules for life\"--Amazon.com.",
+         "photoURL":"http://books.google.com/books/content?id=sxVHDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+         "score":1,
+         "pageCount":448,
+         "availableLocations":["medellin","digital"]
+      },
+      {
+         "id": 4,
+         "title":"Cien años de soledad",
+         "author":"Gabriel García Márquez",
+         "year":2009,
+         "description":"\"Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo\". Con estas palabras empieza una novela ya legendaria en los anales de la literatura universal, una de las aventuras literarias más fascinantes del siglo xx. Millones de ejemplares de Cien años de soledad leídos en todas las lenguas y el Premio Nobel de Literatura coronando una obra que se había abierto paso a \"boca a boca\" --como gusta decir el escritor-- son la más palpable demostración de que la aventura fabulosa de la familia Buendía-Iguarán, con sus milagros, fantasías, obsesiones, tragedias, incestos, adulterios, rebeldías, descubrimientos y condenas, representaba al mismo tiempo el mito y la historia, la tragedia y el amor del mundo entero.",
+         "photoURL":"http://books.google.com/books/content?id=_2UCwD6jnWUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+         "score":4,
+         "pageCount":494,
+         "availableLocations":["digital"]
+      },
+      {
+         "id": 5,
+         "title":"El Extranjero",
+         "author":"Albert Camus",
+         "year":2016,
+         "description":"es la primera novela del escritor francés Albert Camus, publicada en 1942. El protagonista, Meursault, es un ser indiferente a la realidad por resultarle absurda e inabordable. El progreso tecnológico le ha privado de la participación en las decisiones colectivas y le ha convertido en \"extranjero\" dentro de lo que debería ser su propio entorno.",
+         "photoURL":"http://books.google.com/books/content?id=9R1dvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+         "score":1,
+         "pageCount":66,
+         "availableLocations":["cartagena","medellin"]
+      }
+   ]
+}

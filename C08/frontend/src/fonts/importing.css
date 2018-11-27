@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Pluto Sans Regular';
+  src: url('./PlutoSansRegular.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Medium';
+  src: url('./PlutoSansMedium.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Bold';
+  src: url('./PlutoSansCondBold.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Regular';
+  src: url('./PlutoSansCondRegular.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Medium';
+  src: url('./PlutoSansCondMedium.otf');
+}
+@font-face {
+  font-family: 'Pluto Sans Cond Light';
+  src: url('./PlutoSansCondLight.otf');
+}
