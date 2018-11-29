@@ -65,7 +65,7 @@ const Book = (props) => {
       onPointerLeave={onBookPointerLeave}>
       <img src={book.photoURL} alt={`${book.title} cover`} />
       <h1>{book.title}</h1>
-      <h2>{book.author}</h2>    
+      <h2>{book.author}</h2>
       <BookStars score={book.score} color={theme.accentColor} />
       <span><i className='fas fa-globe' /> {availableLocations} </span>
       {children}

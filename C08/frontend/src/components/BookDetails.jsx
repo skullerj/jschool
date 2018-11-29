@@ -4,7 +4,7 @@ import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
 import mq from '../styles/mediaQueries'
 import BookStars from './BookStars'
-
+import { Link } from 'react-router-dom'
 const mainStyle = css`
   height: 250px;
   position: absolute;
@@ -111,7 +111,9 @@ const BookDetails = (props) => {
   return (
     <section className={mainStyle}>
       <div className={actionsStyle}>
-        <i className='fas fa-book-open open-book' />
+        <Link to={`/books/${book.id}`}>
+          <i className='fas fa-book-open open-book' />
+        </Link>
         <div className='rate'>
           <p>Rate this book</p>
           <BookStars score={book.score} color={theme.starColor} />

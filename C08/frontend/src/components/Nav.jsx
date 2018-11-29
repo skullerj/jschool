@@ -1,61 +1,52 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
 import logo from '../images/logo.png'
 
-const navStyle = css`
-  @keyframes opendrawer {
-    from {
-      transform: translateX(-240px);
-    }
-
-    to {
-      transform: none;
-    }
-  }
-  animation-duration: 400ms;
-  animation-name: opendrawer;
-  animation-timing-function: cubic-bezier(0, 0, .2, 1);
-  background: ${theme.sidebarColor};
+const linksStyle = css`
   display: flex;
   flex-direction: column;
-  
-  .logo {
-    background: #fff;
-    border-bottom: 1px solid ${theme.accentColor};
-    display: flex;
-    height: 80px;
+  padding: 40px;
 
-    img {
-      margin: auto
-    }
-  }
-  
-  .links {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
+  h1 {
+    ${plutoFont('cond_regular', 13)};
+    color: ${theme.onSidebarHeTextColor};
+    text-transform: uppercase;
   }
 `
-const h1Style = css`
-  ${plutoFont('cond_regular', 13)};
-  color: ${theme.onSidebarHeTextColor};
-  text-transform: uppercase;
+const logoStyle = css`
+  background: #fff;
+  border-bottom: 1px solid ${theme.accentColor};
+  display: flex;
+  height: 80px;
+
+  img {
+    margin: auto
+  }
 `
-const linkStyle = (linkLocation, selectedLocation) => css`
+const linkStyle = css`
   ${plutoFont('cond_light', 14)};
-  color: ${linkLocation === selectedLocation ? theme.onSidebarHeTextColor : theme.accentColor};
+  color: ${theme.accentColor};
   margin-top: 26px;
   text-decoration: none;
   & :visited,
   & :hover {
-    color: ${linkLocation === selectedLocation ? theme.onSidebarHeTextColor : theme.accentColor};
+    color: ${theme.accentColor};
     text-decoration: none;
   }
   i {
     margin-right: 16px;
+  }
+`
+const activeLinkStyle = css`
+  color: ${theme.onSidebarHeTextColor};
+  & :visited,
+  & :hover {
+    color: ${theme.onSidebarHeTextColor};
+    text-decoration: none;
   }
 `
 
@@ -67,47 +58,37 @@ class Nav extends Component {
     }
   }
   render () {
-    const { location } = this.state
-    const parentStyles = this.props.style
     return (
-      <nav className={css`${navStyle} ${parentStyles}`}>
-        <div className='logo'>
-          <img src={logo} alt='Jobsity Logo' />
+      <React.Fragment>
+        <div className={logoStyle}>
+          <img src={logo} alt='Jobsity Logo'/>
         </div>
-        <div className='links'>
-          <h1 className={h1Style}>Locations</h1>
-          <a href='/#' className={linkStyle('everywhere', location)} onClick={this.selectLocation.bind(this, 'everywhere')}>
+        <div className={linksStyle}>
+          <h1>Locations</h1>
+          <NavLink to='/books' className={linkStyle} activeClassName={activeLinkStyle} exact>
             <i className='fas fa-globe' />
             <span>Everywhere</span>
-          </a>
-          <a href='/#' className={linkStyle('quito', location)} onClick={this.selectLocation.bind(this, 'quito')}>
+          </NavLink>
+          <NavLink to='/books/quito' className={linkStyle} activeClassName={activeLinkStyle}>
             <i className='fas fa-globe' />
             <span>Quito</span>
-          </a>
-          <a href='/#' className={linkStyle('cartagena', location)} onClick={this.selectLocation.bind(this, 'cartagena')}>
+          </NavLink>
+          <NavLink to='/books/cartagena' className={linkStyle} activeClassName={activeLinkStyle}>
             <i className='fas fa-globe' />
             <span>Cartagenta</span>
-          </a>
-          <a href='/#' className={linkStyle('medellin', location)} onClick={this.selectLocation.bind(this, 'medellin')}>
+          </NavLink>
+          <NavLink to='/books/medellin' className={linkStyle} activeClassName={activeLinkStyle}>
             <i className='fas fa-globe' />
             <span>Medellin</span>
-          </a>
-          <a href='/#' className={linkStyle('digital', location)} onClick={this.selectLocation.bind(this, 'digital')}>
+          </NavLink>
+          <NavLink to='/books/digital' className={linkStyle} activeClassName={activeLinkStyle}>
             <i className='fas fa-tablet-alt' />
             <span>Digital</span>
-          </a>
+          </NavLink>
         </div>
-      </nav>
+      </React.Fragment>
     )
   }
-  selectLocation (location) {
-    this.setState({ location: location })
-    this.props.onLocationChange(location)
-  }
-}
-
-Nav.propTypes = {
-  onLocationChange: PropTypes.func.isRequired
 }
 
 export default Nav
