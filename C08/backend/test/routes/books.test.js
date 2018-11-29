@@ -9,8 +9,14 @@ describe('Books routes', () => {
   let app
   let books
   before((done) => {
-    // Get a valid jwt
-    const us = fixtures.user[0]
+    // Get a valid jwt from the same frodo we lended the book to
+    const us = fixtures.user.reduce((res, u) => {
+      if (u.username === 'frodo') {
+        return u
+      } else {
+        return res
+      }
+    }, null)
     app = global.app
     books = global.books
     request(app)
@@ -133,8 +139,18 @@ describe('Books routes', () => {
   })
   describe('GET /books/:id', () => {
     let validBook
+    let lentBook
     before(() => {
       [validBook] = books
+      // Find that book we lent to frodo
+      lentBook = books.reduce((res, b) => {
+        if (b.lentTo.length > 0) {
+          return b
+        } else {
+          validBook = b
+          return res
+        }
+      }, null)
     })
     it('responds with a 401 when no jwt is sent', (done) => {
       request(app)
@@ -179,6 +195,21 @@ describe('Books routes', () => {
           expect(book.pageCount).to.equal(validBook.pageCount)
           expect(book.author).to.equal(validBook.author)
           expect(book.id).to.equal(validBook.id)
+          expect(book.returnDate).to.equal(undefined)
+          return done()
+        })
+    })
+    it('responds with a 200 and a book with returnDate setted when user has lend that book', (done) => {
+      request(app)
+        .get(`/books/${lentBook.id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err)
+          const book = res.body.data
+          expect(book).to.be.an('object')
+          expect(new Date(book.returnDate).getTime()).to.equal(lentBook.lentTo[0].returnDate.getTime())
           return done()
         })
     })
@@ -203,7 +234,7 @@ describe('Books routes', () => {
     const futureTime = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
     before((done) => {
       testBook = books.find(b => b.availableLocations.indexOf('quito') >= 0 &&
-                              b.availableLocations.indexOf('cartagena') < 0)
+                              b.availableLocations.indexOf('cartagena') < 0 && b.lentTo.length === 0)
       if (!testBook) return done(new Error('Fixtures do not contain expected test book'))
       return done()
     })

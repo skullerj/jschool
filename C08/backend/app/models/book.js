@@ -78,10 +78,15 @@ bookSchema.virtual('lendingUsers').get(function getAvailableLocations () {
   }, [])
 })
 
-bookSchema.methods.toPublic = function publicBook () {
+bookSchema.methods.toPublic = function publicBook (userId) {
   const parsedBook = Object.assign({}, this.toJSON())
   parsedBook.availableLocations = this.availableLocations
   parsedBook.id = this._id
+  parsedBook.lentTo.forEach(r => {
+    if (r.userId.toString() === userId) {
+      parsedBook.returnDate = r.returnDate
+    }
+  })
   delete parsedBook._id
   delete parsedBook.lentTo
   delete parsedBook.locations

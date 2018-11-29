@@ -17,7 +17,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"All the Light We Cannot See",
       "author":"Anthony Doerr",
@@ -31,7 +32,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Redeployment",
       "author":"Phil Klay",
@@ -45,7 +47,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Euphoria",
       "author":"Lily King",
@@ -60,7 +63,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Big Little Lies",
       "author":"Liane Moriarty",
@@ -74,7 +78,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ] 
+      ],
+      "lentTo": []
     },{
       "title":"Revival",
       "author":"Stephen King",
@@ -88,7 +93,8 @@
           "name": "medellin",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Station Eleven",
       "author":"Emily St. John Mandel",
@@ -103,7 +109,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Creativity, Inc.",
       "author":"Ed Catmull,Amy Wallace",
@@ -118,7 +125,8 @@
           "name": "cartagena",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"World of Warcraft: The Shattering",
       "author":"Christie Golden",
@@ -132,7 +140,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]   
+      ],
+      "lentTo": [] 
     },{
       "title":"Eloquent JavaScript, 3rd Edition",
       "author":"Marijn Haverbeke",
@@ -146,7 +155,8 @@
           "name": "digital",
           "onInventory": 100
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Learning JavaScript Design Patterns",
       "author":"Addy Osmani",
@@ -160,7 +170,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"12 Rules for Life",
       "author":"Jordan B. Peterson",
@@ -175,7 +186,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Cien años de soledad",
       "author":"Gabriel García Márquez",
@@ -189,7 +201,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"El Extranjero",
       "author":"Albert Camus",
@@ -203,7 +216,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },
     {
       "title":"Everything I Never Told You",
@@ -218,7 +232,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"All the Light We Cannot See",
       "author":"Anthony Doerr",
@@ -232,7 +247,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Redeployment",
       "author":"Phil Klay",
@@ -246,7 +262,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Euphoria",
       "author":"Lily King",
@@ -261,7 +278,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Big Little Lies",
       "author":"Liane Moriarty",
@@ -275,7 +293,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ] 
+      ],
+      "lentTo": []
     },{
       "title":"Revival",
       "author":"Stephen King",
@@ -289,7 +308,8 @@
           "name": "medellin",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Station Eleven",
       "author":"Emily St. John Mandel",
@@ -304,7 +324,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Creativity, Inc.",
       "author":"Ed Catmull,Amy Wallace",
@@ -319,7 +340,8 @@
           "name": "cartagena",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"World of Warcraft: The Shattering",
       "author":"Christie Golden",
@@ -333,7 +355,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]   
+      ],
+      "lentTo": []  
     },{
       "title":"Eloquent JavaScript, 3rd Edition",
       "author":"Marijn Haverbeke",
@@ -347,7 +370,8 @@
           "name": "digital",
           "onInventory": 100
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Learning JavaScript Design Patterns",
       "author":"Addy Osmani",
@@ -361,7 +385,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"12 Rules for Life",
       "author":"Jordan B. Peterson",
@@ -376,7 +401,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"Cien años de soledad",
       "author":"Gabriel García Márquez",
@@ -390,7 +416,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     },{
       "title":"El Extranjero",
       "author":"Albert Camus",
@@ -404,7 +431,8 @@
           "name": "quito",
           "onInventory": 10
         }
-      ]
+      ],
+      "lentTo": []
     }
   ]
 }

@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
   const page = parseInt(req.query.page || 1)
   Book.find(queryToFilters(req.query)).skip(limit * (page - 1)).limit(limit).exec((err, books) => {
     if (err) return next(err)
-    return res.json({ data: books.map(b => b.toPublic()) })
+    return res.json({ data: books.map(b => b.toPublic(req.user.sub)) })
   })
 })
 
@@ -40,7 +40,7 @@ router.get('/:id', (req, res, next) => {
       return next(err)
     }
     if (!book) return res.status(404).json(formatError('Book not found.', 404))
-    return res.json({ data: book.toPublic() })
+    return res.json({ data: book.toPublic(req.user.sub) })
   })
 })
 
