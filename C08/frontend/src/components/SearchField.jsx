@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
-
+import { withRouter } from 'react-router-dom'
+import qs from 'querystring'
 const style = css`
   align-self: center;
   background: ${theme.bgColor};
@@ -35,6 +35,7 @@ class SearchField extends Component {
       value: ''
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
     this.clearInput = this.clearInput.bind(this)
   }
 
@@ -42,7 +43,7 @@ class SearchField extends Component {
     return (
       <div className={style}>
         <i className='fas fa-search' />
-        <input type='text' placeholder='Search...' value={this.state.value} onChange={this.handleChange} />
+        <input type='text' placeholder='Search...' value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
         {this.state.value && <i className='fas fa-times' onClick={this.clearInput} />}
       </div>
     )
@@ -50,17 +51,30 @@ class SearchField extends Component {
 
   clearInput () {
     this.setState({ value: '' })
-    this.props.onValueChange('')
   }
 
   handleChange (e) {
     this.setState({ value: e.target.value })
-    this.props.onValueChange(e.target.value)
+  }
+
+  handleKeyPress (e) {
+    if (e.key === 'Enter') {
+      if (!this.state.value) return
+      this.updateUrl()
+      this.setState({ value: '' })
+    }
+  }
+
+  updateUrl () {
+    const params = qs.parse(this.props.location.search.replace('?', ''))
+    params.title = this.state.value
+    this.props.history.replace(`${this.props.location.pathname}?${qs.stringify(params)}`)
+  }
+
+  componentDidMount () {
+    const params = qs.parse(this.props.location.search.replace('?', ''))
+    this.setState({ value: params.title })
   }
 }
 
-SearchField.propTypes = {
-  onValueChange: PropTypes.func.isRequired
-}
-
-export default SearchField
+export default withRouter(SearchField)

@@ -13,26 +13,9 @@ const avatarStyles = css`
     min-width: 50px;
     width: 100%;
     height: 100%;
-    
-    img {
-      border: solid 1px ${theme.accentColor};
-      border-radius: 50%;
-      height: 36px;
-      width: 36px;
-    }
 
     .spacer {
       flex-grow: 1;
-    }
-
-    .name {
-      ${plutoFont('cond_regular', 14)}
-      ${mq({ display: ['none', 'none', 'block', 'block'] })}
-      margin-right: 10px;
-    }
-
-    i {
-      margin-right: 16px;
     }
 
     .divider {
@@ -47,10 +30,10 @@ const avatarStyles = css`
       align-self: center;
       border: none;
       background-color: ${theme.accentColor};
-      height: 40px;
+      height: 36px;
       width: 80px;
       border-radius: 20px;
-      ${plutoFont('cond_light', 15)};
+      ${plutoFont('cond_light', 16)};
       color: #fff;
     }
 `

@@ -33,11 +33,6 @@ const main = css`
     width: 100%;
     z-index: 2;
   }
-  .search-terms {
-    padding: 20px 0px 10px 44px;
-    ${plutoFont('cond_light', 20)};
-    color: ${theme.heTextColor};
-  }
 `
 const headerStyle = css`
   grid-area: header;

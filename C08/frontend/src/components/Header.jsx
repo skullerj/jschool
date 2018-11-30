@@ -69,8 +69,8 @@ const Header = (props) => {
 }
 
 Header.propTypes = {
-  search: PropTypes.element,
-  avatar: PropTypes.element,
+  search: PropTypes.any,
+  avatar: PropTypes.any,
   onMenuTap: PropTypes.func
 }
 

@@ -8,8 +8,12 @@ import * as qs from 'querystring'
 import axios from 'axios'
 import Bookshelf from './Bookshelf'
 import ReservationPage from './ReservationPage'
+import { locations } from './Book'
 
 const styles = css`
+  display: flex;
+  flex-direction: column;
+  
   .loading,
   .error,
   .message {
@@ -24,16 +28,21 @@ const styles = css`
   .message {
     color: ${theme.accentColor}
   }
+  .search-terms {
+    padding: 20px 0px 10px 44px;
+    ${plutoFont('cond_light', 20)};
+    color: ${theme.heTextColor};
+  }
 `
 const BooksRouter = (WrappedComponent) => ({ match, ...passed }) => {
   return (
     <Switch>
       <Route path={`${match.url}/`} exact
-        render={({ location }) => <WrappedComponent location='everywhere' query={qs.parse(location.search)} {...passed} />} />
+        render={({ location }) => <WrappedComponent searchLocation='everywhere' query={location.search.replace('?', '')} {...passed} />} />
       <Route path={`${match.url}/:location(quito|medellin|cartagena|digital)`} exact
-        render={({ match, location }) => <WrappedComponent location={`${match.params.location}`} query={qs.parse(location.search)} {...passed} />} />
+        render={({ match, location }) => <WrappedComponent {...passed} searchLocation={match.params.location} query={location.search.replace('?', '')} />} />
       <Route path={`${match.url}/:id`}
-        render={({ match }) => <WrappedComponent selectedBookId={`${match.params.id}`} {...passed} />} />
+        render={({ match }) => <WrappedComponent {...passed} selectedBookId={match.params.id} />} />
     </Switch>
   )
 }
@@ -54,8 +63,9 @@ class BooksSection extends Component {
   }
   render () {
     const { books, loading, error } = this.state
-    const { location, selectedBookId, token } = this.props
+    const { searchLocation, selectedBookId, token } = this.props
     const selectedBook = this.getBook(selectedBookId)
+    const searchTerms = this.getSearchTerms()
     return (
       <div className={styles}>
         {
@@ -63,8 +73,8 @@ class BooksSection extends Component {
             ? <h1 className='loading'>Loading ...</h1>
             : error
               ? <h1 className='error'>{error.message}</h1>
-              : location
-                ? <Bookshelf books={books} />
+              : searchLocation
+                ? <React.Fragment> <span className='search-terms' >{searchTerms}</span> <Bookshelf books={books} /></React.Fragment>
                 : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />
         }
       </div>
@@ -72,8 +82,8 @@ class BooksSection extends Component {
   }
 
   componentDidMount () {
-    if (this.props.location) {
-      this.fetchBooks(this.props.location)
+    if (this.props.searchLocation) {
+      this.fetchBooks(this.props.searchLocation, this.props.query)
     }
     if (this.props.selectedBookId) {
       this.fetchSingleBook(this.props.selectedBookId)
@@ -81,13 +91,16 @@ class BooksSection extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.location !== this.props.location && this.props.location) {
-      this.fetchBooks(this.props.location)
+    if (
+      (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
+      (prevProps.query !== this.props.query)
+    ) {
+      this.fetchBooks(this.props.searchLocation, this.props.query)
     }
   }
 
-  fetchBooks (location) {
-    const url = location === 'everywhere' ? '/books' : `/books?location=${location}`
+  fetchBooks (location, query) {
+    const url = location === 'everywhere' ? `/books?${query}` : `/books?location=${location}&${query}`
     this.setState({ loading: true })
     this.requester.get(url)
       .then((res) => {
@@ -118,6 +131,15 @@ class BooksSection extends Component {
         return res
       }
     }, null)
+  }
+
+  getSearchTerms () {
+    const query = qs.parse(this.props.query)
+    if (query.title) {
+      return `Searching: ${query.title} on ${locations.get(this.props.searchLocation)}`
+    } else {
+      return `${locations.get(this.props.searchLocation)}`
+    }
   }
 
   updateBook (id, updates) {

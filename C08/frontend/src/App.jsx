@@ -1,6 +1,5 @@
-/* globals localStorage */
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import AppLayout from './components/AppLayout'
@@ -8,15 +7,14 @@ import withAuth from './components/withAuth'
 import BooksSection from './components/BooksSection'
 import LoginPage from './components/LoginPage'
 import SearchField from './components/SearchField'
-import { locations } from './components/Book'
 import Avatar from './components/Avatar'
-import axios from 'axios'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      showNav: false
+      showNav: false,
+      searchTerms: ''
     }
     this.updateSearchTerms = this.updateSearchTerms.bind(this)
     this.toggleNav = this.toggleNav.bind(this)
@@ -31,7 +29,12 @@ class App extends Component {
           onNavToggle={this.toggleNav}
           showNav={showNav}
           appNav={<Nav />}
-          appHeader={<Header onMenuTap={this.toggleNav.bind(this)} avatar={<Avatar authenticated={authenticated} onLogout={logout} />} />}
+          appHeader={<Header
+            onMenuTap={this.toggleNav.bind(this)}
+            search={authenticated && <SearchField />}
+            avatar={<Avatar authenticated={authenticated}
+              onLogout={logout}
+            />} />}
           appContent={
             <Switch>
               <Route exact path='/' render={() => <Redirect to={authenticated ? '/books' : '/login'} />} />
@@ -40,7 +43,7 @@ class App extends Component {
               } />
               <Route path='/books' render={(props) =>
                 authenticated
-                  ? <BooksSection match={props.match} token={authToken} />
+                  ? <BooksSection {...props} token={authToken} />
                   : <Redirect to='/login' />
               } />
             </Switch>

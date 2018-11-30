@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import mq from '../styles/mediaQueries'
 import book from '../types/book'
-
+import plutoFont from '../styles/plutoFont'
+import theme from '../styles/theme'
 import Book from './Book'
 import BookDetails from './BookDetails'
 
@@ -17,6 +18,13 @@ const style = css`
   overflow: auto;
   & article:last-child {
     ${mq({ 'margin-bottom': ['300px', '200px', '0', '0'] })}
+  }
+  .no-results {
+    ${plutoFont('cond_light', 20)};
+    color: ${theme.heTextColor};
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 `
 
@@ -44,6 +52,7 @@ class Bookshelf extends Component {
               {selectedBook === book.id && <BookDetails book={book} alignment={this.computeAlignment(i)} /> }
             </Book>)
         })}
+        {!books[0] && <span className='no-results'>No results found :(</span>}
       </div>
     )
   }
