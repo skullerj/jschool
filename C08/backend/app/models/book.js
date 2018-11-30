@@ -42,6 +42,7 @@ const bookSchema = new Schema({
   photoURL: { type: String, required: true },
   score: { type: Number, required: true },
   pageCount: { type: Number, required: true },
+  digitalLink: String,
   locations: {
     type: [locationSchema],
     validate: {
