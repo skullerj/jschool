@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import { css } from 'emotion'
 import theme from '../styles/theme'
@@ -10,11 +11,15 @@ import book from '../types/book'
 
 const styles = css`
   padding: 31px; 
-  display: flex;
+  display: grid;
+
   ${mq({
-    'flex-direction': ['column', 'column', 'row', 'row']
+    'grid-template-columns': ['1fr','1fr','1fr 1fr','1fr 1fr'],
+    'grid-template-rows': ['1fr 1fr', '1fr 1fr','1fr','1fr'],
+    'grid-template-areas': [`'info' 'reservation'`,`'info' 'reservation'`,`'info reservation'`,`'info reservation'`]
   })}
   .info { 
+    grid-area: info;
     max-height: calc(100vh - 110px);
     overflow: auto;
     display: flex;
@@ -64,18 +69,41 @@ const styles = css`
     }
   }
   .reservation {
+    grid-area: reservation;
     display: flex;
+    flex-direction: column;
     flex-grow: 2;
+    .message {
+      width: 300px;
+      text-align: center;
+      color: ${theme.heTextColor};
+
+      b {
+        color: ${theme.accentColor};
+      }
+    }
   }
 `
+function formatDate (date) {
+  const monthNames = [
+    'January', 'February', 'March',
+    'April', 'May', 'June', 'July',
+    'August', 'September', 'October',
+    'November', 'December'
+  ]
 
+  const day = date.getDate()
+  const monthIndex = date.getMonth()
+  const year = date.getFullYear()
+
+  return `${monthNames[monthIndex]} ${day}, ${year}`
+}
 class ReservationPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
       loading: false,
-      error: null,
-      bookLent: props.book.returnDate && true
+      error: null
     }
     this.requester = axios.create({
       baseURL: '/',
@@ -85,7 +113,9 @@ class ReservationPage extends Component {
   }
   render () {
     const { book } = this.props
-    const { loading, error, isLent } = this.state
+    const { loading, error } = this.state
+    const bookLent = book.returnDate && true
+    const parsedReturnDate = bookLent ? formatDate(new Date(book.returnDate)) : null
     return (
       <section className={styles}>
         <div className='info'>
@@ -102,11 +132,11 @@ class ReservationPage extends Component {
           {
             loading
               ? <h1>Loading...</h1>
-              : isLent
-                ? <h1>You have lended this book. Remember to return it before: </h1>
-                : <ReservationForm book={book} onBookLent={this.lendBook} />
+              : bookLent
+                ? <h1 className='message'>You have lent this book. <br /> Remember to return it before: <br /><br /> <b>{parsedReturnDate}</b> </h1>
+                : <ReservationForm book={book} onBookLend={this.lendBook} />
           }
-          {error && <h1>There was an error lending that book</h1>}
+          {error && <h1 className='error'>There was an error lending that book</h1>}
         </div>
       </section>
     )
@@ -116,7 +146,8 @@ class ReservationPage extends Component {
     this.setState({ loading: true })
     this.requester.post(`/books/${this.props.book.id}/lend`, { location, returnDate })
       .then((res) => {
-        this.setState({ loading: false, bookLent: true })
+        this.setState({ loading: false })
+        this.props.onBookUpdate(this.props.book.id, { returnDate: returnDate.toString() })
       })
       .catch((err) => {
         this.setState({ loading: false, error: err })
@@ -125,7 +156,8 @@ class ReservationPage extends Component {
 }
 
 ReservationPage.propTypes = {
-  book: book
+  book: book,
+  onBookUpdate: PropTypes.func.isRequired
 }
 
 export default ReservationPage

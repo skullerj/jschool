@@ -50,10 +50,11 @@ class BooksSection extends Component {
       baseURL: '/',
       headers: { 'Authorization': `Bearer ${props.token}` }
     })
+    this.updateBook = this.updateBook.bind(this)
   }
   render () {
-    const { books, loading, error, token } = this.state
-    const { location, selectedBookId } = this.props
+    const { books, loading, error } = this.state
+    const { location, selectedBookId, token } = this.props
     const selectedBook = this.getBook(selectedBookId)
     return (
       <div className={styles}>
@@ -64,7 +65,7 @@ class BooksSection extends Component {
               ? <h1 className='error'>{error.message}</h1>
               : location
                 ? <Bookshelf books={books} />
-                : selectedBook && <ReservationPage book={selectedBook} token={token} />
+                : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />
         }
       </div>
     )
@@ -117,6 +118,19 @@ class BooksSection extends Component {
         return res
       }
     }, null)
+  }
+
+  updateBook (id, updates) {
+    const newBooks = this.state.books.reduce((res, book) => {
+      if (book.id === id) {
+        const newBook = Object.assign({}, book, updates)
+        res.push(newBook)
+      } else {
+        res.push(book)
+      }
+      return res
+    }, [])
+    this.setState({ books: newBooks })
   }
 }
 

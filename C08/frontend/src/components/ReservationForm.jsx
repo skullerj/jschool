@@ -24,11 +24,25 @@ const styles = css`
   }
   h2 {
     ${plutoFont('cond_light', 20)};
-    color: ${theme.leTextColor};
+    color: ${theme.meTextColor};
     margin-bottom: 30px;
+    text-align: center;
+    a {
+      color: ${theme.accentColor};
+      margin-top: 26px;
+      text-decoration: none;
+      & :visited,
+      & :hover {
+        color: ${theme.accentColor};
+        text-decoration: none;
+      }
+    }
+    
   }
   .locations {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 30px;
   }
   .date-picker {
@@ -60,6 +74,7 @@ const locationStyles = (isSelected) => css`
   width: 170px;
   border-radius: 20px;
   line-height: 40px;
+  margin: 8px;
 `
 const datePickerStyles = css`
   ${plutoFont('cond_light', 18)};
@@ -72,12 +87,13 @@ class ReservationForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedlocation: null,
+      selectedLocation: null,
       selectedDate: null
     }
     this.restrictedDays = { before: new Date(Date.now() + 1000 * 60 * 60 * 24), after: new Date(Date.now() + 1000 * 60 * 60 * 24 * 15) }
     this.selectLocation = this.selectLocation.bind(this)
     this.selectDate = this.selectDate.bind(this)
+    this.lendBook = this.lendBook.bind(this)
   }
   render () {
     const { book } = this.props
@@ -97,7 +113,7 @@ class ReservationForm extends Component {
             !selectedLocation
               ? null
               : selectedLocation === 'digital'
-                ? <h2>You can't rent that book on digital. Try this link: </h2>
+                ? <h2>You can't rent digital books. <br /> <a href={book.digitalLink} rel='external noopener noreferer' target='_blank'>Try this link</a> </h2>
                 : <div>
                   <p className='date-legend'>Select a date on the next 15 days: </p>
                   <DayPicker
@@ -123,7 +139,7 @@ class ReservationForm extends Component {
     this.setState({ selectedDate: date })
   }
   lendBook () {
-    this.props.onBookLend(this.state.selectedlocation, this.state.selectedDate)
+    this.props.onBookLend(this.state.selectedLocation, this.state.selectedDate)
   }
 }
 

@@ -8,7 +8,8 @@ const book = PropTypes.shape({
   photoURL: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   pageCount: PropTypes.number.isRequired,
-  returnDate: PropTypes.instanceOf(Date),
+  digitalLink: PropTypes.string,
+  returnDate: PropTypes.string,
   availableLocations: PropTypes.arrayOf(PropTypes.string).isRequired
 })
 
