@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import mq from '../styles/mediaQueries'
+import book from '../types/book'
 
 import Book from './Book'
 import BookDetails from './BookDetails'
@@ -79,7 +80,7 @@ class Bookshelf extends Component {
 }
 
 Bookshelf.propTypes = {
-  books: PropTypes.array
+  books: PropTypes.arrayOf(book)
 }
 
 export default Bookshelf

@@ -6,7 +6,6 @@ import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
 import * as qs from 'querystring'
 import axios from 'axios'
-
 import Bookshelf from './Bookshelf'
 import ReservationPage from './ReservationPage'
 

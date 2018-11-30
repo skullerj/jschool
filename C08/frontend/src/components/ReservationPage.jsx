@@ -6,6 +6,7 @@ import mq from '../styles/mediaQueries'
 import plutoFont from '../styles/plutoFont'
 import BookStars from './BookStars'
 import ReservationForm from './ReservationForm'
+import book from '../types/book'
 
 const styles = css`
   padding: 31px; 
@@ -74,7 +75,7 @@ class ReservationPage extends Component {
     this.state = {
       loading: false,
       error: null,
-      bookLent: props.book.isLent
+      bookLent: props.book.returnDate && true
     }
     this.requester = axios.create({
       baseURL: '/',
@@ -121,6 +122,10 @@ class ReservationPage extends Component {
         this.setState({ loading: false, error: err })
       })
   }
+}
+
+ReservationPage.propTypes = {
+  book: book
 }
 
 export default ReservationPage

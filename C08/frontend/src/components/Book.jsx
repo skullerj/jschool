@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
+import book from '../types/book'
 
 import BookStars from './BookStars'
 
@@ -74,16 +75,7 @@ const Book = (props) => {
 }
 
 Book.propTypes = {
-  book: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    photoURL: PropTypes.string.isRequired,
-    score: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    availableLocations: PropTypes.arrayOf(PropTypes.string).isRequired
-  }),
+  book: book,
   onBookClick: PropTypes.func,
   onBookPointerEnter: PropTypes.func,
   onBookPointerLeave: PropTypes.func

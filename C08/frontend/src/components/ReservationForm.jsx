@@ -6,6 +6,7 @@ import theme from '../styles/theme'
 import mq from '../styles/mediaQueries'
 import plutoFont from '../styles/plutoFont'
 import { locations } from './Book'
+import book from '../types/book'
 
 import 'react-day-picker/lib/style.css'
 
@@ -127,29 +128,8 @@ class ReservationForm extends Component {
 }
 
 ReservationForm.propTypes = {
-  book: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    photoURL: PropTypes.string.isRequired,
-    score: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    availableLocations: PropTypes.arrayOf(PropTypes.string).isRequired
-  }),
+  book: book,
   onBookLend: PropTypes.func.isRequired
-}
-ReservationForm.defaultProps = {
-  book: {
-    title: ' ',
-    author: ' ',
-    year: 0,
-    description: ' ',
-    photoURL: ' ',
-    score: 0,
-    pageCount: 0,
-    availableLocations: ['']
-  }
 }
 
 export default ReservationForm
