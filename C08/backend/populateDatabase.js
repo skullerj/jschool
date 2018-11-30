@@ -152,13 +152,13 @@ async function populateDatabase () {
           photoURL: b.imageLinks.thumbnail,
           score: Math.ceil(Math.random() * 5),
           pageCount: b.pageCount || 360,
-          digitalLink: hasDigital >= 0 ? b.selfLink : null,
+          digitalLink: hasDigital >= 0 ? b.selfLink || 'https://openlibrary.org/' : null,
           locations: locations
         })
         await book.save()
       }
     }
-    const user = new User({ username: 'frodo', password: 'givemethatring' })  
+    const user = new User({ username: 'frodo', password: 'givemethatring' })
     user.hashPassword()
     await user.save()
   } catch (e) {
