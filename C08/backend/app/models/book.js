@@ -22,9 +22,11 @@ locationSchema.virtual('availableAfterLend')
   })
 
 const lendRecord = new Schema({
-  userId: ObjectId,
+  userId: { type: ObjectId, required: true },
+  location: { type: String, required: true, enum: ['quito', 'medellin', 'cartagena'] }, // you can't lend digital books so avoid digital lending
   returnDate: {
     type: Date,
+    required: true,
     validate: {
       validator: validateReturnDate,
       message: 'Can\'t lend books for more than 15 days'

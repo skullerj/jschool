@@ -44,7 +44,7 @@ router.get('/:id', (req, res, next) => {
   })
 })
 
-function validateLendParams (params) {
+function checkMissingParams (params) {
   const missingParams = []
   if (!params.location) {
     missingParams.push('location')
@@ -57,9 +57,12 @@ function validateLendParams (params) {
 
 // *POST* Lend a book
 router.post('/:id/lend', (req, res, next) => {
-  const paramsErrors = validateLendParams(req.body)
-  if (paramsErrors) {
-    return res.status(400).json(formatError('Missing parameters.', 400, { missingParameters: paramsErrors }))
+  const missingParams = checkMissingParams(req.body)
+  if (missingParams) {
+    return res.status(400).json(formatError('Missing parameters.', 400, { missingParameters: missingParams }))
+  }
+  if (req.body.location === 'digital') {
+    return res.status(400).json(formatError('Invalid lending location: digital.', 400))
   }
   if (!validateReturnDate(req.body.returnDate)) {
     return res.status(400).json(formatError('Invalid returnDate.', 400))
@@ -90,7 +93,7 @@ router.post('/:id/lend', (req, res, next) => {
       return loc
     })
     book.set({
-      lentTo: [...book.lentTo, { userId: req.user.sub, returnDate: req.body.returnDate }],
+      lentTo: [...book.lentTo, { userId: req.user.sub, returnDate: req.body.returnDate, location: req.body.location }],
       locations: updatedLocations
     })
     return book.save((updateError) => {

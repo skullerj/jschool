@@ -23,7 +23,8 @@ before((done) => {
         if (!frodoId) return done(new Error('There was an error when trying to load fixtures into the database'))
         fixtures.book[0].lentTo = [{
           returnDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3), // three days on the future
-          userId: frodoId
+          userId: frodoId,
+          location: 'quito'
         }]
         fixtureLoader({ book: fixtures.book }, (err, booksData) => {
           if (err) return done(err);

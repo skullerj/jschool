@@ -30,7 +30,7 @@ describe('Books routes', () => {
       })
   })
   describe('GET /books', () => {
-    it('responds with a 401 when no jwt is sent', (done) => {
+    it('returns a 401 when no jwt is sent', (done) => {
       request(app)
         .get('/books')
         .expect('Content-Type', /json/)
@@ -43,7 +43,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 401 when an invalid jwt is sent', (done) => {
+    it('returns a 401 when an invalid jwt is sent', (done) => {
       request(app)
         .get('/books')
         .set('Authorization', 'Bearer 123123asdfasdf123123asdfasdfa')
@@ -57,7 +57,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and 15 books which is the default limit', (done) => {
+    it('returns a 200 and 15 books which is the default limit', (done) => {
       request(app)
         .get('/books')
         .set('Authorization', `Bearer ${token}`)
@@ -71,7 +71,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and the limit quantity of books', (done) => {
+    it('returns a 200 and the limit quantity of books', (done) => {
       request(app)
         .get('/books?limit=5')
         .set('Authorization', `Bearer ${token}`)
@@ -85,7 +85,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and the remaining books in the last page', (done) => {
+    it('returns a 200 and the remaining books in the last page', (done) => {
       const page = Math.ceil(books.length / 10)
       const remaining = books.length % 10
       request(app)
@@ -101,7 +101,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and the books matching sent location', (done) => {
+    it('returns a 200 and the books matching sent location', (done) => {
       request(app)
         .get('/books?location=quito')
         .set('Authorization', `Bearer ${token}`)
@@ -117,7 +117,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and the books containing sent title', (done) => {
+    it('returns a 200 and the books containing sent title', (done) => {
       const searchingTitle = 'redep'
       const desiredBooks = books.filter((b) => {
         return b.title.toLowerCase().indexOf(searchingTitle) >= 0
@@ -152,7 +152,7 @@ describe('Books routes', () => {
         }
       }, null)
     })
-    it('responds with a 401 when no jwt is sent', (done) => {
+    it('returns a 401 when no jwt is sent', (done) => {
       request(app)
         .get(`/books/${validBook.id}`)
         .expect('Content-Type', /json/)
@@ -165,7 +165,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 401 when an invalid jwt is sent', (done) => {
+    it('returns a 401 when an invalid jwt is sent', (done) => {
       request(app)
         .get(`/books/${validBook.id}`)
         .set('Authorization', 'Bearer 123123asdfasdf123123asdfasdfa')
@@ -179,7 +179,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and single book', (done) => {
+    it('returns a 200 and single book', (done) => {
       request(app)
         .get(`/books/${validBook.id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -199,7 +199,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and a book with returnDate setted when user has lend that book', (done) => {
+    it('returns a 200 and a book with returnDate setted when user has lend that book', (done) => {
       request(app)
         .get(`/books/${lentBook.id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -213,7 +213,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 404 if the book does not exist', (done) => {
+    it('returns a 404 if the book does not exist', (done) => {
       request(app)
         .get('/books/somefakeid')
         .set('Authorization', `Bearer ${token}`)
@@ -238,7 +238,7 @@ describe('Books routes', () => {
       if (!testBook) return done(new Error('Fixtures do not contain expected test book'))
       return done()
     })
-    it('responds with a 401 when no jwt is sent', (done) => {
+    it('returns a 401 when no jwt is sent', (done) => {
       request(app)
         .post(`/books/lend/${testBook.id}`)
         .expect('Content-Type', /json/)
@@ -251,7 +251,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 401 when an invalid jwt is sent', (done) => {
+    it('returns a 401 when an invalid jwt is sent', (done) => {
       request(app)
         .post(`/books/lend/${testBook.id}`)
         .set('Authorization', 'Bearer 123123asdfasdf123123asdfasdfa')
@@ -265,7 +265,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 400 when any required parameters are missing', (done) => {
+    it('returns a 400 when any required parameters are missing', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
@@ -281,7 +281,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 400 when returnDate is more than 15 days from now', (done) => {
+    it('returns a 400 when returnDate is more than 15 days from now', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
@@ -296,7 +296,22 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 404 if the book does not exist', (done) => {
+    it('returns a 400 when location is digital', (done) => {
+      request(app)
+        .post(`/books/${testBook.id}/lend`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ location: 'digital', returnDate: validTime })
+        .expect('Content-Type', /json/)
+        .expect(400)
+        .end((err, res) => {
+          if (err) return done(err)
+          const { error } = res.body
+          expect(error).to.be.an('object')
+          expect(error.message).to.equal('Invalid lending location: digital.')
+          return done()
+        })
+    })
+    it('returns a 404 if the book does not exist', (done) => {
       request(app)
         .post('/books/somefakeid/lend')
         .set('Authorization', `Bearer ${token}`)
@@ -311,7 +326,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 200 and some confirmation data', (done) => {
+    it('returns a 200 and some confirmation data', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
@@ -326,7 +341,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('responds with a 409 when the book is already lent ', (done) => {
+    it('returns a 409 when the book is already lent ', (done) => {
       request(app)
         .post(`/books/${testBook.id}/lend`)
         .set('Authorization', `Bearer ${token}`)
