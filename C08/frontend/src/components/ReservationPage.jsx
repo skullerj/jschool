@@ -14,9 +14,9 @@ const styles = css`
   display: grid;
 
   ${mq({
-    'grid-template-columns': ['1fr','1fr','1fr 1fr','1fr 1fr'],
-    'grid-template-rows': ['1fr 1fr', '1fr 1fr','1fr','1fr'],
-    'grid-template-areas': [`'info' 'reservation'`,`'info' 'reservation'`,`'info reservation'`,`'info reservation'`]
+    'grid-template-columns': ['1fr', '1fr', '1fr 1fr', '1fr 1fr'],
+    'grid-template-rows': ['1fr 1fr', '1fr 1fr', '1fr', '1fr'],
+    'grid-template-areas': [`'info' 'reservation'`, `'info' 'reservation'`, `'info reservation'`, `'info reservation'`]
   })}
   .info { 
     grid-area: info;
