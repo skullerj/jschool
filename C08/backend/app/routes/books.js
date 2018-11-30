@@ -23,9 +23,13 @@ router.use(isAuthenticated)
 router.get('/', (req, res, next) => {
   const limit = parseInt(req.query.limit || 15)
   const page = parseInt(req.query.page || 1)
-  Book.find(queryToFilters(req.query)).skip(limit * (page - 1)).limit(limit).exec((err, books) => {
+  const filters = queryToFilters(req.query)
+  Book.countDocuments(filters).exec((err, count) => {
     if (err) return next(err)
-    return res.json({ data: books.map(b => b.toPublic(req.user.sub)) })
+    Book.find(filters).skip(limit * (page - 1)).limit(limit).exec((err, books) => {
+      if (err) return next(err)
+      return res.json({ total: count, data: books.map(b => b.toPublic(req.user.sub)) })
+    })
   })
 })
 

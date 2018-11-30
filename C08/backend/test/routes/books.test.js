@@ -57,7 +57,7 @@ describe('Books routes', () => {
           return done()
         })
     })
-    it('returns a 200 and 15 books which is the default limit', (done) => {
+    it('returns a 200, 15 books which is the default limit and the total of books matching that query', (done) => {
       request(app)
         .get('/books')
         .set('Authorization', `Bearer ${token}`)
@@ -68,6 +68,7 @@ describe('Books routes', () => {
           const resultBooks = res.body.data
           expect(resultBooks).to.be.an('array')
           expect(resultBooks.length).to.equal(15)
+          expect(res.body.total).to.equal(books.length)
           return done()
         })
     })
