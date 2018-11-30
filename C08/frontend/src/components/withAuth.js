@@ -23,13 +23,15 @@ const withAuth = WrappedComponent => {
     }
 
     render () {
-      const { authenticated, loading, error, token } = this.state
+      const { authenticated, loading, error, token, user } = this.state
       return (<WrappedComponent {...this.props}
         authenticated={authenticated}
         loadingAuth={loading}
         authError={error}
         authToken={token}
-        login={this.login.bind(this)} />)
+        user={user}
+        login={this.login.bind(this)}
+        logout={this.logout.bind(this)} />)
     }
 
     login (username, password) {
@@ -42,7 +44,11 @@ const withAuth = WrappedComponent => {
         .catch((err) => {
           this.setState({ error: err, authenticated: false, loading: false })
         })
-    }  
+    }
+    logout () {
+      localStorage.removeItem('jwt')
+      this.setState({ authenticated: false, token: null })
+    }
   }
 }
 

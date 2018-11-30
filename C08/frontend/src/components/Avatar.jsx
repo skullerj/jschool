@@ -43,43 +43,35 @@ const avatarStyles = css`
       width: 1px;
     }
 
-    .login-button {
+    .logout-button {
       align-self: center;
       border: none;
       background-color: ${theme.accentColor};
       height: 40px;
       width: 80px;
       border-radius: 20px;
-      ${plutoFont('cond_light', 20)};
+      ${plutoFont('cond_light', 15)};
       color: #fff;
     }
 `
 
 const Avatar = (props) => {
-  const { user, authenticated } = props
+  const { authenticated, onLogout } = props
   if (authenticated) {
     return (
       <div className={avatarStyles}>
         <div className='spacer' />
-        <span className='name'>{user.username}</span>
-        <i className='fas fa-caret-down' />
-        <img src={avatar} alt={user.username} />
+        <button onClick={onLogout} className='logout-button'>Log out</button>
         <div className='divider' />
       </div>)
   } else {
-    return (
-      <div className={avatarStyles}>
-        <div className='spacer' />
-        <button onClick={props.onLoginClick} className='login-button'>Log in</button>
-        <div className='divider' />
-      </div>)
+    return null
   }
 }
 
 Avatar.propTypes = {
-  user: PropTypes.shape({ username: PropTypes.string }),
   authenticated: PropTypes.bool,
-  onLoginClick: PropTypes.func
+  onLogout: PropTypes.func
 }
 
 export default Avatar

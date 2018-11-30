@@ -6,6 +6,7 @@ import Nav from './components/Nav'
 import AppLayout from './components/AppLayout'
 import withAuth from './components/withAuth'
 import BooksSection from './components/BooksSection'
+import LoginPage from './components/LoginPage'
 import SearchField from './components/SearchField'
 import { locations } from './components/Book'
 import Avatar from './components/Avatar'
@@ -22,19 +23,20 @@ class App extends Component {
   }
   render () {
     const { showNav } = this.state
-    const { authenticated, authToken } = this.props
+    const { authenticated, authToken, loadingAuth, authError, logout } = this.props
     // Usar un redirect para mandar al usuario a la página de login O a la página de books
     return (
       <Router>
         <AppLayout
-          onNavToggle={this.toggleNav.bind(this)}
+          onNavToggle={this.toggleNav}
+          showNav={showNav}
           appNav={<Nav />}
-          appHeader={<Header onMenuTap={this.toggleNav.bind(this)} />}
+          appHeader={<Header onMenuTap={this.toggleNav.bind(this)} avatar={<Avatar authenticated={authenticated} onLogout={logout} />} />}
           appContent={
             <Switch>
               <Route exact path='/' render={() => <Redirect to={authenticated ? '/books' : '/login'} />} />
               <Route exact path='/login' render={() =>
-                !authenticated ? <h1>Here you can login</h1> : <Redirect to='/books' />
+                !authenticated ? <LoginPage onLogin={this.props.login} loadingAuth={loadingAuth} authError={authError} /> : <Redirect to='/books' />
               } />
               <Route path='/books' render={(props) =>
                 authenticated
