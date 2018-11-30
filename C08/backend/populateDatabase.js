@@ -141,7 +141,7 @@ async function populateDatabase () {
   }
   promises = []
 
-  results.forEach((res) => {
+  for (let res of results) {
     if (!res.totalItems || res.totalItems <= 0) {
       return
     }
@@ -156,7 +156,7 @@ async function populateDatabase () {
     console.log(b.title)
     const book = new Book({
       title: b.title,
-      author: b.authors ? b.authors.join(',') : 'Anonimus',
+      author: b.authors ? b.authors.join(', ') : 'Anonimus',
       year: b.publishedDate.split('-')[0],
       description: b.description,
       photoURL: b.imageLinks.thumbnail,
@@ -165,12 +165,11 @@ async function populateDatabase () {
       digitalLink: hasDigital >= 0 ? b.selfLink : null,
       locations: locations
     })
-    promises.push(book.save())
-  })
-  try {
-    await Promise.all(promises)
-  } catch (e) {
-    return e
+    try {
+      await book.save()
+    } catch (e) {
+      return e
+    }
   }
   // Create a sample user
   const user = new User({ username: 'frodo', password: 'givemethatring' })
