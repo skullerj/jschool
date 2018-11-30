@@ -22,7 +22,6 @@ const booksISBNs = [
   '9780307474728',
   '9781537392349',
   '9780552149518',
-  '9780552149518',
   '9780747532743',
   '9780747538486',
   '9780552150736',
@@ -31,7 +30,7 @@ const booksISBNs = [
   '9780747591054',
   '9780747546290',
   '9781904233657',
-  '9780747550990',
+  '9780439139601',
   '9780552151764',
   '9781904233886',
   '9780330457729',
@@ -59,7 +58,7 @@ const booksISBNs = [
   '9781841953922',
   '9780091889487',
   '9780747599876',
-  '9780749397548',
+  '9780679763970',
   '9780563384304',
   '9780330507417',
   '9781861976123',
@@ -86,7 +85,6 @@ const booksISBNs = [
   '9780747561071',
   '9780701181840',
   '9780099771517',
-  '9780563384311',
   '9780590112895',
   '9780718148621',
   '9781904994367',
@@ -136,47 +134,35 @@ async function populateDatabase () {
   try {
     results = await Promise.all(promises)
     results = await Promise.all(results.map(b => b.json()))
-  } catch (e) {
-    return e
-  }
-  promises = []
-
-  for (let res of results) {
-    if (!res.totalItems || res.totalItems <= 0) {
-      return
-    }
-    const b = res.items[0].volumeInfo
-    const locations = locationsGenerator()
-    const hasDigital = locations.reduce((res, l) => {
-      if (l.name === 'digital') {
-        return true
+    for (let res of results) {
+      if (res.totalItems && res.totalItems > 0) {
+        const b = res.items[0].volumeInfo
+        const locations = locationsGenerator()
+        const hasDigital = locations.reduce((res, l) => {
+          if (l.name === 'digital') {
+            return true
+          }
+          return res
+        }, false)
+        const book = new Book({
+          title: b.title,
+          author: b.authors ? b.authors.join(', ') : 'Anonimus',
+          year: b.publishedDate.split('-')[0],
+          description: b.description,
+          photoURL: b.imageLinks.thumbnail,
+          score: Math.ceil(Math.random() * 5),
+          pageCount: b.pageCount || 360,
+          digitalLink: hasDigital >= 0 ? b.selfLink : null,
+          locations: locations
+        })
+        await book.save()
       }
-      return res
-    }, false)
-    console.log(b.title)
-    const book = new Book({
-      title: b.title,
-      author: b.authors ? b.authors.join(', ') : 'Anonimus',
-      year: b.publishedDate.split('-')[0],
-      description: b.description,
-      photoURL: b.imageLinks.thumbnail,
-      score: Math.ceil(Math.random() * 5),
-      pageCount: b.pageCount,
-      digitalLink: hasDigital >= 0 ? b.selfLink : null,
-      locations: locations
-    })
-    try {
-      await book.save()
-    } catch (e) {
-      return e
     }
-  }
-  // Create a sample user
-  const user = new User({ username: 'frodo', password: 'givemethatring' })
-  user.hashPassword()
-  try {
+    const user = new User({ username: 'frodo', password: 'givemethatring' })  
+    user.hashPassword()
     await user.save()
   } catch (e) {
+    console.error(e)
     return e
   }
   console.log(`Success! Check the database at: ${config.get('mongoUri')}`)
