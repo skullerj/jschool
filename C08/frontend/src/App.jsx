@@ -7,7 +7,7 @@ import withAuth from './components/withAuth'
 import BooksSection from './components/BooksSection'
 import LoginPage from './components/LoginPage'
 import SearchField from './components/SearchField'
-import Avatar from './components/Avatar'
+import LogoutButton from './components/LogoutButton'
 import NotFoundPage from './components/NotFoundPage'
 class App extends Component {
   constructor (props) {
@@ -32,7 +32,7 @@ class App extends Component {
           appHeader={<Header
             onMenuTap={this.toggleNav.bind(this)}
             search={authenticated && <SearchField />}
-            avatar={<Avatar authenticated={authenticated}
+            avatar={<LogoutButton authenticated={authenticated}
               onLogout={logout}
             />} />}
           appContent={

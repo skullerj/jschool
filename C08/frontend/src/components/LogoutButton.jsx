@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
-import avatar from '../images/avatar.png'
 import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
-import mq from '../styles/mediaQueries'
 
-const avatarStyles = css`
+const buttonStyles = css`
     align-items: center;
     display: flex;
     max-width: 220px;
@@ -16,14 +14,6 @@ const avatarStyles = css`
 
     .spacer {
       flex-grow: 1;
-    }
-
-    .divider {
-      background-color: ${theme.meTextColor};
-      height: 50px;
-      margin-left: 20px;
-      position: absolute;
-      width: 1px;
     }
 
     .logout-button {
@@ -38,11 +28,11 @@ const avatarStyles = css`
     }
 `
 
-const Avatar = (props) => {
+const LogoutButton = (props) => {
   const { authenticated, onLogout } = props
   if (authenticated) {
     return (
-      <div className={avatarStyles}>
+      <div className={buttonStyles}>
         <div className='spacer' />
         <button onClick={onLogout} className='logout-button'>Log out</button>
       </div>)
@@ -51,9 +41,9 @@ const Avatar = (props) => {
   }
 }
 
-Avatar.propTypes = {
+LogoutButton.propTypes = {
   authenticated: PropTypes.bool,
   onLogout: PropTypes.func
 }
 
-export default Avatar
+export default LogoutButton
