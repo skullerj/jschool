@@ -81,7 +81,7 @@ class BooksSection extends Component {
           loading
             ? <h1 className='loading'>Loading ...</h1>
             : error
-              ? <h1 className='error'>{ error.status === 404 ? <Redirect to='/notfound'/> : <h1 className='error'>{error.message}</h1> }</h1>
+              ? <h1 className='error'>{ error.status === 404 ? <Redirect to='/notfound' /> : <h1 className='error'>{error.message}</h1> }</h1>
               : searchLocation
                 ? <React.Fragment> <div className='search-helpers'><span className='search-terms' >{searchTerms}</span> <PageSelector page={page} total={total} /> </div> <Bookshelf books={books} /></React.Fragment>
                 : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />

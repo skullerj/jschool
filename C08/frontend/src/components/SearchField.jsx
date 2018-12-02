@@ -72,7 +72,6 @@ class SearchField extends Component {
     }
     this.props.history.replace(`${this.props.location.pathname}?${qs.stringify(params)}`)
   }
-
 }
 
 export default withRouter(SearchField)

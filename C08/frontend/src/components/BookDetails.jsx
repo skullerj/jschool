@@ -2,7 +2,6 @@ import React from 'react'
 import { css } from 'emotion'
 import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
-import mq from '../styles/mediaQueries'
 import BookStars from './BookStars'
 const mainStyle = css`
   height: 250px;

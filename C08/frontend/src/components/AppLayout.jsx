@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { css } from 'emotion'
 import mq from '../styles/mediaQueries'
 import theme from '../styles/theme'
-import plutoFont from '../styles/plutoFont'
 
 const main = css`
   display: grid;

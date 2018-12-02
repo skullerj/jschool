@@ -113,7 +113,7 @@ class ReservationForm extends Component {
             !selectedLocation
               ? null
               : selectedLocation === 'digital'
-                ? <h2>You can't rent digital books. <br /> <a href={book.digitalLink} rel='external noopener noreferer' target='_blank'>Try this link</a> </h2>
+                ? <h2>You can't rent digital books. <br /> <a href={book.digitalLink} rel='external noopener noreferrer' target='_blank'>Try this link</a> </h2>
                 : <div>
                   <p className='date-legend'>Select a date on the next 15 days: </p>
                   <DayPicker
