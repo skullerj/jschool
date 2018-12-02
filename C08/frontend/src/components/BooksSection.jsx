@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
 import theme from '../styles/theme'
@@ -81,7 +81,7 @@ class BooksSection extends Component {
           loading
             ? <h1 className='loading'>Loading ...</h1>
             : error
-              ? <h1 className='error'>{error.message}</h1>
+              ? <h1 className='error'>{ error.status === 404 ? <Redirect to='/notfound'/> : <h1 className='error'>{error.message}</h1> }</h1>
               : searchLocation
                 ? <React.Fragment> <div className='search-helpers'><span className='search-terms' >{searchTerms}</span> <PageSelector page={page} total={total} /> </div> <Bookshelf books={books} /></React.Fragment>
                 : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />
@@ -117,7 +117,8 @@ class BooksSection extends Component {
         this.setState({ books: res.data.data, total: res.data.total, loading: false })
       })
       .catch((err) => {
-        this.setState({ loading: false, error: err })
+        const body = err.response.data.error
+        this.setState({ loading: false, error: body })
       })
   }
 
@@ -129,7 +130,8 @@ class BooksSection extends Component {
         this.setState((lastState) => { return { loading: false, books: [...lastState.books, res.data.data] } })
       })
       .catch((err) => {
-        this.setState({ loading: false, error: err })
+        const body = err.response.data.error
+        this.setState({ loading: false, error: body })
       })
   }
 

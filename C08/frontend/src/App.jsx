@@ -8,7 +8,7 @@ import BooksSection from './components/BooksSection'
 import LoginPage from './components/LoginPage'
 import SearchField from './components/SearchField'
 import Avatar from './components/Avatar'
-
+import NotFoundPage from './components/NotFoundPage'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -46,6 +46,7 @@ class App extends Component {
                   ? <BooksSection {...props} token={authToken} />
                   : <Redirect to='/login' />
               } />
+              <Route component={NotFoundPage} />
             </Switch>
           } />
       </Router>
