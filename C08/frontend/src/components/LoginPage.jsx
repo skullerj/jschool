@@ -79,7 +79,7 @@ class LoginPage extends Component {
         <div className={inputStyle(passwordError)}>
           <input type='password' placeholder='Password' name='password' onChange={this.handleChange} value={password} />
           {passwordError && <span className='error'>Password is required</span>}
-        </div>    
+        </div>
         {loadingAuth ? <span className='loading'>Loading ...</span> : <button onClick={this.sendForm} className='submit'>Log in</button> }
         {authError && <span className='error' >Invalid username or password</span> }
       </section>
