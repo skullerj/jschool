@@ -60,7 +60,7 @@ class SearchField extends Component {
 
   handleKeyPress (e) {
     if (e.key === 'Enter') {
-      this.updateUrl(this.state.title)
+      this.updateUrl(this.state.value)
     }
   }
 
