@@ -8,6 +8,7 @@ import * as qs from 'querystring'
 import axios from 'axios'
 import Bookshelf from './Bookshelf'
 import ReservationPage from './ReservationPage'
+import PageLinks from './PageLinks'
 import { locations } from './Book'
 
 const styles = css`
@@ -74,7 +75,7 @@ class BooksSection extends Component {
             : error
               ? <h1 className='error'>{error.message}</h1>
               : searchLocation
-                ? <React.Fragment> <span className='search-terms' >{searchTerms}</span> <Bookshelf books={books} /></React.Fragment>
+                ? <React.Fragment> <div><span className='search-terms' >{searchTerms}</span> <PageLinks page={2} total={30}/> </div> <Bookshelf books={books} /></React.Fragment>
                 : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />
         }
       </div>
