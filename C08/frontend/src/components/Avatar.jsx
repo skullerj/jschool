@@ -45,7 +45,6 @@ const Avatar = (props) => {
       <div className={avatarStyles}>
         <div className='spacer' />
         <button onClick={onLogout} className='logout-button'>Log out</button>
-        <div className='divider' />
       </div>)
   } else {
     return null

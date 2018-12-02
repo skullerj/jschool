@@ -32,7 +32,7 @@ class SearchField extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: ''
+      value: qs.parse(props.location.search.replace('?', '')).title
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
@@ -51,6 +51,7 @@ class SearchField extends Component {
 
   clearInput () {
     this.setState({ value: '' })
+    this.updateUrl('')
   }
 
   handleChange (e) {
@@ -59,22 +60,19 @@ class SearchField extends Component {
 
   handleKeyPress (e) {
     if (e.key === 'Enter') {
-      if (!this.state.value) return
-      this.updateUrl()
-      this.setState({ value: '' })
+      this.updateUrl(this.state.title)
     }
   }
 
-  updateUrl () {
+  updateUrl (title) {
     const params = qs.parse(this.props.location.search.replace('?', ''))
-    params.title = this.state.value
+    params.title = title
+    if (!params.title) {
+      delete params.title
+    }
     this.props.history.replace(`${this.props.location.pathname}?${qs.stringify(params)}`)
   }
 
-  componentDidMount () {
-    const params = qs.parse(this.props.location.search.replace('?', ''))
-    this.setState({ value: params.title })
-  }
 }
 
 export default withRouter(SearchField)
