@@ -4,12 +4,12 @@ import { css } from 'emotion'
 
 import plutoFont from '../styles/plutoFont'
 import mq from '../styles/mediaQueries'
-import theme from '../styles/theme'
 
 const grid = css`
   display: grid;
   padding: 23px;
   z-index: 10;
+  height: 100%;
   ${mq({
     'grid-template-areas': [
       `'title title avatar' 'search search search'`,

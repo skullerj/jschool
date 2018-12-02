@@ -15,7 +15,7 @@ const styles = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: calc(100vh - 111px);
+  ${mq({ 'max-height': ['inherit', 'inherit', 'calc(100vh - 160px)', 'calc(100vh - 111px)'] })}
   overflow: hidden;
   h1 {
     ${plutoFont('cond_bold', 24)};

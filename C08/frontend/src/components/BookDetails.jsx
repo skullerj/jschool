@@ -4,7 +4,6 @@ import theme from '../styles/theme'
 import plutoFont from '../styles/plutoFont'
 import mq from '../styles/mediaQueries'
 import BookStars from './BookStars'
-import { Link } from 'react-router-dom'
 const mainStyle = css`
   height: 250px;
   position: absolute;
@@ -44,13 +43,11 @@ const actionsStyle = css`
 
 `
 const infoStyle = alignment => css`
-  ${mq({
-    'bottom': ['0', '0', '0', 'inherit'],
-    'left': ['0', '0', '0', alignment === 'left' ? '-400px' : '205px'],
-    'position': ['fixed', 'fixed', 'fixed', 'absolute'],
-    'top': ['inherit', 'inherit', 'inherit', '0'],
-    'width': ['100vw', '100vw', '100vw', '372px']
-  })};
+
+  top: 0;
+  right: ${alignment === 'right' ? '-400px' : '205px'};
+  position: absolute;
+  width: 372px;
   background-color: ${theme.hoverBackgroundColor};
   color: #fff;
   ${plutoFont('cond_light', 12)};
@@ -92,7 +89,6 @@ const infoStyle = alignment => css`
   }
 
   .arrow {
-    ${mq({ 'display': ['none', 'none', 'none', 'block'] })};
     border-bottom: 13px solid transparent;
     border-top: 13px solid transparent;
     ${alignment === 'left'
@@ -111,9 +107,7 @@ const BookDetails = (props) => {
   return (
     <section className={mainStyle}>
       <div className={actionsStyle}>
-        <Link to={`/books/${book.id}`}>
-          <i className='fas fa-book-open open-book' />
-        </Link>
+        <i className='fas fa-book-open open-book' />
         <div className='rate'>
           <p>Rate this book</p>
           <BookStars score={book.score} color={theme.starColor} />

@@ -68,9 +68,8 @@ const navStyle = showNav => {
     animation-name: opendrawer;
     animation-timing-function: cubic-bezier(0, 0, .2, 1);
     background: ${theme.sidebarColor};
-    display: flex;
-    flex-direction: column;
     height: 100%;
+    flex-direction: column;
     min-height: 100vh;
     width: 240px;
     z-index: 100;

@@ -104,6 +104,7 @@ class BooksSection extends Component {
       (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
       (prevProps.query !== this.props.query)
     ) {
+      if (this.props.selectedBookId) return
       this.fetchBooks(this.props.searchLocation, this.props.query)
     }
   }

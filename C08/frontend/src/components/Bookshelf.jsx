@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'emotion'
+import { withRouter } from 'react-router-dom'
 import mq from '../styles/mediaQueries'
 import book from '../types/book'
 import plutoFont from '../styles/plutoFont'
@@ -14,11 +15,8 @@ const style = css`
   grid-template-columns: repeat(auto-fill, 175px);
   justify-content: space-around;
   padding: 31px;
-  max-height: calc(100vh - 130px);
+  ${mq({ 'max-height': ['calc(100vh - 214px)', 'calc(100vh - 214px)', 'calc(100vh - 214px)', 'calc(100vh - 134px)'] })}
   overflow: auto;
-  & article:last-child {
-    ${mq({ 'margin-bottom': ['300px', '200px', '0', '0'] })}
-  }
   .no-results {
     ${plutoFont('cond_light', 20)};
     color: ${theme.heTextColor};
@@ -46,7 +44,7 @@ class Bookshelf extends Component {
           return (
             <Book book={book}
               key={book.id}
-              onBookClick={(e) => this.selectBook(e, book.id)}
+              onBookClick={(e) => this.redirect(e, book.id)}
               onBookPointerEnter={(e) => this.selectBook(e, book.id)}
               onBookPointerLeave={(e) => this.clearSelectedBook(e)}>
               {selectedBook === book.id && <BookDetails book={book} alignment={this.computeAlignment(i)} /> }
@@ -73,6 +71,10 @@ class Bookshelf extends Component {
     }
   }
 
+  redirect (e, id) {
+    this.props.history.push(`/books/${id}`)
+  }
+
   selectBook (e, id) {
     e.preventDefault()
     e.stopPropagation()
@@ -92,4 +94,4 @@ Bookshelf.propTypes = {
   books: PropTypes.arrayOf(book)
 }
 
-export default Bookshelf
+export default withRouter(Bookshelf)

@@ -15,12 +15,11 @@ const styles = css`
 
   ${mq({
     'grid-template-columns': ['1fr', '1fr', '1fr 1fr', '1fr 1fr'],
-    'grid-template-rows': ['1fr 1fr', '1fr 1fr', '1fr', '1fr'],
+    'grid-template-rows': ['auto 120vh', 'auto 120vh', '1fr', '1fr'],
     'grid-template-areas': [`'info' 'reservation'`, `'info' 'reservation'`, `'info reservation'`, `'info reservation'`]
   })}
   .info { 
     grid-area: info;
-    max-height: calc(100vh - 110px);
     overflow: auto;
     display: flex;
     flex-grow: 1;
@@ -76,7 +75,7 @@ const styles = css`
     .message {
       width: 300px;
       text-align: center;
-      color: ${theme.heTextColor};
+      color: ${theme.leTextColor};
 
       b {
         color: ${theme.accentColor};
