@@ -2,14 +2,14 @@
 
 import React from 'react'
 import { mount } from 'enzyme'
-import PageLinks from '../PageLinks.jsx'
+import PageSelector from '../PageSelector.jsx'
 import { MemoryRouter } from 'react-router-dom'
 const router = mount(<MemoryRouter>
-  <PageLinks total={60} page={2} />
+  <PageSelector total={60} page={2} />
 </MemoryRouter>)
-const links = router.find(PageLinks).at(0)
+const links = router.find(PageSelector).at(0)
 
-describe('PageLinks tests', () => {
+describe('PageSelector tests', () => {
   it('should render normally', () => {
     expect(links).toBeDefined()
   })

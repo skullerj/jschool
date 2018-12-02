@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { css } from 'emotion'
 import theme from '../styles/theme'
@@ -20,9 +21,10 @@ const linkStyles = (selected) => css`
   background: ${selected ? theme.accentColor : 'transparent'};
 `
 
-class PageLinks extends Component {
+class PageSelector extends Component {
   render () {
-    const { total, page } = this.props
+    const { total } = this.props
+    const page = this.props.page || 1
     const links = []
     for (let i = 1; i <= Math.ceil(total / 15); i += 1) {
       links.push(<span className={linkStyles(i === page)} onClick={(e) => this.updateUrl(i)} key={i} selected={i === page} >{i}</span>)
@@ -38,4 +40,14 @@ class PageLinks extends Component {
   }
 }
 
-export default withRouter(PageLinks)
+PageSelector.propTypes = {
+  total: PropTypes.number,
+  page: PropTypes.number
+}
+
+PageSelector.deafaultProps = {
+  total: 0,
+  page: 1
+}
+
+export default withRouter(PageSelector)

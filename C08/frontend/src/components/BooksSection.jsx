@@ -8,7 +8,7 @@ import * as qs from 'querystring'
 import axios from 'axios'
 import Bookshelf from './Bookshelf'
 import ReservationPage from './ReservationPage'
-import PageLinks from './PageLinks'
+import PageSelector from './PageSelector'
 import { locations } from './Book'
 
 const styles = css`
@@ -29,8 +29,14 @@ const styles = css`
   .message {
     color: ${theme.accentColor}
   }
+  .search-helpers {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 44px 10px 44px;
+  }
   .search-terms {
-    padding: 20px 0px 10px 44px;
+    display: flex;
+    flex-grow: 1;   
     ${plutoFont('cond_light', 20)};
     color: ${theme.heTextColor};
   }
@@ -53,6 +59,7 @@ class BooksSection extends Component {
     super(props)
     this.state = {
       books: [],
+      total: 0,
       loading: false,
       error: null
     }
@@ -63,8 +70,9 @@ class BooksSection extends Component {
     this.updateBook = this.updateBook.bind(this)
   }
   render () {
-    const { books, loading, error } = this.state
-    const { searchLocation, selectedBookId, token } = this.props
+    const { books, total, loading, error } = this.state
+    const { searchLocation, selectedBookId, token, query } = this.props
+    const page = parseInt(qs.parse(query).page)
     const selectedBook = this.getBook(selectedBookId)
     const searchTerms = this.getSearchTerms()
     return (
@@ -75,7 +83,7 @@ class BooksSection extends Component {
             : error
               ? <h1 className='error'>{error.message}</h1>
               : searchLocation
-                ? <React.Fragment> <div><span className='search-terms' >{searchTerms}</span> <PageLinks page={2} total={30}/> </div> <Bookshelf books={books} /></React.Fragment>
+                ? <React.Fragment> <div className='search-helpers'><span className='search-terms' >{searchTerms}</span> <PageSelector page={page} total={total} /> </div> <Bookshelf books={books} /></React.Fragment>
                 : selectedBook && <ReservationPage book={selectedBook} token={token} onBookUpdate={this.updateBook} />
         }
       </div>
@@ -105,7 +113,7 @@ class BooksSection extends Component {
     this.setState({ loading: true })
     this.requester.get(url)
       .then((res) => {
-        this.setState({ books: res.data.data, loading: false })
+        this.setState({ books: res.data.data, total: res.data.total, loading: false })
       })
       .catch((err) => {
         this.setState({ loading: false, error: err })
