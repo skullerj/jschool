@@ -10,9 +10,15 @@ import './fonts/index'
 import { ThemeProvider } from 'react-jss'
 import theme from './styles/theme'
 
+// Redux related imports
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </ThemeProvider>
   , document.getElementById('root'))
 
