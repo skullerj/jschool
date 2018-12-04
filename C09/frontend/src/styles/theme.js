@@ -12,6 +12,14 @@ const fontGenerator = (type, size) => {
     size: size
   }
 }
+const mediaQueries = {
+  xs: '@media screen and (max-widht:425px)',
+  s: '@media screen and (min-width:425px)',
+  m: '@media screen and (min-width:860px)',
+  l: '@media screen and (min-width:1180px)',
+  xl: '@media screen and (min-width:1300px)'
+}
+
 const theme = {
   bgColor: '#f5f6f8',
   headerColor: '#fcf8f3',
@@ -27,6 +35,8 @@ const theme = {
   ondrawerHeTextColor: '#fff',
   ondrawerMeTextColor: 'rgba(252, 248, 243, .7)',
   starColor: '#eec75a',
-  font: fontGenerator
+  font: fontGenerator,
+  // Media Queries
+  mq: mediaQueries
 }
 export default theme

@@ -3,7 +3,13 @@ import injectSheet from 'react-jss'
 
 const styles = theme => ({
   title: {
-    font: theme.font('regular', 16)
+    font: theme.font('regular', 16),
+    [theme.mq.s]: {
+      font: theme.font('regular', 26)
+    },
+    [theme.mq.m]: {
+      font: theme.font('regular', 36)
+    }
   }
 })
 
