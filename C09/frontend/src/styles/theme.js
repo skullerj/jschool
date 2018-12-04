@@ -19,22 +19,30 @@ const mediaQueries = {
   l: '@media screen and (min-width:1180px)',
   xl: '@media screen and (min-width:1300px)'
 }
+const colors = {
+  bg: '#f5f6f8',
+  // he: High Emphasis, me: Medium Emphasis, le: Low Emphasis
+  heText: '#231f20',
+  meText: '#484848',
+  leText: '#aeaeae',
+  header: {
+    bg: '#fcf8f3'
+  },
+  drawer: {
+    bg: '#231f20',
+    heText: '#fff',
+    meText: 'rgba(252, 248, 243, .7)'
+  },
+  hoverBg: 'rgba(35, 31 , 32, .8)',
+
+  accent: '#6ec1e4',
+  error: '#dc3545',
+  white: '#fff',
+  star: '#eec75a'
+}
 
 const theme = {
-  bgColor: '#f5f6f8',
-  headerColor: '#fcf8f3',
-  drawerColor: '#231f20',
-  hoverBackgroundColor: 'rgba(35, 31 , 32, .8)',
-
-  accentColor: '#6ec1e4',
-  errorColor: '#dc3545',
-  // he: High Emphasis, me: Medium Emphasis, le: Low Emphasis
-  heTextColor: '#231f20',
-  meTextColor: '#484848',
-  leTextColor: '#aeaeae',
-  ondrawerHeTextColor: '#fff',
-  ondrawerMeTextColor: 'rgba(252, 248, 243, .7)',
-  starColor: '#eec75a',
+  colors: colors,
   font: fontGenerator,
   // Media Queries
   mq: mediaQueries
