@@ -1,0 +1,76 @@
+import React from 'react'
+import injectSheet from 'react-jss'
+
+const styles = (theme) => ({
+  header: {
+    background: theme.colors.header.bg,
+    heigth: '100%',
+    padding: theme.spacing * 3,
+    'z-index': '10',
+    display: 'grid',
+    grid: {
+      area: 'header',
+      templateColumns: 'auto auto auto',
+      templateRows: '1fr 1fr',
+      templateAreas: `'title title avatar' 'search search search'`
+    },
+    [theme.mq.l]: {
+      grid: {
+        templateColumns: 'auto 300px 240px',
+        templateRows: '1fr',
+        templateAreas: `'title search avatar'`
+      }
+    }
+  },
+  title: {
+    grid: {
+      area: 'title'
+    },
+    display: 'flex',
+    flex: {
+      direction: 'row'
+    },
+    'align-items': 'center',
+    '& h1': {
+      font: theme.font('regular', 24),
+      margin: 0
+    },
+    '& .menu-button': {
+      'margin-right': theme.spacing * 2,
+      display: 'block',
+      [theme.mq.l]: {
+        display: 'none'
+      }
+    }
+  },
+  search: {
+    grid: {
+      area: 'search'
+    }
+  },
+  avatar: {
+    grid: {
+      area: 'avatar'
+    }
+  }
+})
+
+const Header = (props) => {
+  const { classes } = props
+  return (
+    <header className={classes.header}>
+      <div className={classes.title}>
+        <i className='fas fa-bars menu-button' />
+        <h1>Bookshelf</h1>
+      </div>
+      <div className={classes.search}>
+        Here goes the searchbar
+      </div>
+      <div className={classes.avatar}>
+        Here goes the avatar
+      </div>
+    </header>
+  )
+}
+
+export default injectSheet(styles)(Header)

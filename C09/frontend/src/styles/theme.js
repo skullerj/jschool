@@ -41,10 +41,24 @@ const colors = {
   star: '#eec75a'
 }
 
+const mixins = {
+  link: (color, visitedColor, font) => ({
+    font,
+    color: color,
+    '&:visited, &:hover': {
+      color: visitedColor,
+      'text-decoration': 'none'
+    },
+    'text-decoration': 'none'
+  })
+}
+
 const theme = {
   colors: colors,
   font: fontGenerator,
   // Media Queries
-  mq: mediaQueries
+  mq: mediaQueries,
+  spacing: 8,
+  mixins
 }
 export default theme
