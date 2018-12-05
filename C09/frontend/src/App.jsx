@@ -3,8 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import injectSheet from 'react-jss'
 
 import Nav from './components/Nav'
-import Header from './components/Header'
-import Input from './components/Input'
+import Header from './containers/Header'
 
 const styles = theme => ({
   main: {
@@ -26,10 +25,6 @@ const styles = theme => ({
         templateRows: '80px 1fr'
       }
     }
-  },
-  test: {
-    margin: 30,
-    width: 200
   }
 })
 
@@ -41,9 +36,6 @@ class App extends Component {
         <Header />
         <Nav />
         <section className={classes.content}>
-          <div className={classes.test}>
-            <Input icon={<i className='fas fa-user' />} errorMessage='No puedes' placeholder='Username' />
-          </div>
           <Switch>
             <Route path='/books' exact render={({ match }) => <h1>Welcome Everywhere {match.url}</h1>} />
             <Route path='/books/:location(quito|medellin|cartagena)' exact render={({ match }) => <h1>Welcome to {match.params.location}</h1>} />

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import injectSheet from 'react-jss'
+import SearchInput from './SearchInput'
+import Button from '../components/Button'
 
 const styles = (theme) => ({
   header: {
@@ -51,26 +53,32 @@ const styles = (theme) => ({
   avatar: {
     grid: {
       area: 'avatar'
-    }
+    },
+    display: 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'center',
+    'align-content': 'center'
   }
 })
 
-const Header = (props) => {
-  const { classes } = props
-  return (
-    <header className={classes.header}>
-      <div className={classes.title}>
-        <i className='fas fa-bars menu-button' />
-        <h1>Bookshelf</h1>
-      </div>
-      <div className={classes.search}>
-        Here goes the searchbar
-      </div>
-      <div className={classes.avatar}>
-        Here goes the avatar
-      </div>
-    </header>
-  )
+class Header extends Component {
+  render () {
+    const { classes } = this.props
+    return (
+      <header className={classes.header}>
+        <div className={classes.title}>
+          <i className='fas fa-bars menu-button' />
+          <h1>Bookshelf</h1>
+        </div>
+        <div className={classes.search}>
+          <SearchInput />
+        </div>
+        <div className={classes.avatar}>
+          <Button >Log out</Button>
+        </div>
+      </header>
+    )
+  }
 }
 
 export default injectSheet(styles)(Header)
