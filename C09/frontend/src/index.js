@@ -10,14 +10,17 @@ import './fonts/index'
 import { ThemeProvider } from 'react-jss'
 import theme from './styles/theme'
 
-// Redux related imports
+// Redux and Routing related imports
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import { ConnectedRouter } from 'connected-react-router'
+import store, { history } from './redux/store'
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>
   </ThemeProvider>
   , document.getElementById('root'))

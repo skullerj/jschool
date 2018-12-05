@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "connected-react-router": "^5.0.1",
     "normalize.css": "^8.0.1",
     "react": "^16.6.3",
     "react-day-picker": "^7.2.4",

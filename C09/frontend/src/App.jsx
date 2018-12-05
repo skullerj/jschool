@@ -32,20 +32,18 @@ class App extends Component {
   render () {
     const { classes } = this.props
     return (
-      <Router>
-        <div className={classes.main}>
-          <Header />
-          <Nav />
-          <section className={classes.content}>
-            <Switch>
-              <Route path='/books' exact render={({ match }) => <h1>Welcome Everywhere {match.url}</h1>} />
-              <Route path='/books/:location(quito|medellin|cartagena)' exact render={({ match }) => <h1>Welcome to {match.params.location}</h1>} />
-              <Route path='/books/:id' exact render={(match) => <h1>Welcome to the {match.params.id}</h1>} />
-              <Route render={(match) => <h1>Welcome to hell baby!!!</h1>} />
-            </Switch>
-          </section>
-        </div>
-      </Router>
+      <div className={classes.main}>
+        <Header />
+        <Nav />
+        <section className={classes.content}>
+          <Switch>
+            <Route path='/books' exact render={({ match }) => <h1>Welcome Everywhere {match.url}</h1>} />
+            <Route path='/books/:location(quito|medellin|cartagena)' exact render={({ match }) => <h1>Welcome to {match.params.location}</h1>} />
+            <Route path='/books/:id' exact render={(match) => <h1>Welcome to the {match.params.id}</h1>} />
+            <Route render={(match) => <h1>Welcome to hell baby!!!</h1>} />
+          </Switch>
+        </section>
+      </div>
     )
   }
 }
