@@ -11,7 +11,8 @@ const styles = (theme) => ({
     'align-items': 'start'
   },
   inputContainer: {
-    position: 'relative'
+    position: 'relative',
+    width: '100%'
   },
   input: {
     background: theme.colors.bg,
@@ -43,23 +44,16 @@ const styles = (theme) => ({
   }
 })
 
-const Input = (props) => {
-  const { classes } = props
-  const showsError = props.errorMessage && true
+const Input = ({ classes, errorMessage, icon, invalid, ...rest }) => {
   return (
     <div className={classes.container}>
       <div className={classes.icon}>
-        {props.icon}
+        {icon}
       </div>
       <div className={classes.inputContainer}>
-        <input className={classes.input}
-          type={props.type}
-          placeholder={props.placeholder}
-          value={props.value}
-          onChange={props.onChange}
-          onKeyPress={props.onKeyPress} />
+        <input className={classes.input} {...rest} />
       </div>
-      { showsError && <span className={classes.error}>{ props.invalid && props.errorMessage}</span>}
+      { errorMessage && <span className={classes.error}>{ invalid && errorMessage}</span>}
     </div>
   )
 }
