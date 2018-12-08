@@ -7,14 +7,32 @@ import { Redirect } from 'react-router-dom'
 import { logIn } from '../redux/actions/auth'
 import Input from '../components/Input'
 import Button from '../components/Button'
-const styles = {
+const styles = (theme) => ({
   container: {
     display: 'flex',
     'flex-direction': 'column',
     'align-items': 'center',
-    'margin-top': '18vh'
+    'padding-top': '18vh',
+    'max-width': 300,
+    'margin': 'auto'
+  },
+  title: {
+    font: theme.font('regular', 36),
+    color: theme.colors.heText
+  },
+  subtitle: {
+    font: theme.font('regular', 24),
+    color: theme.colors.meText
+  },
+  loading: {
+    font: theme.font('regular', 16),
+    color: theme.colors.meText
+  },
+  error: {
+    font: theme.font('regular', 16),
+    color: theme.colors.error
   }
-}
+})
 
 class LoginPage extends Component {
   constructor (props) {
@@ -37,8 +55,8 @@ class LoginPage extends Component {
     if (authenticated) return <Redirect to={from} />
     return (
       <div className={classes.container}>
-        <h1>Log in</h1>
-        <h2>Hello friend, you must be logged in to see the books.</h2>
+        <h1 className={classes.title}>Log in</h1>
+        <h2 className={classes.subtitle}>Hello friend, you must be logged in to see the books.</h2>
         <Input
           type='text'
           placeholder='Username'
