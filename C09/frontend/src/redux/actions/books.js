@@ -38,6 +38,13 @@ export const setBooksLoading = (loading) => {
   }
 }
 
+export const selectBook = (id) => {
+  return {
+    type: 'SELECT_BOOK',
+    bookId: id
+  }
+}
+
 function generateRequesterFromState (state) {
   if (!state.auth.token) return null
   if (requester) {
@@ -56,7 +63,7 @@ export const fetchBooks = (location, query) => {
     if (!requester) return false
     const url = location === 'everywhere' ? `/books?${query}` : `/books?location=${location}&${query}`
     dispatch(setBooksLoading(true))
-    this.requester.get(url)
+    requester.get(url)
       .then((res) => {
         dispatch(setBooksLoading(false))
         dispatch(setBooksTotal(res.data.total))
@@ -75,7 +82,7 @@ export const fetchSingleBook = (id) => {
     if (!requester) return false
     const url = `/books/${id}`
     dispatch(setBooksLoading(true))
-    this.requester.get(url)
+    requester.get(url)
       .then((res) => {
         dispatch(setBooksLoading(false))
         dispatch(addBook(res.data.data))
@@ -93,7 +100,7 @@ export const lendBook = (id, location, returnDate) => {
     if (!requester) return false
     const url = `/books/${id}/lend`
     dispatch(setBooksLoading(true))
-    this.requester.post(url, { location, returnDate })
+    requester.post(url, { location, returnDate })
       .then((res) => {
         dispatch(setBooksLoading(false))
         dispatch(updateBook(id, { returnDate: returnDate.toString() }))

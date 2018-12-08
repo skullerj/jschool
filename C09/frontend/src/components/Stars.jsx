@@ -6,12 +6,12 @@ const styles = (theme) => ({
     color: (props) => props.golden ? theme.colors.golden : theme.colors.accent,
     'font-size': 13,
     'letter-spacing': '-2 px',
-    'margin-top': theme.spacing
+    'margin-top': theme.spacing / 2
   }
 })
 
 const Stars = (props) => {
-  const { score, color, classes } = props
+  const { score, classes } = props
   let stars = []
   for (let i = 1; i <= 5; i += 1) {
     if (i <= score) {

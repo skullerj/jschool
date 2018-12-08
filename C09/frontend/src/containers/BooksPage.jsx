@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import qs from 'querystring'
 import book from '../types/book'
-import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router-dom'
-
+import { connect } from 'react-redux'
+import { fetchBooks, fetchSingleBook, lendBook, selectBook } from '../redux/actions/books'
 import BookDetails from '../components/BookDetails'
 import Bookshelf from '../components/Bookshelf'
 
@@ -22,7 +23,8 @@ const BooksRouter = (WrappedComponent) => ({ match, ...passed }) => {
 
 class BooksPage extends Component {
   render () {
-    const { loading, error, searchLocation, selectedBook, books, searchTerms } = this.props
+    const { loading, error, searchLocation, selectedBook, books, searchTerms, total, query } = this.props
+    const page = parseInt(qs.parse(query).page || 0)
     return (
       <div>
         {
@@ -36,6 +38,25 @@ class BooksPage extends Component {
         }
       </div>
     )
+  }
+  componentDidMount () {
+    if (this.props.searchLocation) {
+      this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
+    }
+    if (this.props.selectedBookId) {
+      this.props.dispatch(selectBook(this.props.selectedBookId))
+      this.props.dispatch(fetchSingleBook(this.props.selectedBookId))
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (
+      (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
+      (prevProps.query !== this.props.query)
+    ) {
+      if (this.props.selectedBookId) return
+      this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
+    }
   }
 }
 
@@ -52,7 +73,7 @@ const mapStateToProps = (state) => ({
   error: state.books.lastError,
   total: state.books.totalBooks,
   books: state.books.entities,
-  selectedBook: state.books.find(b => b.id === state.books.selectedBook)
+  selectedBook: state.books.entities.find(b => b.id === state.books.selectedBook)
 })
 
 export default connect(mapStateToProps)(BooksRouter(BooksPage))
