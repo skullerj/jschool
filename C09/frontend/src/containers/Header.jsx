@@ -1,4 +1,8 @@
+/* globals localStorage */
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { logOut } from '../redux/actions/auth'
 import injectSheet from 'react-jss'
 import SearchInput from './SearchInput'
 import Button from '../components/Button'
@@ -63,7 +67,7 @@ const styles = (theme) => ({
 
 class Header extends Component {
   render () {
-    const { classes } = this.props
+    const { classes, authenticated } = this.props
     return (
       <header className={classes.header}>
         <div className={classes.title}>
@@ -71,14 +75,22 @@ class Header extends Component {
           <h1>Bookshelf</h1>
         </div>
         <div className={classes.search}>
-          <SearchInput />
+          {authenticated && <SearchInput />}
         </div>
         <div className={classes.avatar}>
-          <Button >Log out</Button>
+          {authenticated && <Button onClick={() => this.props.dispatch(logOut(localStorage))}>Log out</Button>}
         </div>
       </header>
     )
   }
 }
 
-export default injectSheet(styles)(Header)
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.token && true
+})
+
+Header.propTypes = {
+  authenticated: PropTypes.bool
+}
+
+export default connect(mapStateToProps)(injectSheet(styles)(Header))

@@ -1,9 +1,17 @@
+/* globals localStorage */
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import injectSheet from 'react-jss'
 
+import { checkLogin } from './redux/actions/auth'
+
+import ProtectedRoute from './containers/ProtectedRoute'
 import Nav from './components/Nav'
 import Header from './containers/Header'
+import LoginPage from './containers/LoginPage'
+import BooksPage from './containers/BooksPage'
 
 const styles = theme => ({
   main: {
@@ -30,22 +38,32 @@ const styles = theme => ({
 
 class App extends Component {
   render () {
-    const { classes } = this.props
+    const { classes, authenticated } = this.props
     return (
       <div className={classes.main}>
         <Header />
         <Nav />
         <section className={classes.content}>
           <Switch>
-            <Route path='/books' exact render={({ match }) => <h1>Welcome Everywhere {match.url}</h1>} />
-            <Route path='/books/:location(quito|medellin|cartagena)' exact render={({ match }) => <h1>Welcome to {match.params.location}</h1>} />
-            <Route path='/books/:id' exact render={(match) => <h1>Welcome to the {match.params.id}</h1>} />
-            <Route render={(match) => <h1>Welcome to hell baby!!!</h1>} />
+            <Route path='/' exact render={() => <Redirect to='/books' />} />
+            <Route path='/login' exact component={LoginPage} />
+            <ProtectedRoute path='/books' component={BooksPage} authenticated={authenticated} />
           </Switch>
         </section>
       </div>
     )
   }
+  componentDidMount () {
+    this.props.dispatch(checkLogin(localStorage))
+  }
+}
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.token && true
+})
+
+App.propTypes = {
+  authenticated: PropTypes.bool
 }
 
-export default injectSheet(styles)(App)
+// Export with router to ensure App is re rendered when location changes
+export default withRouter(connect(mapStateToProps)(injectSheet(styles)(App)))
