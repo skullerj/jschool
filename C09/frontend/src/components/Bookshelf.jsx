@@ -1,6 +1,8 @@
 import React from 'react'
 import InjectSheet from 'react-jss'
-import Book from './Book'
+import Book, { locations } from './Book'
+import PageSelector from './PageSelector'
+import qs from 'querystring'
 
 const styles = (theme) => ({
   container: {
@@ -10,6 +12,17 @@ const styles = (theme) => ({
     [theme.mq.l]: {
       'max-height': 'calc(100vh - 134px)'
     }
+  },
+  summary: {
+    display: 'flex',
+    'flex-direction': 'row',
+    padding: theme.spacing * 3
+  },
+  search: {
+    display: 'flex',
+    'flex-grow': 1,
+    font: theme.font('cond_light', 20),
+    color: theme.colors.heText
   },
   grid: {
     display: 'grid',
@@ -44,10 +57,24 @@ function computeAlignment (index) {
   }
 }
 
+function getSearchTerms (query, location) {
+  query = qs.parse(query)
+  if (query.title) {
+    return `Searching: ${query.title} ${location === 'everywhere' ? '' : 'on '}${locations.get(location)}`
+  } else {
+    return `${locations.get(location)}`
+  }
+}
+
 const Bookshelf = (props) => {
-  const { classes, books } = props
+  const { classes, books, page, total, query, location } = props
+  const searchTerms = getSearchTerms(query, location)
   return (
     <div className={classes.container}>
+      <div className={classes.summary}>
+        <span className={classes.search}>{searchTerms}</span>
+        <PageSelector page={page} total={total} />
+      </div>
       <div className={classes.grid}>
         {
           books.map((book, i) => {

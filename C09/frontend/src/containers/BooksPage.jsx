@@ -23,7 +23,7 @@ const BooksRouter = (WrappedComponent) => ({ match, ...passed }) => {
 
 class BooksPage extends Component {
   render () {
-    const { loading, error, searchLocation, selectedBook, books, searchTerms, total, query } = this.props
+    const { loading, error, searchLocation, selectedBook, books, total, query } = this.props
     const page = parseInt(qs.parse(query).page || 0)
     return (
       <div>
@@ -33,7 +33,7 @@ class BooksPage extends Component {
             : error
               ? <h1 className='error'>{ error.status === 404 ? <Redirect to='/notfound' /> : <h1 className='error'>{error.message}</h1> }</h1>
               : searchLocation
-                ? <Bookshelf books={books} searchTerms={searchTerms} page={page} total={total} />
+                ? <Bookshelf books={books} location={searchLocation} query={query} page={page} total={total} />
                 : selectedBook && <BookDetails book={selectedBook} />
         }
       </div>
