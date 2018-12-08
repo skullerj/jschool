@@ -38,7 +38,7 @@ const colors = {
   accent: '#6ec1e4',
   error: '#dc3545',
   white: '#fff',
-  star: '#eec75a'
+  golden: '#eec75a'
 }
 
 const mixins = {

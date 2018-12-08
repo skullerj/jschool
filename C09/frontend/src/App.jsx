@@ -7,7 +7,7 @@ import injectSheet from 'react-jss'
 
 import { checkLogin } from './redux/actions/auth'
 
-import ProtectedRoute from './containers/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute'
 import Nav from './components/Nav'
 import Header from './containers/Header'
 import LoginPage from './containers/LoginPage'
