@@ -71,7 +71,9 @@ export const fetchBooks = (location, query) => {
       })
       .catch((err) => {
         dispatch(setBooksLoading(false))
-        dispatch(setBooksError(err.response.data.error))
+        if (err.response.data) {
+          dispatch(setBooksError(err.response.data.error))
+        }
       })
   }
 }
@@ -89,7 +91,9 @@ export const fetchSingleBook = (id) => {
       })
       .catch((err) => {
         dispatch(setBooksLoading(false))
-        dispatch(setBooksError(err.response.data.error))
+        if (err.response.data) {
+          dispatch(setBooksError(err.response.data.error))
+        }
       })
   }
 }
@@ -107,7 +111,9 @@ export const lendBook = (id, location, returnDate) => {
       })
       .catch((err) => {
         dispatch(setBooksLoading(false))
-        dispatch(setBooksError(err.response.data.error))
+        if (err.response.data) {
+          dispatch(setBooksError(err.response.data.error))
+        }
       })
   }
 }

@@ -7,11 +7,36 @@ import book from '../types/book'
 import Button from './Button'
 import 'react-day-picker/lib/style.css'
 
-const styles = {
+const styles = theme => ({
   container: {
+    display: 'flex',
+    'flex-direction': 'column',
+    'align-items': 'start',
 
+  },
+  title: {
+    font: theme.font('cond_bold', 36),
+    color: theme.colors.heText
+  },
+  subtitle: {
+    font: theme.font('cond_bold', 24),
+    color: theme.colors.meText
+  },
+  location: {
+    '& *': {
+      margin: theme.spacing / 2
+    }
+  },
+  datePickerContainer: {
+    font: theme.font('cond_light', 16),
+    '& .DayPicker-Day.DayPicker-Day--selected': {
+      background: theme.colors.accent
+    }
+  },
+  send: {
+    width: 120
   }
-}
+})
 
 class ReservationForm extends Component {
   constructor (props) {
@@ -37,7 +62,7 @@ class ReservationForm extends Component {
             book.availableLocations.map((l) => <Button key={l} raised={l === selectedLocation} onClick={(e) => this.selectLocation(l)}>{locations.get(l)}</Button>)
           }
         </div>
-        {selectedLocation && selectedLocation !== 'digital' && <h2>Until?</h2>}
+        {selectedLocation && selectedLocation !== 'digital' && <h2 className={classes.subtitle}>Until?</h2>}
         <div className={classes.datePickerContainer}>
           {
             !selectedLocation
@@ -56,7 +81,7 @@ class ReservationForm extends Component {
                 </div>
           }
         </div>
-        {selectedLocation && selectedLocation !== 'digital' && selectedDate && <Button raised onClick={this.lendBook}>Lend</Button>}
+        {selectedLocation && selectedLocation !== 'digital' && selectedDate && <Button raised onClick={this.lendBook} width={120}>Lend</Button>}
       </section>
     )
   }
@@ -69,7 +94,7 @@ class ReservationForm extends Component {
     this.setState({ selectedDate: date })
   }
   lendBook () {
-    this.props.onBookLend(this.state.selectedLocation, this.state.selectedDate)
+    this.props.onBookLend(this.props.book.id, this.state.selectedLocation, this.state.selectedDate)
   }
 }
 

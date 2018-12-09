@@ -8,7 +8,8 @@ const styles = (theme) => ({
     background: (props) => props.raised ? theme.colors.accent : 'transparent',
     color: (props) => props.raised ? theme.colors.white : theme.colors.accent,
     'border-radius': 36,
-    border: `1px solid ${theme.colors.accent}`
+    border: `1px solid ${theme.colors.accent}`,
+    width: (props) => props.width || 'inherit'
   }
 })
 
