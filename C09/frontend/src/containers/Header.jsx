@@ -59,9 +59,12 @@ const styles = (theme) => ({
       area: 'avatar'
     },
     display: 'flex',
-    'flex-direction': 'column',
-    'justify-content': 'center',
-    'align-content': 'center'
+    'flex-direction': 'row',
+    'align-items': 'center'
+  },
+  spacer: {
+    display: 'flex',
+    'flex-grow': '1'
   }
 })
 
@@ -78,7 +81,8 @@ class Header extends Component {
           {authenticated && <SearchInput />}
         </div>
         <div className={classes.avatar}>
-          {authenticated && <Button onClick={() => this.props.dispatch(logOut(localStorage))}>Log out</Button>}
+          <div className={classes.spacer} />
+          {authenticated && <Button onClick={() => this.props.dispatch(logOut(localStorage))} width={120} raised>Log out</Button>}
         </div>
       </header>
     )

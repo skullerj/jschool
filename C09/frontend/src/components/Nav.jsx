@@ -18,7 +18,7 @@ const styles = (theme) => ({
     },
     display: (props) => props.opened ? 'flex' : 'none',
     position: 'fixed',
-    [theme.mq.l]: {
+    [theme.mq.m]: {
       position: 'relative',
       display: 'flex !important'
     },
