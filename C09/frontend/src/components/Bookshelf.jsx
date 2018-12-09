@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import book from '../types/book'
 import InjectSheet from 'react-jss'
 import Book, { locations } from './Book'
 import PageSelector from './PageSelector'
@@ -85,6 +87,14 @@ const Bookshelf = (props) => {
       </div>
     </div>
   )
+}
+
+Bookshelf.propTypes = {
+  books: PropTypes.arrayOf(book),
+  page: PropTypes.number,
+  total: PropTypes.number,
+  query: PropTypes.string,
+  location: PropTypes.string
 }
 
 export default InjectSheet(styles)(Bookshelf)

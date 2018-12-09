@@ -1,5 +1,6 @@
 import React from 'react'
 import InjectSheet from 'react-jss'
+import PropTypes from 'prop-types'
 
 const styles = (theme) => ({
   button: {
@@ -15,6 +16,12 @@ const styles = (theme) => ({
 
 const Button = ({ children, classes, raised, ...rest }) => {
   return <button className={classes.button} {...rest}>{children}</button>
+}
+
+Button.propTypes = {
+  raised: PropTypes.bool,
+  children: PropTypes.node,
+  width: PropTypes.number
 }
 
 export default InjectSheet(styles)(Button)

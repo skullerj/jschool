@@ -1,5 +1,7 @@
 import React from 'react'
 import InjectSheet from 'react-jss'
+import PropTypes from 'prop-types'
+import book from '../types/book'
 import Stars from './Stars'
 import ReservationForm from './ReservationForm'
 
@@ -131,6 +133,12 @@ const BookDetails = (props) => {
       </div>
     </section>
   )
+}
+
+BookDetails.propTypes = {
+  book: book,
+  loading: PropTypes.bool,
+  error: PropTypes.object
 }
 
 export default InjectSheet(styles)(BookDetails)

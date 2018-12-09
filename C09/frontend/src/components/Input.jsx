@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import InjectSheet from 'react-jss'
 
 const styles = (theme) => ({
@@ -60,6 +61,11 @@ const Input = ({ classes, errorMessage, icon, invalid, ...rest }) => {
 Input.defaultProps = {
   invalid: false,
   errorMessage: ''
+}
+Input.propTypes = {
+  invalid: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  icon: PropTypes.node
 }
 
 export default InjectSheet(styles)(Input)

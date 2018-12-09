@@ -75,7 +75,7 @@ class LoginPage extends Component {
           errorMessage='Password is required'
           invalid={passwordError}
           icon={<i className='fas fa-key' />} />
-        {loading ? <span className={classes.loading}>Loading ...</span> : <Button onClick={this.login}>Log in</Button> }
+        {loading ? <span className={classes.loading}>Loading ...</span> : <Button onClick={this.login} width={120}>Log in</Button> }
         {error
           ? error.status === 401
             ? <span className={classes.error} >Invalid username or password</span>
