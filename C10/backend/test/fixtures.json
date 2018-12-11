@@ -214,7 +214,7 @@
       "locations": [
         {
           "name": "quito",
-          "onInventory": 10
+          "onInventory": 1
         }
       ],
       "lentTo": []
@@ -411,21 +411,6 @@
       ,"photoURL":"http://books.google.com/books/content?id=_2UCwD6jnWUC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
       "score":4,
       "pageCount":494,
-      "locations": [
-        {
-          "name": "quito",
-          "onInventory": 10
-        }
-      ],
-      "lentTo": []
-    },{
-      "title":"El Extranjero",
-      "author":"Albert Camus",
-      "year":2016,
-      "description":"es la primera novela del escritor francés Albert Camus, publicada en 1942. El protagonista, Meursault, es un ser indiferente a la realidad por resultarle absurda e inabordable. El progreso tecnológico le ha privado de la participación en las decisiones colectivas y le ha convertido en \"extranjero\" dentro de lo que debería ser su propio entorno.",
-      "photoURL":"http://books.google.com/books/content?id=9R1dvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "score":1,
-      "pageCount":66,
       "locations": [
         {
           "name": "quito",

@@ -4,6 +4,8 @@ const router = express.Router()
 const Book = require('../models/book.js')
 const isAuthenticated = require('../policies/isAuthenticated')
 const { formatError, validateReturnDate } = require('../utils')
+const io = require('../sockets').getIo
+
 // Used to parse params and convert them into mongoose filters
 function queryToFilters (query) {
   const filters = {}
@@ -100,6 +102,11 @@ router.post('/:id/lend', (req, res, next) => {
       lentTo: [...book.lentTo, { userId: req.user.sub, returnDate: req.body.returnDate, location: req.body.location }],
       locations: updatedLocations
     })
+    const lentEvent = {
+      book: book.id,
+      newAvailableLocations: book.availableLocations
+    }
+    io().emit('book_lent', lentEvent)
     return book.save((updateError) => {
       if (updateError) return next(updateError)
       return res.json({ data: { lended: true } })

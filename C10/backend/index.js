@@ -2,17 +2,20 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const { socketListen } = require('./app/sockets')
 
 const app = express()
+const server = require('http').Server(app)
+
 // Get configurations
 const config = require('config')
-
 const booksRouter = require('./app/routes/books')
 const authRouter = require('./app/routes/auth')
 
 mongoose.connect(config.get('mongoUri'), { useNewUrlParser: true }, (error) => {
   if (error) { console.error(error) }
-  app.listen(config.get('port'))
+  socketListen(server)
+  server.listen(config.get('port'))
   console.log('We are on baby!')
 })
 
