@@ -1,119 +1,77 @@
-import axios from 'axios'
-let requester = null
+export const FETCH_BOOKS = 'FETCH_BOOKS'
+export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS'
+export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR'
+export const FETCH_SINGLE_BOOK = 'FETCH_SINGLE_BOOK'
+export const FETCH_SINGLE_BOOK_SUCCESS = 'FETCH_SINGLE_BOOK_SUCCESS'
+export const SELECT_BOOK = 'SELECT_BOOK'
+export const LEND_BOOK = 'LEND_BOOK'
+export const UPDATE_BOOK = 'UPDATE_BOOK'
+export const LEND_BOOK_ERROR = 'LEND_BOOK_ERROR'
 
-export const addBook = (book) => {
+export const fetchBooks = (location, query) => {
   return {
-    type: 'ADD_BOOK',
-    book: book
+    type: FETCH_BOOKS,
+    location,
+    query
   }
 }
-export const updateBook = (id, updates) => {
+
+export const loadBooks = (books, total) => {
   return {
-    type: 'UPDATE_BOOK',
-    id,
-    updates
+    type: FETCH_BOOKS_SUCCESS,
+    books,
+    total
   }
 }
-export const loadBooks = (books) => {
+
+export const fetchBooksError = (error) => {
   return {
-    type: 'LOAD_BOOKS',
-    books: books
+    type: FETCH_BOOKS_ERROR,
+    error
   }
 }
-export const setBooksTotal = (total) => {
+
+export const fetchSingleBook = (id) => {
   return {
-    type: 'SET_BOOKS_TOTAL',
-    total: total
+    type: FETCH_SINGLE_BOOK,
+    id
   }
 }
-export const setBooksError = (err) => {
+
+export const loadSingleBook = (book) => {
   return {
-    type: 'SET_BOOKS_ERROR',
-    error: err
-  }
-}
-export const setBooksLoading = (loading) => {
-  return {
-    type: loading ? 'BOOKS_LOADING' : 'BOOKS_LOADED'
+    type: FETCH_SINGLE_BOOK_SUCCESS,
+    book
   }
 }
 
 export const selectBook = (id) => {
   return {
-    type: 'SELECT_BOOK',
-    bookId: id
-  }
-}
-
-function generateRequesterFromState (state) {
-  if (!state.auth.token) return null
-  if (requester) {
-    return requester
-  } else {
-    return axios.create({
-      baseURL: '/',
-      headers: { 'Authorization': `Bearer ${state.auth.token}` }
-    })
-  }
-}
-
-export const fetchBooks = (location, query) => {
-  return (dispatch, getState) => {
-    const requester = generateRequesterFromState(getState())
-    if (!requester) return false
-    const url = location === 'everywhere' ? `/books?${query}` : `/books?location=${location}&${query}`
-    dispatch(setBooksLoading(true))
-    requester.get(url)
-      .then((res) => {
-        dispatch(setBooksLoading(false))
-        dispatch(setBooksTotal(res.data.total))
-        dispatch(loadBooks(res.data.data))
-      })
-      .catch((err) => {
-        dispatch(setBooksLoading(false))
-        if (err.response.data) {
-          dispatch(setBooksError(err.response.data.error))
-        }
-      })
-  }
-}
-
-export const fetchSingleBook = (id) => {
-  return (dispatch, getState) => {
-    const requester = generateRequesterFromState(getState())
-    if (!requester) return false
-    const url = `/books/${id}`
-    dispatch(setBooksLoading(true))
-    requester.get(url)
-      .then((res) => {
-        dispatch(setBooksLoading(false))
-        dispatch(addBook(res.data.data))
-      })
-      .catch((err) => {
-        dispatch(setBooksLoading(false))
-        if (err.response.data) {
-          dispatch(setBooksError(err.response.data.error))
-        }
-      })
+    type: SELECT_BOOK,
+    id
   }
 }
 
 export const lendBook = (id, location, returnDate) => {
-  return (dispatch, getState) => {
-    const requester = generateRequesterFromState(getState())
-    if (!requester) return false
-    const url = `/books/${id}/lend`
-    dispatch(setBooksLoading(true))
-    requester.post(url, { location, returnDate })
-      .then((res) => {
-        dispatch(setBooksLoading(false))
-        dispatch(updateBook(id, { returnDate: returnDate.toString() }))
-      })
-      .catch((err) => {
-        dispatch(setBooksLoading(false))
-        if (err.response.data) {
-          dispatch(setBooksError(err.response.data.error))
-        }
-      })
+  return {
+    type: LEND_BOOK,
+    id,
+    location,
+    returnDate
+  }
+}
+
+export const updateBook = (id, updates) => {
+  return {
+    type: UPDATE_BOOK,
+    id,
+    updates
+  }
+}
+
+export const lendBookError = (error) => {
+  return {
+    type: LEND_BOOK_ERROR,
+    error
   }
 }

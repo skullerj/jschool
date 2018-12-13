@@ -54,7 +54,7 @@ class App extends Component {
     )
   }
   componentDidMount () {
-    // Check login here
+    this.props.dispatch(checkLogin(localStorage))
   }
 }
 const mapStateToProps = (state) => ({

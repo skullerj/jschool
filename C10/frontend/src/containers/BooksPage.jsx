@@ -5,7 +5,7 @@ import qs from 'querystring'
 import book from '../types/book'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchBooks, fetchSingleBook, lendBook, selectBook } from '../redux/actions/books'
+import { fetchBooks, lendBook, selectBook } from '../redux/actions/books'
 import BookDetails from '../components/BookDetails'
 import Bookshelf from '../components/Bookshelf'
 
@@ -61,23 +61,22 @@ class BooksPage extends Component {
   }
 
   componentDidMount () {
-    // if (this.props.searchLocation) {
-    //   this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
-    // }
-    // if (this.props.selectedBookId) {
-    //   this.props.dispatch(selectBook(this.props.selectedBookId))
-    //   this.props.dispatch(fetchSingleBook(this.props.selectedBookId))
-    // }
+    if (this.props.searchLocation) {
+      this.props.fetchBooks(this.props.searchLocation, this.props.query)
+    }
+    if (this.props.selectedBookId) {
+      this.props.selectBook(this.props.selectedBookId)
+    }
   }
 
   componentDidUpdate (prevProps) {
-    // if (
-    //   (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
-    //   (prevProps.query !== this.props.query)
-    // ) {
-    //   if (this.props.selectedBookId) return this.props.dispatch(selectBook(this.props.selectedBookId))
-    //   this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
-    // }
+    if (
+      (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
+      (prevProps.query !== this.props.query)
+    ) {
+      if (this.props.selectedBookId) return this.props.selectBook(this.props.selectedBookId)
+      this.props.fetchBooks(this.props.searchLocation, this.props.query)
+    }
   }
 }
 
@@ -92,9 +91,15 @@ BooksPage.propTypes = {
 const mapStateToProps = (state) => ({
   loading: state.books.loading,
   error: state.books.lastError,
-  total: state.books.totalBooks,
+  total: state.books.total,
   books: state.books.entities,
   selectedBook: state.books.entities.find(b => b.id === state.books.selectedBook)
 })
 
-export default connect(mapStateToProps)(BooksRouter(InjectSheet(styles)(BooksPage)))
+const mapDispatchToProps = (dispatch) => ({
+  fetchBooks: (location, query) => dispatch(fetchBooks(location, query)),
+  selectBook: (id) => dispatch(selectBook(id)),
+  lendBook: (id, location, returnDate) => dispatch(lendBook(id, location, returnDate))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksRouter(InjectSheet(styles)(BooksPage)))
