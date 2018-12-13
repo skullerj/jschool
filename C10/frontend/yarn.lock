@@ -7436,9 +7436,9 @@ redux-devtools-extension@^2.13.7:
   version "2.13.7"
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.7.tgz#14bd7a1a7c8bee7f397beb1116fd16fc9633b752"
 
-redux-thunk@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+redux-observable@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-observable/-/redux-observable-1.0.0.tgz#780ff2455493eedcef806616fe286b454fd15d91"
 
 redux@^4.0.1:
   version "4.0.1"
@@ -7719,13 +7719,21 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+rxios@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/rxios/-/rxios-1.1.2.tgz#412bf98a646eb1662fe9e6941d1c93f39e643e61"
+
+rxjs-compat@^6.3.3:
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.3.3.tgz#2ab3b9ac0dac0c073749d55fef9c03ea1df2045c"
+
 rxjs@^5.5.2:
   version "5.5.12"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
   dependencies:
     symbol-observable "1.0.1"
 
-rxjs@^6.1.0:
+rxjs@^6.1.0, rxjs@^6.3.3:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
   dependencies:

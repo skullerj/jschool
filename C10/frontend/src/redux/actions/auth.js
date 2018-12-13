@@ -1,31 +1,7 @@
-import axios from 'axios'
-import { push } from 'connected-react-router'
-
-export const setAuthLoading = (loading) => {
-  if (loading) {
-    return {
-      type: 'AUTH_LOADING'
-    }
-  } else {
-    return {
-      type: 'AUTH_LOADED'
-    }
-  }
-}
-
-export const setAuthToken = (token) => {
-  return {
-    type: 'SET_AUTH_TOKEN',
-    token: token
-  }
-}
-
-export const setAuthError = (error) => {
-  return {
-    type: 'SET_AUTH_TOKEN',
-    error: error
-  }
-}
+export const REQUEST_LOGIN = 'REQUEST_LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOGOUT = 'LOGOUT'
 
 function getTokenFromLocalStorage (localStorage) {
   const jwt = localStorage.getItem('jwt')
@@ -35,39 +11,39 @@ function getTokenFromLocalStorage (localStorage) {
   return null
 }
 
-export const logIn = (username, password, localStorage) => {
-  return (dispatch, getState) => {
-    if (getState().auth.loading) {
-      return false
-    }
-    dispatch(setAuthLoading(true))
-    axios.post('/auth/login', { username, password })
-      .then((response) => {
-        localStorage.jwt = response.data.jwt
-        dispatch(setAuthToken(response.data.jwt))
-        dispatch(setAuthLoading(false))
-        dispatch(push('/books'))
-      })
-      .catch((err) => {
-        dispatch(setAuthLoading(false))
-        dispatch(setAuthError(err.response.data.error))
-      })
+export const requestLogin = (username, password) => {
+  return {
+    type: REQUEST_LOGIN,
+    username: username,
+    password: password
+  }
+}
+
+export const logIn = (token) => {
+  return {
+    type: LOGIN_SUCCESS,
+    token: token
+  }
+}
+
+export const logInError = (error) => {
+  return {
+    type: LOGIN_ERROR,
+    error: error
+  }
+}
+
+export const logOut = () => {
+  return {
+    type: LOGOUT
   }
 }
 
 export const checkLogin = (localStorage) => {
-  return (dispatch) => {
-    const token = getTokenFromLocalStorage(localStorage)
-    if (token) {
-      dispatch(setAuthToken(token))
-      return true
-    } else {
-      return false
-    }
+  const token = getTokenFromLocalStorage(localStorage)
+  if (token) {
+    return logIn(token)
+  } else {
+    return logOut()
   }
-}
-
-export const logOut = (localStorage) => {
-  localStorage.removeItem('jwt')
-  return setAuthToken(null)
 }

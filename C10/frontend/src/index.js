@@ -13,7 +13,8 @@ import theme from './styles/theme'
 // Redux and Routing related imports
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import store, { history } from './redux/store'
+import configureStore, { history } from './redux/store'
+const store = configureStore()
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

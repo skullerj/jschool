@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import InjectSheet from 'react-jss'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { logIn } from '../redux/actions/auth'
+import { requestLogin } from '../redux/actions/auth'
 import Input from '../components/Input'
 import Button from '../components/Button'
 const styles = (theme) => ({
@@ -107,7 +107,7 @@ class LoginPage extends Component {
   }
   login () {
     if (this.validateForm()) {
-      this.props.dispatch(logIn(this.state.username, this.state.password, localStorage))
+      this.props.dispatch(requestLogin(this.state.username, this.state.password))
     }
   }
 }

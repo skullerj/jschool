@@ -61,23 +61,23 @@ class BooksPage extends Component {
   }
 
   componentDidMount () {
-    if (this.props.searchLocation) {
-      this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
-    }
-    if (this.props.selectedBookId) {
-      this.props.dispatch(selectBook(this.props.selectedBookId))
-      this.props.dispatch(fetchSingleBook(this.props.selectedBookId))
-    }
+    // if (this.props.searchLocation) {
+    //   this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
+    // }
+    // if (this.props.selectedBookId) {
+    //   this.props.dispatch(selectBook(this.props.selectedBookId))
+    //   this.props.dispatch(fetchSingleBook(this.props.selectedBookId))
+    // }
   }
 
   componentDidUpdate (prevProps) {
-    if (
-      (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
-      (prevProps.query !== this.props.query)
-    ) {
-      if (this.props.selectedBookId) return this.props.dispatch(selectBook(this.props.selectedBookId))
-      this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
-    }
+    // if (
+    //   (prevProps.searchLocation !== this.props.searchLocation && this.props.searchLocation) ||
+    //   (prevProps.query !== this.props.query)
+    // ) {
+    //   if (this.props.selectedBookId) return this.props.dispatch(selectBook(this.props.selectedBookId))
+    //   this.props.dispatch(fetchBooks(this.props.searchLocation, this.props.query))
+    // }
   }
 }
 

@@ -1,17 +1,24 @@
+import {
+  REQUEST_LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  LOGOUT
+} from '../actions/auth'
+
 const auth = (state = {
   token: null,
   loading: false,
   lastError: null
 }, action) => {
   switch (action.type) {
-    case 'AUTH_LOADING':
-      return Object.assign({}, state, { loading: true })
-    case 'AUTH_LOADED':
-      return Object.assign({}, state, { loading: false })
-    case 'AUTH_ERROR':
-      return Object.assign({}, state, { lastError: action.error })
-    case 'SET_AUTH_TOKEN':
-      return Object.assign({}, state, { token: action.token })
+    case REQUEST_LOGIN:
+      return { ...state, loading: true }
+    case LOGIN_SUCCESS:
+      return { ...state, loading: false, token: action.token }
+    case LOGIN_ERROR:
+      return { ...state, loading: false, token: null, lastError: action.error }
+    case LOGOUT:
+      return { ...state, token: null }
     default:
       return state
   }
