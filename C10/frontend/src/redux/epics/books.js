@@ -1,7 +1,9 @@
 import { ofType, combineEpics } from 'redux-observable'
-import { of } from 'rxjs'
-import { switchMap, withLatestFrom, map, filter, catchError } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { switchMap, withLatestFrom, map, filter, catchError, merge, tap } from 'rxjs/operators'
 import { Rxios } from 'rxios'
+import io from 'socket.io-client'
+
 import {
   FETCH_BOOKS,
   SELECT_BOOK,
@@ -14,6 +16,10 @@ import {
   lendBookError,
   fetchSingleBook
 } from '../actions/books'
+
+import {
+  LOGIN_SUCCESS
+} from '../actions/auth'
 
 let requester = null
 
@@ -89,4 +95,23 @@ const selectBookEpic = (action$, state$) => action$.pipe(
   map(info => fetchSingleBook(info.id))
 )
 
-export default combineEpics(fetchBooksEpic, fetchSingleBookEpic, lendBookEpic, selectBookEpic)
+const socket$ = Observable.create((observer) => {
+  const socket = io('/')
+  socket.on('connect', () => {
+    observer.next({ event: 'connect' })
+  })
+  socket.on('book_lent', (data) => {
+    observer.next({ event: 'book_lent', data: data })
+  })
+  socket.on('error', (error) => {
+    observer.error(error)
+  })
+})
+
+const watchBooksEpic = (action$, state$) => action$.pipe(
+  merge(socket$),
+  filter(action => action.event === 'book_lent'),
+  map(action => updateBook(action.data.book, { availableLocations: action.data.newAvailableLocations }))
+)
+
+export default combineEpics(fetchBooksEpic, fetchSingleBookEpic, lendBookEpic, selectBookEpic, watchBooksEpic)
