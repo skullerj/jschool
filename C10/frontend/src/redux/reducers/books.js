@@ -14,6 +14,7 @@ const books = (state = {
   entities: [],
   total: 0,
   selectedBook: null,
+  lastUpdated: null,
   loading: false,
   lastError: null
 }, action) => {
@@ -27,14 +28,14 @@ const books = (state = {
     case FETCH_BOOKS_ERROR:
       return { ...state, loading: false, entities: [], lastError: action.error }
     case FETCH_SINGLE_BOOK_SUCCESS:
-      return { ...state, loading: false, entities: [...state.entities, ...action.book] }
+      return { ...state, loading: false, entities: [...state.entities, action.book] }
     case LEND_BOOK_ERROR:
       return { ...state, loading: false, lastError: action.error }
     case SELECT_BOOK:
       return { ...state, selectedBook: action.id }
     case UPDATE_BOOK:
       const newEnties = state.entities.map(book => (book.id === action.id ? { ...book, ...action.updates } : book))
-      return { ...state, entities: newEnties, loading: false }
+      return { ...state, entities: newEnties, loading: false, lastUpdated: action.id }
     default:
       return state
   }

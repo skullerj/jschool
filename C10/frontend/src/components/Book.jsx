@@ -7,6 +7,17 @@ import book from '../types/book'
 import Stars from './Stars'
 
 const styles = (theme) => ({
+  '@keyframes bookupdated': {
+    '0%': {
+      transform: 'none'
+    },
+    '70%': {
+      transform: 'scale(1.2,1.2)'
+    },
+    '100%': {
+      transform: 'none'
+    }
+  },
   article: {
     display: 'flex',
     'flex-direction': 'column',
@@ -40,7 +51,12 @@ const styles = (theme) => ({
     'border-radius': '4px',
     display: 'flex',
     'max-width': 200,
-    width: '100%'
+    width: '100%',
+    'animation-name': (props) => props.recentlyUpdated ? 'bookupdated' : null,
+    animation: {
+      duration: '400ms',
+      timingFunction: 'cubic-bezier(0, 0, .2, 1)'
+    }
   },
   locations: {
     font: theme.font('cond_light', 10),
@@ -177,7 +193,8 @@ const Book = (props) => {
 
 Book.propTypes = {
   book: book,
-  onBookClick: PropTypes.func
+  onBookClick: PropTypes.func,
+  recentlyUpdated: PropTypes.bool
 }
 
 export default InjectSheet(styles)(Book)

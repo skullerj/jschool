@@ -101,6 +101,7 @@ const socket$ = Observable.create((observer) => {
     observer.next({ event: 'connect' })
   })
   socket.on('book_lent', (data) => {
+    console.log(data)
     observer.next({ event: 'book_lent', data: data })
   })
   socket.on('error', (error) => {

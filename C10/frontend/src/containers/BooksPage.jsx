@@ -39,7 +39,7 @@ class BooksPage extends Component {
     this.lendBook = this.lendBook.bind(this)
   }
   render () {
-    const { loading, error, searchLocation, selectedBook, books, total, query, classes } = this.props
+    const { loading, error, searchLocation, selectedBook, books, total, query, classes, lastUpdated } = this.props
     const page = parseInt(qs.parse(query).page || 0)
     return (
       <div>
@@ -49,7 +49,7 @@ class BooksPage extends Component {
             : error
               ? <div>{ error.status === 404 ? <Redirect to='/notfound' /> : <h1 className={classes.error}>{error.message}</h1> }</div>
               : searchLocation
-                ? <Bookshelf books={books} location={searchLocation} query={query} page={page} total={total} />
+                ? <Bookshelf books={books} location={searchLocation} query={query} page={page} total={total} lastUpdated={lastUpdated} />
                 : selectedBook && <BookDetails book={selectedBook} onBookLend={this.lendBook} />
         }
       </div>
@@ -57,7 +57,7 @@ class BooksPage extends Component {
   }
 
   lendBook (id, location, returnDate) {
-    this.props.dispatch(lendBook(id, location, returnDate))
+    this.props.lendBook(id, location, returnDate)
   }
 
   componentDidMount () {
@@ -93,6 +93,7 @@ const mapStateToProps = (state) => ({
   error: state.books.lastError,
   total: state.books.total,
   books: state.books.entities,
+  lastUpdated: state.books.lastUpdated,
   selectedBook: state.books.entities.find(b => b.id === state.books.selectedBook)
 })
 

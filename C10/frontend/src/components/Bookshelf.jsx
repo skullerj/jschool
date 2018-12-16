@@ -69,7 +69,7 @@ function getSearchTerms (query, location) {
 }
 
 const Bookshelf = (props) => {
-  const { classes, books, page, total, query, location } = props
+  const { classes, books, page, total, query, location, lastUpdated } = props
   const searchTerms = getSearchTerms(query, location)
   return (
     <div className={classes.container}>
@@ -80,7 +80,7 @@ const Bookshelf = (props) => {
       <div className={classes.grid}>
         {
           books.map((book, i) => {
-            return (<Book book={book} key={i} alignment={computeAlignment(i)} />)
+            return (<Book book={book} key={book.id} alignment={computeAlignment(i)} recentlyUpdated={lastUpdated === book.id} />)
           })
         }
         {!books[0] && <span className={classes.noResults}>No results found :(</span>}
@@ -94,7 +94,8 @@ Bookshelf.propTypes = {
   page: PropTypes.number,
   total: PropTypes.number,
   query: PropTypes.string,
-  location: PropTypes.string
+  location: PropTypes.string,
+  lastUpdated: PropTypes.string
 }
 
 export default InjectSheet(styles)(Bookshelf)
