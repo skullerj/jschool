@@ -1,4 +1,4 @@
-## C09 - Bookshelf react backend with Redux
+## C10 - Bookshelf frontend
 
 This folder contains the backed for the bookshelf app.
 
@@ -10,14 +10,8 @@ To start the create-react-app server run:
 
 ### `yanr start`
 
-To run the tests:
-
-### `yarn test`
-
+An animation is fired on the book list everytime some user lends a book. To see that you can lend a book from a new incognito tab. You should see the animation on the regular tab.
 
 ## Some comments
 
-This time I completely refactored the code to delete some missleading components. We moved to JSS replacing the former emotion implementation. I think is a better path for code readibility. I wish there were a faster way to write styles though.
-Implementing Redux was fun, the Flux framewor just makes sense and I like it a lot.
-
-
+I used RxJs to handle the async operations. Most of the action names were changed to better addapt to that pattern.

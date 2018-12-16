@@ -24,7 +24,7 @@ The API does not have any endpoint to create new books. To populate it with book
 
   #### `npm run populate` 
 
-That script contains a fair ammount of google books API calls so running it repeteadly may result in some error due to quotas. It will create a test user with username 'frodo' and password 'givemethatring'
+That script contains a fair ammount of google books API calls so running it repeteadly may result in some error due to quotas. It will also create a test user with username 'frodo' and password 'givemethatring'
 
 ## Available endpoints
 
@@ -33,4 +33,6 @@ That script contains a fair ammount of google books API calls so running it repe
 - `GET /books` - Get all the books. Available filters are: `location and title`. It also supports pagination through the page parameter. Ej: `GET /books?location=quito&title=harry&page=2` <== would return the second page of books in quito that have harry on their title
 - `GET /books/:id` - Get a single book given certain id
 - `POST /books/:id/lend` - Lends this book to you. This endpoint need a location parameter sent in the body, indicating the place where you want to lend it from.
+
+You can also subscribe to the websocket at the root (`/`). It will fire the book_lent event everytime a book is lended.
 
