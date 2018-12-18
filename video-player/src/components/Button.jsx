@@ -59,7 +59,8 @@ const Button = props => {
 };
 
 Button.defaultProps = {
-  raised: false
+  raised: false,
+  variant: 'normal'
 };
 
 Button.propTypes = {

@@ -3,25 +3,44 @@ import InjectSheet from 'react-jss';
 import Button from './components/Button';
 const styles = theme => ({
   main: {
-    background: theme.colors.primary,
+    background: theme.colors.white,
     height: '100vh',
-    width: '100vw'
+    width: '100vw',
+    display: 'grid',
+    grid: {
+      templateRows: '64px auto 120px',
+      templateColumns: '6fr 3fr',
+      templateAreas: `'header header' 'player clips' 'controls clips'`
+    }
   },
   header: {
-    background: theme.colors.lightPrimary,
+    background: theme.colors.primary,
     color: theme.colors.text.he,
     height: '4rem',
     padding: '0.5rem 1rem',
     display: 'flex',
     flex: {
-      direction: 'row'
-    }
+      direction: 'row',
+      justify: 'center'
+    },
+    'grid-area': 'header'
   },
   title: {
     ...theme.fonts.h5,
     display: 'flex',
-    flex: '1',
-    'self-align': 'center'
+    flex: '1'
+  },
+  player: {
+    'grid-area': 'player',
+    background: theme.colors.white
+  },
+  clips: {
+    'grid-area': 'clips',
+    background: '#E0DEDD'
+  },
+  controls: {
+    'grid-area': 'controls',
+    background: theme.colors.primary
   }
 });
 
@@ -32,7 +51,7 @@ class App extends Component {
       <main className={classes.main}>
         <header className={classes.header}>
           <h1 className={classes.title}>{`< Video Player />`}</h1>
-          <Button variant="accent" raised>Share</Button>
+          <Button raised>Share</Button>
         </header>
         <section className={classes.player}>
           <h2>Videos here</h2>
@@ -42,6 +61,9 @@ class App extends Component {
         </section>
         <section className={classes.clips}>
           <h3>Clips here</h3>
+        </section>
+        <section className={classes.controls}>
+          <h3>Controls</h3>
         </section>
       </main>
     );
