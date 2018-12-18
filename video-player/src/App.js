@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import InjectSheet from 'react-jss';
-
+import Button from './components/Button';
 const styles = theme => ({
-  header: {
-    background: theme.colors.bg,
-    color: theme.colors.text.he
+  main: {
+    background: theme.colors.primary,
+    height: '100vh',
+    width: '100vw'
   },
-  h1: {
-    ...theme.fonts.h1
+  header: {
+    background: theme.colors.lightPrimary,
+    color: theme.colors.text.he,
+    height: '4rem',
+    padding: '0.5rem',
+    display: 'flex',
+    flex: {
+      direction: 'row'
+    }
+  },
+  title: {
+    ...theme.fonts.h5,
+    display: 'flex',
+    flex: '1'
   },
   h2: {
     ...theme.fonts.h2
@@ -16,10 +29,12 @@ const styles = theme => ({
     ...theme.fonts.h3
   },
   h4: {
-    ...theme.fonts.h4
+    ...theme.fonts.h4,
+    color: theme.colors.accent
   },
   h5: {
-    ...theme.fonts.h5
+    ...theme.fonts.h5,
+    color: theme.colors.error
   },
   body: {
     ...theme.fonts.body,
@@ -35,19 +50,23 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <main className={classes.main}>
         <header className={classes.header}>
-          <h1 className={classes.h1}>Video killed the radio star!</h1>
-          <h2 className={classes.h2}>Video killed the radio star!</h2>
-          <h3 className={classes.h3}>Video killed the radio star!</h3>
-          <h4 className={classes.h4}>Video killed the radio star!</h4>
-          <h5 className={classes.h5}>Video killed the radio star!</h5>
-          <span className={classes.body}>Video killed the radio star!</span>
-          <button className={classes.button}>
-            Video killed the radio star!
-          </button>
+          <h1 className={classes.title}>{`<Video Player />`}</h1>
+          <Button variant="normal" raised>Play</Button>
+          <Button variant="accent" raised>Play</Button>
+          <Button variant="error" raised>Play</Button>
         </header>
-      </div>
+        <section className={classes.player}>
+          <h2>Videos here</h2>
+          <Button variant="normal">Play</Button>
+          <Button variant="accent">Pause</Button>
+          <Button variant="error">Stop</Button>
+        </section>
+        <section className={classes.clips}>
+          <h3>Clips here</h3>
+        </section>
+      </main>
     );
   }
 }
