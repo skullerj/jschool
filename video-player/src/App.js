@@ -11,7 +11,7 @@ const styles = theme => ({
     background: theme.colors.lightPrimary,
     color: theme.colors.text.he,
     height: '4rem',
-    padding: '0.5rem',
+    padding: '0.5rem 1rem',
     display: 'flex',
     flex: {
       direction: 'row'
@@ -20,29 +20,8 @@ const styles = theme => ({
   title: {
     ...theme.fonts.h5,
     display: 'flex',
-    flex: '1'
-  },
-  h2: {
-    ...theme.fonts.h2
-  },
-  h3: {
-    ...theme.fonts.h3
-  },
-  h4: {
-    ...theme.fonts.h4,
-    color: theme.colors.accent
-  },
-  h5: {
-    ...theme.fonts.h5,
-    color: theme.colors.error
-  },
-  body: {
-    ...theme.fonts.body,
-    color: theme.colors.text.disabled
-  },
-  button: {
-    ...theme.fonts.button,
-    color: theme.colors.text.me
+    flex: '1',
+    'self-align': 'center'
   }
 });
 
@@ -52,10 +31,8 @@ class App extends Component {
     return (
       <main className={classes.main}>
         <header className={classes.header}>
-          <h1 className={classes.title}>{`<Video Player />`}</h1>
-          <Button variant="normal" raised>Play</Button>
-          <Button variant="accent" raised>Play</Button>
-          <Button variant="error" raised>Play</Button>
+          <h1 className={classes.title}>{`< Video Player />`}</h1>
+          <Button variant="accent" raised>Share</Button>
         </header>
         <section className={classes.player}>
           <h2>Videos here</h2>

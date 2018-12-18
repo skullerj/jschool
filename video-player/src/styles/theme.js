@@ -16,33 +16,34 @@ const theme = {
   },
   fonts: {
     h1: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '6.3rem'
     },
     h2: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '4rem'
     },
     h3: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '3.2rem'
     },
     h4: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '2.25rem'
     },
     h5: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '1.6rem'
     },
     body: {
-      'font-family': 'Crete Round, sans-seirf',
+      'font-family': 'Roboto Slab, seirf',
       'font-size': '1rem'
     },
     button: {
-      'font-family': 'Crete Round, sans-serif',
+      'font-family': 'Roboto Slab, serif',
       'font-size': '1rem',
-      'text-transform': 'Uppercase'
+      'text-transform': 'Uppercase',
+      'letter-spacing': '0.2rem'
     }
   }
 };
