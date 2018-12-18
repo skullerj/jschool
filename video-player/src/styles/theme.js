@@ -4,7 +4,8 @@ const theme = {
     lightPrimary: '#484953',
     accent: '#3185FC',
     error: '#E84855',
-    white: '#F6F4F3',
+    bg: '#FFF',
+    darkBg: '#F6F4F3',
     text: {
       he: 'rgba(255,255,255,1)',
       me: 'rgba(255,255,255,0.4)',

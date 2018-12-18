@@ -3,12 +3,12 @@ import InjectSheet from 'react-jss';
 import Button from './components/Button';
 const styles = theme => ({
   main: {
-    background: theme.colors.white,
+    background: theme.colors.bg,
     height: '100vh',
     width: '100vw',
     display: 'grid',
     grid: {
-      templateRows: '64px auto 120px',
+      templateRows: '64px auto 64px',
       templateColumns: '6fr 3fr',
       templateAreas: `'header header' 'player clips' 'controls clips'`
     }
@@ -32,11 +32,11 @@ const styles = theme => ({
   },
   player: {
     'grid-area': 'player',
-    background: theme.colors.white
+    background: theme.colors.bg
   },
   clips: {
     'grid-area': 'clips',
-    background: '#E0DEDD'
+    background: theme.colors.darkBg
   },
   controls: {
     'grid-area': 'controls',

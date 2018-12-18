@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 const buttonColor = (theme, props) => {
   let colors = {
-    main: theme.colors.white,
+    main: theme.colors.bg,
     secondary: theme.colors.text.blackHe
   };
   switch (props.variant) {
