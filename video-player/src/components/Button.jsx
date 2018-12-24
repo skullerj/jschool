@@ -40,10 +40,10 @@ const styles = theme => ({
   button: props => ({
     ...theme.fonts.button,
     ...buttonColor(theme, props),
-    padding: '0.5rem',
+    padding: '0 0.5rem',
     border: '0',
     'border-radius': '0.5rem',
-    height: '2.5rem',
+    height: '2rem',
     'min-width': '4rem',
     'text-align': 'center'
   })

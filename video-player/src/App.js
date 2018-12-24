@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InjectSheet from 'react-jss';
 import Button from './components/Button';
+import VideoPlayer from './components/VideoPlayer/index';
 const styles = theme => ({
   main: {
     background: theme.colors.bg,
@@ -9,7 +10,7 @@ const styles = theme => ({
     display: 'grid',
     grid: {
       templateRows: '64px auto 64px',
-      templateColumns: '6fr 3fr',
+      templateColumns: '1fr 30vw',
       templateAreas: `'header header' 'player clips' 'controls clips'`
     }
   },
@@ -54,10 +55,7 @@ class App extends Component {
           <Button raised>Share</Button>
         </header>
         <section className={classes.player}>
-          <h2>Videos here</h2>
-          <Button variant="normal">Play</Button>
-          <Button variant="accent">Pause</Button>
-          <Button variant="error">Stop</Button>
+          <VideoPlayer src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4" />
         </section>
         <section className={classes.clips}>
           <h3>Clips here</h3>
