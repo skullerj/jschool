@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import InjectSheet from 'react-jss';
 import Timeline from './Timeline';
+
+import { play, pause, setDuration, setProgress } from '../redux/actions';
 
 const styles = theme => ({
   container: {
@@ -25,32 +28,25 @@ class VideoPlayer extends Component {
   constructor(props) {
     super(props);
     this.player = React.createRef();
-    this.state = {
-      ready: false,
-      progress: 0,
-      playing: false,
-      duration: 0
-    };
+    this.state = { ready: false };
   }
   togglePlay = () => {
-    this.setState(state => {
-      const newState = !state.playing;
-      if (newState) {
-        this.player.current.play();
-      } else {
-        this.player.current.pause();
-      }
-      return { playing: newState };
-    });
+    if (this.props.playing) {
+      this.player.current.pause();
+      this.props.dispatch(pause());
+    } else {
+      this.player.current.play();
+      this.props.dispatch(play());
+    }
   };
   updateProgress = progress => {
     const newTime = progress * this.player.current.duration;
     this.player.current.currentTime = newTime;
-    this.setState({ progress: progress });
+    this.props.dispatch(setProgress(progress));
   };
   render() {
-    const { src, classes } = this.props;
-    const { progress, playing, ready, duration } = this.state;
+    const { src, classes, progress, playing, duration } = this.props;
+    const { ready } = this.state;
     return (
       <div className={classes.container}>
         {!ready && (
@@ -74,16 +70,24 @@ class VideoPlayer extends Component {
   componentDidMount() {
     const player = this.player.current;
     player.addEventListener('canplay', () => {
-      this.setState({ ready: true, duration: player.duration });
+      this.props.dispatch(setDuration(player.duration));
+      this.setState({ ready: true });
     });
     player.addEventListener('timeupdate', e => {
-      this.setState({ progress: player.currentTime / player.duration });
+      this.props.dispatch(setProgress(player.currentTime / player.duration));
     });
   }
 }
 
 VideoPlayer.propTypes = {
-  src: PropTypes.string
+  src: PropTypes.string,
+  progress: PropTypes.number
 };
 
-export default InjectSheet(styles)(VideoPlayer);
+const mapStateToProps = state => ({
+  progress: state.progress,
+  playing: state.playing,
+  duration: state.duration
+});
+
+export default connect(mapStateToProps)(InjectSheet(styles)(VideoPlayer));

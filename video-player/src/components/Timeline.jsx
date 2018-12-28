@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { fromEvent } from 'rxjs';
-import { notchBounce, notchDrag } from '../../animations/utils';
+import { notchBounce, notchDrag } from '../animations/utils';
 import { map } from 'rxjs/operators';
 
 const styles = theme => ({
