@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { List, Button } from 'antd';
 import '../styles/ClipList.css';
+
+import { openCreate } from '../redux/actions';
 
 const formatSecondsToMin = seconds => {
   if (!seconds) return '0:00';
@@ -11,6 +14,9 @@ const formatSecondsToMin = seconds => {
 };
 
 class ClipList extends Component {
+  createClip = () => {
+    this.props.dispatch(openCreate());
+  };
   render() {
     const { clips } = this.props;
     return (
@@ -18,7 +24,12 @@ class ClipList extends Component {
         <List
           header={
             <div>
-              <h3>Clips</h3>
+              <div className="clips-title">
+                <h1>Clips</h1>
+                <Button type="primary" onClick={this.createClip}>
+                  New Clip
+                </Button>
+              </div>
               <List.Item actions={[<Button icon="play-circle" />]}>
                 <List.Item.Meta title="Full Video" />
               </List.Item>
@@ -49,13 +60,11 @@ class ClipList extends Component {
 }
 
 ClipList.propTypes = {
-  clips: PropTypes.array,
-  onPlayClick: PropTypes.func,
-  onNewClipClick: PropTypes.func
+  clips: PropTypes.array
 };
 
-ClipList.defaultProps = {
-  clips: []
-};
+const mapStateToProps = state => ({
+  clips: state.clips
+});
 
-export default ClipList;
+export default connect(mapStateToProps)(ClipList);

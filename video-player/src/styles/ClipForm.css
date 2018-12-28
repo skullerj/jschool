@@ -1,13 +1,13 @@
-
-.clips-list {
+.clip-form {
   padding: 14px;
 }
 
-.clips-title {
+.clip-form-title {
+  padding-top: 12px;
   display: flex;
   flex-direction: row;
 }
 
-.clips-title h1 {
+.clip-form-title h1 {
   flex: 1;
 }

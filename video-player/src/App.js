@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import VideoPlayer from './components/VideoPlayer';
 import ClipList from './components/ClipList';
+import ClipForm from './components/ClipForm';
 import { Layout } from 'antd';
 import { Button } from 'antd';
 import './styles/App.css';
@@ -8,8 +10,8 @@ import './styles/App.css';
 const { Header, Content, Footer, Sider } = Layout;
 
 class App extends Component {
-
   render() {
+    const { creating } = this.props;
     return (
       <Layout>
         <Header>
@@ -24,10 +26,7 @@ class App extends Component {
             <Footer className="footer">Controls will show up here</Footer>
           </Layout>
           <Sider width={350} theme="light">
-            <ClipList
-              onPlayClick={this.playClip}
-              onNewClipClick={this.createClip}
-            />
+            {creating ? <ClipForm /> : <ClipList />}
           </Sider>
         </Layout>
       </Layout>
@@ -35,4 +34,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  creating: state.creatingClip
+});
+
+export default connect(mapStateToProps)(App);

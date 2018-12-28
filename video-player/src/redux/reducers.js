@@ -3,7 +3,7 @@ const main = (
     clips: [],
     selectedClip: null,
     creatingClip: false,
-    shareOpened: false,
+    duration: 52,
     videoSrc:
       'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
   },
@@ -31,8 +31,6 @@ const main = (
       return { ...state, selectedClip: action.selected };
     case 'SET_CREATING_CLIP':
       return { ...state, creatingClip: action.creating };
-    case 'SET_SHARING_OPENED':
-      return { ...state, shareOpened: action.opened };
     default:
       return state;
   }

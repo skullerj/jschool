@@ -31,12 +31,3 @@ export const closeCreate = () => ({
   creating: false
 });
 
-export const openSharing = () => ({
-  type: 'SET_SHARING_OPENED',
-  creating: true
-});
-
-export const closeSharing = () => ({
-  type: 'SET_SHARING_OPENED',
-  creating: false
-});
