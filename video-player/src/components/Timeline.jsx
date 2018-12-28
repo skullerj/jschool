@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { fromEvent } from 'rxjs';
 import { notchBounce, notchDrag } from '../animations/utils';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 const styles = theme => ({
   container: {
@@ -107,6 +107,7 @@ class Timeline extends Component {
     fromEvent(notch, 'click').subscribe(e => e.stopPropagation());
     notchDrag(
       fromEvent(notch, 'mousedown').pipe(
+        tap(() => { console.log(this.props.progress) }),
         map(e => ({ e: e, startAt: this.props.progress }))
       ),
       timeline.getBoundingClientRect().width

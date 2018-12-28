@@ -1,4 +1,12 @@
-import { Subject, interval, animationFrameScheduler, combineLatest, Observable, defer, fromEvent } from 'rxjs';
+import {
+  Subject,
+  interval,
+  animationFrameScheduler,
+  combineLatest,
+  Observable,
+  defer,
+  fromEvent
+} from 'rxjs';
 import {
   scan,
   map,
@@ -51,10 +59,9 @@ export const notchDrag = (notchClick$, width) => {
       mergeMap(clickEvent => {
         return windowMove$.pipe(
           takeUntil(windowUp$),
-          scan(
-            (progress, e) => progress + e.movementX / width,
-            clickEvent.startAt
-          )
+          scan((progress, e) => {
+            return progress + e.movementX / width;
+          }, clickEvent.startAt)
         );
       })
     )

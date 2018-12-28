@@ -68,13 +68,9 @@ class App extends Component {
     console.log(e);
   };
 
-  handleProgressUpdate = progress => {
-    this.setState({ progress: progress });
-  };
-
   render() {
     const { classes } = this.props;
-    const { clips, progress } = this.state;
+    const { clips } = this.state;
     return (
       <main className={classes.main}>
         <header className={classes.header}>
@@ -82,11 +78,7 @@ class App extends Component {
           <Button raised>Share</Button>
         </header>
         <section className={classes.player}>
-          <VideoPlayer
-            src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-            progress={progress}
-            onProgressUpdate={this.handleProgressUpdate}
-          />
+          <VideoPlayer src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4" />
         </section>
         <section className={classes.clips}>
           <ClipList

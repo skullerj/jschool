@@ -40,12 +40,14 @@ class VideoPlayer extends Component {
     }
   };
   updateProgress = progress => {
+    console.log(progress, this.player.current.duration);
     const newTime = progress * this.player.current.duration;
     this.player.current.currentTime = newTime;
     this.props.dispatch(setProgress(progress));
   };
   render() {
     const { src, classes, progress, playing, duration } = this.props;
+    console.log(progress)
     const { ready } = this.state;
     return (
       <div className={classes.container}>
