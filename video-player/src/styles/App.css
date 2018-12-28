@@ -1,0 +1,12 @@
+@import '~antd/dist/antd.css';
+
+.main{
+  height: calc(100vh - 64px);
+}
+.content{
+  padding: 50px;
+}
+.logo{
+  font-size: 24px;
+  color: #fff;
+}
