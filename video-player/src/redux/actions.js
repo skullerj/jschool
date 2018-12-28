@@ -1,25 +1,42 @@
-export const play = () => {
+export const addClip = clip => {
+  clip.id = Date.now();
   return {
-    type: 'PLAY'
+    type: 'ADD_CLIP',
+    clip
   };
 };
 
-export const pause = () => {
-  return {
-    type: 'PAUSE'
-  };
-};
+export const removeClip = id => ({
+  type: 'REMOVE_CLIP',
+  id
+});
 
-export const setProgress = progress => {
-  return {
-    type: 'SET_PROGRESS',
-    progress: progress
-  };
-};
+export const editClip = clip => ({
+  type: 'EDIT_CLIP',
+  clip
+});
 
-export const setDuration = duration => {
-  return {
-    type: 'SET_DURATION',
-    duration: duration
-  };
-};
+export const selectClip = id => ({
+  type: 'SELECT_CLIP',
+  id
+});
+
+export const openCreate = () => ({
+  type: 'SET_CREATING_CLIP',
+  creating: true
+});
+
+export const closeCreate = () => ({
+  type: 'SET_CREATING_CLIP',
+  creating: false
+});
+
+export const openSharing = () => ({
+  type: 'SET_SHARING_OPENED',
+  creating: true
+});
+
+export const closeSharing = () => ({
+  type: 'SET_SHARING_OPENED',
+  creating: false
+});
