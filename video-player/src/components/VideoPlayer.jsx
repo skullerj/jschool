@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 class VideoPlayer extends Component {
   render() {
-    const { src } = this.props;
+    const { src, fragment } = this.props;
     return (
       <div>
         <video ref={this.player} controls>
-          <source src={src} />
+          <source src={`${src}${fragment}`} />
         </video>
       </div>
     );
@@ -17,13 +17,21 @@ class VideoPlayer extends Component {
 
 VideoPlayer.propTypes = {
   src: PropTypes.string,
-  progress: PropTypes.number
+  fragment: PropTypes.string
+};
+
+const computeMediaFragment = (clips, selectedClip) => {
+  if (!selectedClip) return '';
+  return clips.reduce((r, c) => {
+    if (c.id === selectedClip) {
+      r = `#t=${c.start},${c.end}`;
+    }
+  }, '');
 };
 
 const mapStateToProps = state => ({
-  progress: state.progress,
-  playing: state.playing,
-  duration: state.duration
+  src: state.videoSrc,
+  fragment: computeMediaFragment(state.clips, state.selectedClip)
 });
 
 export default connect(mapStateToProps)(VideoPlayer);

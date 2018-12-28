@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { List, Button } from 'antd';
+import '../styles/ClipList.css';
 
 const formatSecondsToMin = seconds => {
   if (!seconds) return '0:00';
@@ -10,15 +12,37 @@ const formatSecondsToMin = seconds => {
 
 class ClipList extends Component {
   render() {
-    const { clips, onPlayClick, onNewClipClick } = this.props;
+    const { clips } = this.props;
     return (
-      <div>
-        {clips.map(clip => (
-          <div>
-            <span>{formatSecondsToMin(clip.startTime)}</span>
-            <span>{formatSecondsToMin(clip.endTime)}</span>
-          </div>
-        ))}
+      <div className="clips-list">
+        <List
+          header={
+            <div>
+              <h3>Clips</h3>
+              <List.Item actions={[<Button icon="play-circle" />]}>
+                <List.Item.Meta title="Full Video" />
+              </List.Item>
+            </div>
+          }
+          locale={{ emptyText: 'No clips to show' }}
+          dataSource={clips}
+          renderItem={item => (
+            <List.Item
+              actions={[
+                <Button icon="play-circle" />,
+                <Button icon="edit" />,
+                <Button icon="delete" />
+              ]}
+            >
+              <List.Item.Meta
+                title={item.title}
+                description={`${formatSecondsToMin(
+                  item.start
+                )} - ${formatSecondsToMin(item.end)}`}
+              />
+            </List.Item>
+          )}
+        />
       </div>
     );
   }
