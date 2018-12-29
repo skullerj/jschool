@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Input, TimePicker, Form } from 'antd';
+import { Button, Input, TimePicker, Form, message } from 'antd';
 import moment from 'moment';
 import '../styles/ClipForm.css';
 
-import { closeCreate, addClip } from '../redux/actions';
+import { closeCreate, addClip, editClip } from '../redux/actions';
 
 const hasErrors = fieldsError => {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -58,13 +58,21 @@ class ClipForm extends Component {
           start: getSeconds(values.start),
           end: getSeconds(values.end)
         };
-        this.props.dispatch(addClip(clip));
+        if (this.props.editing) {
+          clip.id = this.props.editingClip.id;
+          this.props.dispatch(editClip(clip));
+          message.success('Clip saved');
+        } else {
+          this.props.dispatch(addClip(clip));
+          message.success('Clip added');
+        }
         this.props.form.resetFields();
         this.props.dispatch(closeCreate());
       }
     });
   };
   render() {
+    const { editing } = this.props;
     const {
       getFieldDecorator,
       getFieldsError,
@@ -77,7 +85,7 @@ class ClipForm extends Component {
     return (
       <div className="clip-form">
         <div className="clip-form-title">
-          <h1>New Clip</h1>
+          <h1>{editing ? 'Edit Clip' : 'New Clip'}</h1>
           <Button onClick={this.getBack}>Return</Button>
         </div>
         <Form onSubmit={this.handleSubmit}>
@@ -131,17 +139,31 @@ class ClipForm extends Component {
               htmlType="submit"
               disabled={hasErrors(getFieldsError())}
             >
-              Create
+              {editing ? 'Save' : 'Create'}
             </Button>
           </Form.Item>
         </Form>
       </div>
     );
   }
+  componentDidMount(prevProps) {
+    if (this.props.editing) {
+      const clip = this.props.editingClip;
+      const formClip = {
+        name: clip.name,
+        start: moment('00:00:00', 'HH:mm:ss').seconds(clip.start),
+        end: moment('00:00:00', 'HH:mm:ss').seconds(clip.end)
+      };
+      console.log(formClip)
+      this.props.form.setFieldsValue(formClip);
+    }
+  }
 }
 
 const mapStateToProps = state => ({
-  duration: state.duration
+  duration: state.duration,
+  editing: state.selectedClip && state.creatingClip,
+  editingClip: state.clips.find(c => c.id === state.selectedClip)
 });
 
 export default Form.create()(connect(mapStateToProps)(ClipForm));

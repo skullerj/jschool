@@ -28,7 +28,7 @@ const main = (
         clips: state.clips.map(c => (c.id === action.clip.id ? action.clip : c))
       };
     case 'SELECT_CLIP':
-      return { ...state, selectedClip: action.selected };
+      return { ...state, selectedClip: action.id };
     case 'SET_CREATING_CLIP':
       return { ...state, creatingClip: action.creating };
     default:

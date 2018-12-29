@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class VideoPlayer extends Component {
+  constructor(props) {
+    super(props);
+    this.player = React.createRef();
+  }
   render() {
     const { src, fragment } = this.props;
     return (
@@ -12,6 +16,17 @@ class VideoPlayer extends Component {
         </video>
       </div>
     );
+  }
+  componentDidMount() {
+    this.player.current.addEventListener('ended', () => {
+      console.log('ended');
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.fragment !== this.props.fragment) {
+      this.player.current.load();
+      this.player.current.play();
+    }
   }
 }
 
@@ -26,6 +41,7 @@ const computeMediaFragment = (clips, selectedClip) => {
     if (c.id === selectedClip) {
       r = `#t=${c.start},${c.end}`;
     }
+    return r;
   }, '');
 };
 

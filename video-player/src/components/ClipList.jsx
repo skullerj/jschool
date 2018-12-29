@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { List, Button } from 'antd';
+import { List, Button, Popconfirm, message } from 'antd';
 import '../styles/ClipList.css';
 
-import { openCreate } from '../redux/actions';
+import { openCreate, selectClip, removeClip } from '../redux/actions';
 
 const formatSecondsToMin = seconds => {
   if (!seconds) return '0:00';
@@ -15,10 +15,22 @@ const formatSecondsToMin = seconds => {
 
 class ClipList extends Component {
   createClip = () => {
+    this.props.dispatch(selectClip(null));
+    this.props.dispatch(openCreate());
+  };
+  playClip = id => {
+    this.props.dispatch(selectClip(id));
+  };
+  deleteClip = id => {
+    this.props.dispatch(removeClip(id));
+    message.info('Clip deleted');
+  };
+  selectClip = id => {
+    this.props.dispatch(selectClip(id));
     this.props.dispatch(openCreate());
   };
   render() {
-    const { clips } = this.props;
+    const { clips, selectedClip } = this.props;
     return (
       <div className="clips-list">
         <List
@@ -30,7 +42,14 @@ class ClipList extends Component {
                   New Clip
                 </Button>
               </div>
-              <List.Item actions={[<Button icon="play-circle" />]}>
+              <List.Item
+                actions={[
+                  <Button
+                    icon="play-circle"
+                    onClick={() => this.playClip(null)}
+                  />
+                ]}
+              >
                 <List.Item.Meta title="Full Video" />
               </List.Item>
             </div>
@@ -40,13 +59,32 @@ class ClipList extends Component {
           renderItem={item => (
             <List.Item
               actions={[
-                <Button icon="play-circle" />,
-                <Button icon="edit" />,
-                <Button icon="delete" />
+                <Button
+                  icon="play-circle"
+                  onClick={() => this.playClip(item.id)}
+                />,
+                <Button icon="edit" onClick={() => this.selectClip(item.id)} />,
+                <Popconfirm
+                  placement="topRight"
+                  title="Do you really want to delete this clip?"
+                  okText="Yes"
+                  cancelText="No"
+                  onConfirm={() => this.deleteClip(item.id)}
+                >
+                  <Button icon="delete" />
+                </Popconfirm>
               ]}
             >
               <List.Item.Meta
-                title={item.title}
+                title={
+                  <span
+                    style={{
+                      color: item.id === selectedClip ? '#1890ff' : 'inherit'
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                }
                 description={`${formatSecondsToMin(
                   item.start
                 )} - ${formatSecondsToMin(item.end)}`}
@@ -64,7 +102,8 @@ ClipList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  clips: state.clips
+  clips: state.clips,
+  selectedClip: state.selectedClip
 });
 
 export default connect(mapStateToProps)(ClipList);
