@@ -3,6 +3,8 @@ const main = (
     clips: [],
     selectedClip: null,
     creatingClip: false,
+    autoplay: false,
+    watingNextPlay: false,
     duration: 52,
     videoSrc:
       'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
@@ -31,6 +33,10 @@ const main = (
       return { ...state, selectedClip: action.id };
     case 'SET_CREATING_CLIP':
       return { ...state, creatingClip: action.creating };
+    case 'TOGGLE_AUTOPLAY':
+      return { ...state, autoplay: !state.autoplay };
+    case 'SET_WAITING_NEXT_PLAY':
+      return { ...state, watingNextPlay: action.wating };
     default:
       return state;
   }

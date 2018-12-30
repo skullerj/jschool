@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Spin } from 'antd';
+import { playNext } from '../redux/actions';
+import '../styles/VideoPlayer.css'
 
 class VideoPlayer extends Component {
   constructor(props) {
@@ -8,9 +11,10 @@ class VideoPlayer extends Component {
     this.player = React.createRef();
   }
   render() {
-    const { src, fragment } = this.props;
+    const { src, fragment, watingNext } = this.props;
     return (
-      <div>
+      <div className="video-container">
+        {watingNext && <Spin size="large" className="loading" />}
         <video ref={this.player} controls>
           <source src={`${src}${fragment}`} />
         </video>
@@ -18,8 +22,15 @@ class VideoPlayer extends Component {
     );
   }
   componentDidMount() {
-    this.player.current.addEventListener('ended', () => {
-      console.log('ended');
+    const player = this.player.current;
+    player.addEventListener('pause', () => {
+      if (
+        this.props.selectedClip.end === Math.floor(player.currentTime) &&
+        this.props.autoplay &&
+        this.props.nextClip
+      ) {
+        this.props.dispatch(playNext(this.props.nextClip));
+      }
     });
   }
   componentDidUpdate(prevProps) {
@@ -45,9 +56,23 @@ const computeMediaFragment = (clips, selectedClip) => {
   }, '');
 };
 
+const getNextClip = (clips, selectedClip) => {
+  if (!selectedClip) return null;
+  const index = clips.findIndex(c => c.id === selectedClip);
+  if (index + 1 <= clips.length - 1) {
+    return clips[index + 1].id;
+  } else {
+    return null;
+  }
+};
+
 const mapStateToProps = state => ({
   src: state.videoSrc,
-  fragment: computeMediaFragment(state.clips, state.selectedClip)
+  fragment: computeMediaFragment(state.clips, state.selectedClip),
+  autoplay: state.autoplay,
+  selectedClip: state.clips.find(c => c.id === state.selectedClip),
+  nextClip: getNextClip(state.clips, state.selectedClip),
+  watingNext: state.watingNextPlay
 });
 
 export default connect(mapStateToProps)(VideoPlayer);

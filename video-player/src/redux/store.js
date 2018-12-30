@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import main from './reducers';
 
 const loadState = () => {
@@ -22,11 +23,7 @@ const saveState = state => {
   }
 };
 
-const store = createStore(
-  main,
-  loadState(),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = createStore(main, loadState(), applyMiddleware(thunk));
 
 store.subscribe(() => {
   saveState(store.getState());

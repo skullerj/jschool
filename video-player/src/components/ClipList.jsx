@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { List, Button, Popconfirm, message } from 'antd';
+import { List, Button, Popconfirm, message, Switch } from 'antd';
 import '../styles/ClipList.css';
 
-import { openCreate, selectClip, removeClip } from '../redux/actions';
+import {
+  openCreate,
+  selectClip,
+  removeClip,
+  toggleAutoplay
+} from '../redux/actions';
 
 const formatSecondsToMin = seconds => {
   if (!seconds) return '0:00';
@@ -29,8 +34,11 @@ class ClipList extends Component {
     this.props.dispatch(selectClip(id));
     this.props.dispatch(openCreate());
   };
+  toggleAutoplay = () => {
+    this.props.dispatch(toggleAutoplay());
+  };
   render() {
-    const { clips, selectedClip } = this.props;
+    const { clips, selectedClip, autoplay } = this.props;
     return (
       <div className="clips-list">
         <List
@@ -41,6 +49,14 @@ class ClipList extends Component {
                 <Button type="primary" onClick={this.createClip}>
                   New Clip
                 </Button>
+              </div>
+              <div>
+                <span>{`Autoplay  `}</span>
+                <Switch
+                  size="small"
+                  checked={autoplay}
+                  onChange={this.toggleAutoplay}
+                />
               </div>
               <List.Item
                 actions={[
@@ -92,6 +108,7 @@ class ClipList extends Component {
             </List.Item>
           )}
         />
+
       </div>
     );
   }
@@ -103,7 +120,8 @@ ClipList.propTypes = {
 
 const mapStateToProps = state => ({
   clips: state.clips,
-  selectedClip: state.selectedClip
+  selectedClip: state.selectedClip,
+  autoplay: state.autoplay
 });
 
 export default connect(mapStateToProps)(ClipList);

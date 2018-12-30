@@ -31,3 +31,21 @@ export const closeCreate = () => ({
   creating: false
 });
 
+export const toggleAutoplay = () => ({
+  type: 'TOGGLE_AUTOPLAY'
+});
+
+export const setWatingNext = wating => ({
+  type: 'SET_WAITING_NEXT_PLAY',
+  wating
+});
+
+export const playNext = next => {
+  return dispatch => {
+    dispatch(setWatingNext(true));
+    setTimeout(() => {
+      dispatch(selectClip(next));
+      dispatch(setWatingNext(false));
+    }, 3000);
+  };
+};
