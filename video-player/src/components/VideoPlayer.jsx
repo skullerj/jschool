@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
-import { playNext } from '../redux/actions';
-import '../styles/VideoPlayer.css'
+import { playNext, selectClip } from '../redux/actions';
+import '../styles/VideoPlayer.css';
 
 class VideoPlayer extends Component {
   constructor(props) {
@@ -30,6 +30,27 @@ class VideoPlayer extends Component {
         this.props.nextClip
       ) {
         this.props.dispatch(playNext(this.props.nextClip));
+      }
+    });
+    window.addEventListener('keypress', e => {
+      switch (e.key) {
+        case 'h':
+          if (this.props.nextClip) {
+            this.props.dispatch(selectClip(this.props.nextClip));
+          }
+          break;
+        case 'j':
+          console.log(this.props.prevClip);
+          if (this.props.prevClip) {
+
+            this.props.dispatch(selectClip(this.props.prevClip));
+          }
+          break;
+        case ' ':
+          player.paused ? player.play() : player.pause();
+          break;
+        default:
+          return;
       }
     });
   }
@@ -65,6 +86,15 @@ const getNextClip = (clips, selectedClip) => {
     return null;
   }
 };
+const getPrevClip = (clips, selectedClip) => {
+  if (!selectedClip) return null;
+  const index = clips.findIndex(c => c.id === selectedClip);
+  if (index - 1 >= 0) {
+    return clips[index - 1].id;
+  } else {
+    return null;
+  }
+};
 
 const mapStateToProps = state => ({
   src: state.videoSrc,
@@ -72,6 +102,7 @@ const mapStateToProps = state => ({
   autoplay: state.autoplay,
   selectedClip: state.clips.find(c => c.id === state.selectedClip),
   nextClip: getNextClip(state.clips, state.selectedClip),
+  prevClip: getPrevClip(state.clips, state.selectedClip),
   watingNext: state.watingNextPlay
 });
 

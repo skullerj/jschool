@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import VideoPlayer from './components/VideoPlayer';
 import ClipList from './components/ClipList';
 import ClipForm from './components/ClipForm';
+import KeyboardControls from './components/KeyboardControls';
 import { Layout } from 'antd';
 import { Button } from 'antd';
 import './styles/App.css';
@@ -23,7 +24,9 @@ class App extends Component {
             <Content className="content">
               <VideoPlayer src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4" />
             </Content>
-            <Footer className="footer">Controls will show up here</Footer>
+            <Footer className="footer">
+              <KeyboardControls />
+            </Footer>
           </Layout>
           <Sider width={350} theme="light">
             {creating ? <ClipForm /> : <ClipList />}
