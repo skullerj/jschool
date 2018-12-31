@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "antd": "^3.11.6",
+    "copy-to-clipboard": "^3.0.8",
+    "query-string": "^6.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",

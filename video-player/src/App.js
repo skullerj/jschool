@@ -4,8 +4,9 @@ import VideoPlayer from './components/VideoPlayer';
 import ClipList from './components/ClipList';
 import ClipForm from './components/ClipForm';
 import KeyboardControls from './components/KeyboardControls';
+import ShareButton from './components/ShareButton';
 import { Layout } from 'antd';
-import { Button } from 'antd';
+
 import './styles/App.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -16,8 +17,10 @@ class App extends Component {
     return (
       <Layout>
         <Header>
-          <span className="logo">{`< Video Player />`}</span>
-          <Button type="primary">Share</Button>
+          <div className="header">
+            <span className="logo">{`< Video Player />`}</span>
+            <ShareButton />
+          </div>
         </Header>
         <Layout className="main">
           <Layout>

@@ -38,7 +38,29 @@ class ClipList extends Component {
     this.props.dispatch(toggleAutoplay());
   };
   render() {
-    const { clips, selectedClip, autoplay } = this.props;
+    const { clips, selectedClip, autoplay, disableEdit } = this.props;
+    const clipActions = item => {
+      if (disableEdit) {
+        return [
+          <Button icon="play-circle" onClick={() => this.playClip(item.id)} />
+        ];
+      } else {
+        return [
+          <Button icon="play-circle" onClick={() => this.playClip(item.id)} />,
+          <Button icon="edit" onClick={() => this.selectClip(item.id)} />,
+          <Popconfirm
+            placement="topRight"
+            title="Do you really want to delete this clip?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => this.deleteClip(item.id)}
+          >
+            <Button icon="delete" />
+          </Popconfirm>
+        ];
+      }
+    };
+
     return (
       <div className="clips-list">
         <List
@@ -46,9 +68,11 @@ class ClipList extends Component {
             <div>
               <div className="clips-title">
                 <h1>Clips</h1>
-                <Button type="primary" onClick={this.createClip}>
-                  New Clip
-                </Button>
+                {!disableEdit && (
+                  <Button type="primary" onClick={this.createClip}>
+                    New Clip
+                  </Button>
+                )}
               </div>
               <div>
                 <span>{`Autoplay  `}</span>
@@ -73,24 +97,7 @@ class ClipList extends Component {
           locale={{ emptyText: 'No clips to show' }}
           dataSource={clips}
           renderItem={item => (
-            <List.Item
-              actions={[
-                <Button
-                  icon="play-circle"
-                  onClick={() => this.playClip(item.id)}
-                />,
-                <Button icon="edit" onClick={() => this.selectClip(item.id)} />,
-                <Popconfirm
-                  placement="topRight"
-                  title="Do you really want to delete this clip?"
-                  okText="Yes"
-                  cancelText="No"
-                  onConfirm={() => this.deleteClip(item.id)}
-                >
-                  <Button icon="delete" />
-                </Popconfirm>
-              ]}
-            >
+            <List.Item actions={clipActions(item)}>
               <List.Item.Meta
                 title={
                   <span
@@ -108,7 +115,6 @@ class ClipList extends Component {
             </List.Item>
           )}
         />
-
       </div>
     );
   }
@@ -121,7 +127,8 @@ ClipList.propTypes = {
 const mapStateToProps = state => ({
   clips: state.clips,
   selectedClip: state.selectedClip,
-  autoplay: state.autoplay
+  autoplay: state.autoplay,
+  disableEdit: state.disableEdit
 });
 
 export default connect(mapStateToProps)(ClipList);

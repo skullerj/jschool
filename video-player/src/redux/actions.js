@@ -49,3 +49,8 @@ export const playNext = next => {
     }, 3000);
   };
 };
+
+export const disableEdit = disable => ({
+  type: 'SET_DISABLE_EDIT',
+  disable
+});

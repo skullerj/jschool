@@ -6,7 +6,13 @@
 .content{
   padding: 14px;
 }
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .logo{
   font-size: 24px;
   color: #fff;
+  flex: 1;
 }
