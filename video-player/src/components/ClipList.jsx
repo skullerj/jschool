@@ -90,7 +90,7 @@ class ClipList extends Component {
                   />
                 ]}
               >
-                <List.Item.Meta title="Full Video" />
+                <List.Item.Meta title="Full Video" description="0:00 - 0:52" />
               </List.Item>
             </div>
           }
