@@ -61,10 +61,10 @@ class ClipForm extends Component {
         if (this.props.editing) {
           clip.id = this.props.editingClip.id;
           this.props.dispatch(editClip(clip));
-          message.success('Clip saved');
+          message.success('Clip saved!');
         } else {
           this.props.dispatch(addClip(clip));
-          message.success('Clip added');
+          message.success('Clip added!');
         }
         this.props.form.resetFields();
         this.props.dispatch(closeCreate());

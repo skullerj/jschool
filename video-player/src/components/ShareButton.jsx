@@ -19,6 +19,7 @@ class ShareButton extends Component {
     message.success('Url coppied to clipboard!');
   };
   render() {
+    const { disableEdit } = this.props;
     return (
       !disableEdit && (
         <Button type="primary" onClick={this.copyUrl}>
