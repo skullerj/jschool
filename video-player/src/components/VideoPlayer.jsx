@@ -15,7 +15,7 @@ class VideoPlayer extends Component {
     return (
       <div className="video-container">
         {watingNext && <Spin size="large" className="loading" />}
-        <video ref={this.player} controls>
+        <video ref={this.player} controls={!watingNext}>
           <source src={`${src}${fragment}`} />
         </video>
       </div>
@@ -25,6 +25,7 @@ class VideoPlayer extends Component {
     const player = this.player.current;
     player.addEventListener('pause', () => {
       if (
+        this.props.selectedClip &&
         this.props.selectedClip.end === Math.floor(player.currentTime) &&
         this.props.autoplay &&
         this.props.nextClip
@@ -33,6 +34,9 @@ class VideoPlayer extends Component {
       }
     });
     window.addEventListener('keypress', e => {
+      if (e.target.tagName === 'INPUT') {
+        return;
+      }
       switch (e.key) {
         case 'h':
           if (this.props.nextClip) {
@@ -40,9 +44,7 @@ class VideoPlayer extends Component {
           }
           break;
         case 'j':
-          console.log(this.props.prevClip);
           if (this.props.prevClip) {
-
             this.props.dispatch(selectClip(this.props.prevClip));
           }
           break;

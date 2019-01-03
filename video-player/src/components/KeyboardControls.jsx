@@ -17,9 +17,7 @@ const KeyboardControls = () => {
         <span className="description">Play/Pause</span>
       </div>
     </div>
-  )
-}
-
-
+  );
+};
 
 export default KeyboardControls;

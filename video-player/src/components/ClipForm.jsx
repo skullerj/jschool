@@ -71,6 +71,13 @@ class ClipForm extends Component {
       }
     });
   };
+  handleStartOpenChange = opened => {
+    if (!opened) {
+      const start = this.props.form.getFieldValue('start');
+      if (!start) return;
+      this.props.form.setFieldsValue({ end: moment(start).add(1, 'seconds') });
+    }
+  };
   render() {
     const { editing } = this.props;
     const {
@@ -79,7 +86,7 @@ class ClipForm extends Component {
       getFieldError,
       isFieldTouched
     } = this.props.form;
-    const nameError = isFieldTouched('name') && getFieldError('name');
+    const nameError = getFieldError('name');
     const startError = isFieldTouched('start') && getFieldError('start');
     const endError = isFieldTouched('end') && getFieldError('end');
     return (
@@ -88,22 +95,25 @@ class ClipForm extends Component {
           <h1>{editing ? 'Edit Clip' : 'New Clip'}</h1>
           <Button onClick={this.getBack}>Return</Button>
         </div>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} layout="horizontal">
           <Form.Item
             validateStatus={nameError ? 'error' : 'success'}
+            label="Name"
             help={nameError || ''}
           >
             {getFieldDecorator('name', {
               rules: [{ required: true, message: 'Name is required' }]
-            })(<Input size="large" placeholder="Name" />)}
+            })(<Input size="large" placeholder="The best clip ever" />)}
           </Form.Item>
           <Form.Item
             validateStatus={startError ? 'error' : 'success'}
+            label="Start time"
             help={startError || ''}
           >
             {getFieldDecorator('start', {
               rules: [
                 {
+                  required: true,
                   validator: this.validateStart
                 }
               ]
@@ -111,27 +121,23 @@ class ClipForm extends Component {
               <TimePicker
                 size="large"
                 placeholder="Start Time"
-              // defaultOpenValue={moment('00:00:01', 'HH:mm:ss')}
+                onOpenChange={this.handleStartOpenChange}
               />
             )}
           </Form.Item>
           <Form.Item
             validateStatus={endError ? 'error' : 'success'}
+            label="End time"
             help={endError || ''}
           >
             {getFieldDecorator('end', {
               rules: [
                 {
+                  required: true,
                   validator: this.validateEnd
                 }
               ]
-            })(
-              <TimePicker
-                size="large"
-                placeholder="End time"
-              // defaultOpenValue={moment('00:00:02', 'HH:mm:ss')}
-              />
-            )}
+            })(<TimePicker size="large" placeholder="End time" />)}
           </Form.Item>
           <Form.Item>
             <Button
@@ -154,7 +160,13 @@ class ClipForm extends Component {
         start: moment('00:00:00', 'HH:mm:ss').seconds(clip.start),
         end: moment('00:00:00', 'HH:mm:ss').seconds(clip.end)
       };
-      console.log(formClip)
+      this.props.form.setFieldsValue(formClip);
+    } else {
+      const formClip = {
+        name: '',
+        start: moment('00:00:00', 'HH:mm:ss'),
+        end: null
+      };
       this.props.form.setFieldsValue(formClip);
     }
   }
