@@ -59,4 +59,7 @@ const mapStateToProps = state => ({
   disableEdit: state.disableEdit
 });
 
+// for testing purposes
+export const PlainShareButton = ShareButton;
+
 export default connect(mapStateToProps)(ShareButton);
