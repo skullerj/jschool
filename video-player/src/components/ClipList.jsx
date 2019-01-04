@@ -123,7 +123,7 @@ class ClipList extends Component {
 
 ClipList.propTypes = {
   clips: PropTypes.array,
-  selectedClip: PropTypes.bool,
+  selectedClip: PropTypes.number,
   autoplay: PropTypes.bool,
   disableEdit: PropTypes.bool
 };

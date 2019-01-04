@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Input, TimePicker, Form, message } from 'antd';
 import moment from 'moment';
@@ -184,6 +185,12 @@ class ClipForm extends Component {
     }
   }
 }
+
+ClipForm.propTypes = {
+  editing: PropTypes.bool,
+  duration: PropTypes.number,
+  editingClip: PropTypes.number
+};
 
 const mapStateToProps = state => ({
   duration: state.duration,

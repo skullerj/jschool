@@ -64,10 +64,6 @@ class VideoPlayer extends Component {
   }
 }
 
-VideoPlayer.propTypes = {
-  src: PropTypes.string,
-  fragment: PropTypes.string
-};
 // Returns the appropiate media fragment to control the video player
 export const computeMediaFragment = (clips, selectedClip) => {
   if (!selectedClip) return '';
@@ -97,6 +93,16 @@ export const getPrevClip = (clips, selectedClip) => {
   } else {
     return null;
   }
+};
+
+VideoPlayer.propTypes = {
+  src: PropTypes.string,
+  fragment: PropTypes.string,
+  autoplay: PropTypes.bool,
+  selectedClip: PropTypes.number,
+  nextClip: PropTypes.number,
+  prevClip: PropTypes.number,
+  watingNext: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

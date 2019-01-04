@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import qs from 'query-string';
 import copy from 'copy-to-clipboard';
 import { connect } from 'react-redux';
@@ -53,6 +54,11 @@ class ShareButton extends Component {
     }
   }
 }
+
+ShareButton.propTypes = {
+  clips: PropTypes.array,
+  disableEdit: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
   clips: state.clips,
