@@ -1,0 +1,22 @@
+{
+  "clips": [
+    {
+      "id": 1,
+      "name": "First",
+      "start": 12,
+      "end": 13
+    },
+    {
+      "id": 2,
+      "name": "Second",
+      "start": 3,
+      "end": 8
+    },
+    {
+      "id": 3,
+      "name": "Third",
+      "start": 14,
+      "end": 24
+    }
+  ]
+}

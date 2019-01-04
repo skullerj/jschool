@@ -122,7 +122,10 @@ class ClipList extends Component {
 }
 
 ClipList.propTypes = {
-  clips: PropTypes.array
+  clips: PropTypes.array,
+  selectedClip: PropTypes.bool,
+  autoplay: PropTypes.bool,
+  disableEdit: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -131,5 +134,7 @@ const mapStateToProps = state => ({
   autoplay: state.autoplay,
   disableEdit: state.disableEdit
 });
+
+export const PlainClipList = ClipList;
 
 export default connect(mapStateToProps)(ClipList);
