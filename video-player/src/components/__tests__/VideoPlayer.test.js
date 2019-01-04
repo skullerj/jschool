@@ -1,4 +1,13 @@
-import { computeMediaFragment, getNextClip, getPrevClip } from '../VideoPlayer';
+import React from 'react';
+import { mount } from 'enzyme';
+import { Spin } from 'antd';
+import {
+  computeMediaFragment,
+  getNextClip,
+  getPrevClip,
+  PlainVideoPlayer
+} from '../VideoPlayer';
+
 const fixtures = [
   {
     id: 1,
@@ -63,5 +72,41 @@ describe('VideoPlayer functions tests', () => {
     it("should return null when the clip's list is empty", () => {
       expect(getPrevClip([], 2)).toBeNull();
     });
+  });
+});
+
+describe('VideoPlayer component test', () => {
+  const player = mount(<PlainVideoPlayer />);
+  it('should render properly', () => {
+    expect(player.find('video').length).toEqual(1);
+  });
+  it('should show a Spin component and hide the player controls when watingNext is true', () => {
+    player.setProps({ watingNext: true });
+    expect(player.find(Spin).length).toEqual(1);
+    expect(
+      player
+        .find('video')
+        .at(0)
+        .prop('controls')
+    ).toBeFalsy();
+  });
+  it('should hide the Spin component and show the player controls when watingNext is false', () => {
+    player.setProps({ watingNext: false });
+    expect(player.find(Spin).length).toEqual(0);
+    expect(
+      player
+        .find('video')
+        .at(0)
+        .prop('controls')
+    ).toEqual(true);
+  });
+  it('should set the src property from the source element inside video according to props', () => {
+    player.setProps({ src: 'someurl', fragment: 'somefragment' });
+    expect(
+      player
+        .find('source')
+        .at(0)
+        .prop('src')
+    ).toEqual('someurlsomefragment');
   });
 });

@@ -109,4 +109,7 @@ const mapStateToProps = state => ({
   watingNext: state.watingNextPlay
 });
 
+// For testing purposes
+export const PlainVideoPlayer = VideoPlayer;
+
 export default connect(mapStateToProps)(VideoPlayer);
