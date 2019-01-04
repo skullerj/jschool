@@ -68,8 +68,8 @@ VideoPlayer.propTypes = {
   src: PropTypes.string,
   fragment: PropTypes.string
 };
-
-const computeMediaFragment = (clips, selectedClip) => {
+// Returns the appropiate media fragment to control the video player
+export const computeMediaFragment = (clips, selectedClip) => {
   if (!selectedClip) return '';
   return clips.reduce((r, c) => {
     if (c.id === selectedClip) {
@@ -78,8 +78,8 @@ const computeMediaFragment = (clips, selectedClip) => {
     return r;
   }, '');
 };
-
-const getNextClip = (clips, selectedClip) => {
+// Computes the next clip's id from the list of clips and the currently selected clip
+export const getNextClip = (clips, selectedClip) => {
   if (!selectedClip) return null;
   const index = clips.findIndex(c => c.id === selectedClip);
   if (index + 1 <= clips.length - 1) {
@@ -88,7 +88,8 @@ const getNextClip = (clips, selectedClip) => {
     return null;
   }
 };
-const getPrevClip = (clips, selectedClip) => {
+// Computes the previous clip's id from the list of clips and the currently selected clip
+export const getPrevClip = (clips, selectedClip) => {
   if (!selectedClip) return null;
   const index = clips.findIndex(c => c.id === selectedClip);
   if (index - 1 >= 0) {
