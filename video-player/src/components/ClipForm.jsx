@@ -10,9 +10,34 @@ const hasErrors = fieldsError => {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 };
 
-const getSeconds = moment => {
+// Parse a momentjs object to a value in seconds
+// it assumes a HH:mm:ss format
+export const getSeconds = moment => {
   if (!moment) return 0;
   return moment.second() + moment.minute() * 60 + moment.hour() * 3600;
+};
+
+// Validates a start or ending time relative to it's counterpart and the video duration
+// This are the rules: start < duration ; end < duration ; start < end
+//
+export const validateTime = (type, videoDuration, value, complement) => {
+  const errors = [];
+  if (!value) errors.push(new Error(`${type} time is required`));
+  if (type === 'Start') {
+    // in this case value => start and complement => end
+    if (complement && value >= complement) {
+      errors.push(new Error('Start time must be behind end time'));
+    }
+  } else if (type === 'End') {
+    // in this case value => start and complement => end
+    if (complement && value <= complement) {
+      errors.push(new Error('End time must be ahead start time'));
+    }
+  }
+  if (type === 'Start' ? value >= videoDuration : value > videoDuration) {
+    errors.push(new Error(`${type} time exceeds video duration`));
+  }
+  return errors;
 };
 
 class ClipForm extends Component {
@@ -20,33 +45,21 @@ class ClipForm extends Component {
     this.props.dispatch(closeCreate());
   };
   validateEnd = (rule, value, callback) => {
-    const errors = [];
-    if (!value) {
-      errors.push(new Error('End time is required!'));
-    }
-    const endSeconds = getSeconds(value);
-    const startSeconds = getSeconds(this.props.form.getFieldValue('start'));
-    if (startSeconds && endSeconds <= startSeconds) {
-      errors.push(new Error('End time must be later than start time'));
-    }
-    if (endSeconds > this.props.duration) {
-      errors.push(new Error('End time exceedes the video duration'));
-    }
+    const errors = validateTime(
+      'End',
+      this.props.duration,
+      getSeconds(value),
+      getSeconds(this.props.form.getFieldValue('start'))
+    );
     return callback(errors);
   };
   validateStart = (rule, value, callback) => {
-    const errors = [];
-    if (!value) {
-      errors.push(new Error('Start time is required!'));
-    }
-    const startSeconds = getSeconds(value);
-    const endSeconds = getSeconds(this.props.form.getFieldValue('end'));
-    if (endSeconds && endSeconds <= startSeconds) {
-      errors.push(new Error('Start time must be earlier than end time'));
-    }
-    if (startSeconds >= this.props.duration) {
-      errors.push(new Error('Start time exceedes the video duration'));
-    }
+    const errors = validateTime(
+      'Start',
+      this.props.duration,
+      getSeconds(value),
+      getSeconds(this.props.form.getFieldValue('end'))
+    );
     return callback(errors);
   };
   handleSubmit = e => {
