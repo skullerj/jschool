@@ -11,7 +11,8 @@ import {
   toggleAutoplay
 } from '../redux/actions';
 
-const formatSecondsToMin = seconds => {
+// Takes a value in seconds and applies a more friendly format to it
+export const formatSecondsToMin = seconds => {
   if (!seconds) return '0:00';
   const secs = Math.floor(seconds % 60);
   const min = Math.floor(seconds / 60);
