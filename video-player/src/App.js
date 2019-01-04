@@ -16,11 +16,9 @@ class App extends Component {
     const { creating } = this.props;
     return (
       <Layout>
-        <Header style={{ padding: '0 14px' }}>
-          <div className="header">
-            <span className="logo">{`< Video Player />`}</span>
-            <ShareButton />
-          </div>
+        <Header className="header">
+          <span className="logo">{`< Video Player />`}</span>
+          <ShareButton />
         </Header>
         <Layout className="main">
           <Layout>

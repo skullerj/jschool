@@ -1,18 +1,22 @@
 @import '~antd/dist/antd.css';
 
-.main{
+.main {
   height: calc(100vh - 64px);
 }
-.content{
+.content {
   padding: 14px;
 }
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0 14px;
 }
-.logo{
+.logo {
   font-size: 24px;
   color: #fff;
   flex: 1;
+}
+.footer {
+  padding: 0 14px;
 }
