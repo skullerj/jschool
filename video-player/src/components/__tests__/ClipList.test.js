@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { clips } from './fixtures.json';
-import { List, Switch, Button, Popconfirm } from 'antd';
+import { List } from 'antd';
 import { formatSecondsToMin, PlainClipList } from '../ClipList';
 
 describe('ClipLists functions tests', () => {
